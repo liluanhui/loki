@@ -2,7 +2,7 @@
   "name": "@loki/app",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 5180",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",

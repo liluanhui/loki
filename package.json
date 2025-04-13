@@ -4,6 +4,7 @@
   "description": "F.P.O-未来邮局",
   "main": "index.js",
   "scripts": {
+    "app:dev": "pnpm run -C app dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
