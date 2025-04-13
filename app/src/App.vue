@@ -1,7 +1,7 @@
 <template>
-  <RouterView />
+  <router-view v-slot="{ Component }">
+    <Suspense>
+      <component :is="Component" v-wechat-title="$route.meta.title" />
+    </Suspense>
+  </router-view>
 </template>
-
-<script setup lang="ts">
-import { RouterView } from "vue-router";
-</script>
