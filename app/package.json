@@ -2,7 +2,7 @@
   "name": "@loki/app",
   "private": true,
   "scripts": {
-    "dev": "vite --port 5180 --mode dev",
+    "dev": "vite --port 5180 --mode dev --host",
     "preview": "vite preview",
     "build": "vite build",
     "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
