@@ -1,0 +1,14 @@
+@use "../common/design.scss" as *;
+@use "../common/mixins.scss" as *;
+
+.app-main {
+  @include flex(row, center, center);
+  position: relative;
+  width: 100%;
+
+  &-inner {
+    width: $appWidth;
+    min-height: calc(100vh - $topBarHeight);
+    background-color: var(--danger-1);
+  }
+}
