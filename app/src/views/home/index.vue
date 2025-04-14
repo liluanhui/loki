@@ -1,4 +1,5 @@
 <template>
-  <main>123</main>
+  <main>home</main>
 </template>
+
 <script setup lang="ts"></script>
