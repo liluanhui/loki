@@ -1,0 +1,10 @@
+$side-unfold: 219.5px;
+$side-fold: 69.5px;
+
+.admin-layout-index {
+  --moya-zare-side-width: #{$side-unfold};
+}
+
+.menu-fold {
+  --moya-zare-side-width: #{$side-fold};
+}
