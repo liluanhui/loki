@@ -72,6 +72,9 @@ importers:
 
   app:
     dependencies:
+      '@loki/fpo-ui':
+        specifier: workspace:*
+        version: link:../fpo-ui
       pinia:
         specifier: ^3.0.1
         version: 3.0.1(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))

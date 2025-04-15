@@ -10,6 +10,8 @@ import "@/scss/index.scss";
 import BirdpaperUI from "birdpaper-ui";
 import "birdpaper-ui/theme/src/index.css";
 
+import "@loki/fpo-ui/style/index.scss";
+
 import VueWechatTitle from "vue-wechat-title";
 
 const app = createApp(App);

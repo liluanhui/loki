@@ -1,5 +1,5 @@
-@use "../common/design.scss" as *;
-@use "../common/mixins.scss" as *;
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
 
 .top-bar {
   @include flex(row, center, center);
@@ -13,6 +13,6 @@
     @include flex(row, space-between, center);
     width: $appWidth;
     height: $topBarHeight;
-    background-color: var(--primary-1);
+    // background-color: var(--primary-1);
   }
 }
