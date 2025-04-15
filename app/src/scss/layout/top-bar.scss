@@ -25,7 +25,7 @@
 
     .app-route-active {
       .top-bar-menu-item-inner {
-        color: var(--warning-6);
+        color: var(--warning-5);
         font-weight: 600;
         transition: all 0.2s ease;
       }
@@ -46,19 +46,21 @@
         padding: 0 8px;
         font-size: 13px;
         font-weight: 400;
-        color: var(--gray-8);
+        color: var(--gray-9);
         transform: scale(1);
         transition: all 0.2s ease;
       }
 
       &:hover {
         .top-bar-menu-item-inner {
-          color: var(--warning-6);
+          color: var(--warning-5);
         }
       }
     }
   }
 
-  &-opiton {
+  &-option {
+    @include flex(row, center, center);
+    gap: 20px;
   }
 }

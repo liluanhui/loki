@@ -14,6 +14,8 @@
       </div>
 
       <div :class="`${clsBlockName}-option`">
+        <IconTranslate2 size="16" />
+        <IconSunLine size="16" />
         <bp-button-group size="small" status="warning" type="dashed">
           <bp-button>登录</bp-button>
           <bp-button>注册</bp-button>
@@ -33,5 +35,6 @@ const list: any[] = [
   { title: "公开信", to: "/a" },
   { title: "写一封信", to: "/a" },
   { title: "工具箱", to: "/a" },
+  { title: "关于", to: "/a" },
 ];
 </script>
