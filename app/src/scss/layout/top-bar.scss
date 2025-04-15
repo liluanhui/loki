@@ -15,7 +15,48 @@
     height: $topBarHeight;
   }
 
-  &-logo {
+  &-nav {
+    @include flex(row, flex-start, center);
+  }
+
+  &-menu {
+    @include flex(row, center, center);
+    margin-left: 20px;
+
+    .app-route-active {
+      .top-bar-menu-item-inner {
+        color: var(--warning-6);
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+
+      &-inner {
+        padding: 0 8px;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--gray-8);
+        transform: scale(1);
+        transition: all 0.2s ease;
+      }
+
+      &:hover {
+        .top-bar-menu-item-inner {
+          color: var(--warning-6);
+        }
+      }
+    }
   }
 
   &-opiton {

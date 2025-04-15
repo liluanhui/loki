@@ -1,5 +1,13 @@
 .the-logo {
+  opacity: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
   &-img {
-    height: 30px;
+    height: 28px;
   }
 }
