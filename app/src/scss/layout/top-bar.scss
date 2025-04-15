@@ -13,6 +13,11 @@
     @include flex(row, space-between, center);
     width: $appWidth;
     height: $topBarHeight;
-    // background-color: var(--primary-1);
+  }
+
+  &-logo {
+  }
+
+  &-opiton {
   }
 }

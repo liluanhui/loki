@@ -6,6 +6,5 @@
 
 <script setup lang="ts">
 defineOptions({ name: "TheLogo" });
-
 const clsBlockName = "the-logo";
 </script>
