@@ -1,0 +1,32 @@
+@use "./common/design.scss" as *;
+@use "./common/mixins.scss" as *;
+@use "./common/extend.scss" as *;
+
+$searchBlockWidth: 740px;
+$searchBlockHeight: 64px;
+
+.search-block {
+  @include flex(row, flex-start, center);
+  width: $searchBlockWidth;
+  height: $searchBlockHeight;
+  background-color: var(--gray-0);
+  border-radius: $searchBlockHeight;
+  border: $borderSize solid $borderColor-2;
+  padding: 10px 24px;
+  gap: 12px;
+
+  &-input {
+    flex: 1;
+    height: 100%;
+
+    input {
+      width: 100%;
+      height: 100%;
+      font-size: 18px;
+      color: var(--gray-9);
+      font-weight: 500;
+      letter-spacing: 1px;
+      @extend .font-quick !optional;
+    }
+  }
+}

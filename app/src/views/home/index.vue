@@ -1,6 +1,8 @@
 <template>
   <div :class="clsBlockName">
     <banner-block></banner-block>
+
+    <search-block></search-block>
   </div>
 </template>
 

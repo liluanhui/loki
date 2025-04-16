@@ -1,4 +1,3 @@
-import { TheLogo } from "./fpo-ui";
-import { BannerBlock } from "./fpo-ui";
+import { TheLogo, BannerBlock, SearchBlock } from "./fpo-ui";
 
-export default [TheLogo, BannerBlock];
+export default [TheLogo, BannerBlock, SearchBlock];

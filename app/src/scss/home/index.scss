@@ -1,6 +1,14 @@
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
+@use "@loki/fpo-ui/style/search-block.scss" as *;
 
 .home-page {
-  
+  position: relative;
+
+  .search-block {
+    position: relative;
+    top: calc($searchBlockHeight / -2);
+    left: 50%;
+    margin-left: calc($searchBlockWidth / -2);
+  }
 }
