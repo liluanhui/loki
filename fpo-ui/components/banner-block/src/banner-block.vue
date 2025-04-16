@@ -1,5 +1,5 @@
 <template>
-  <div :class="clsBlockName">banner</div>
+  <div :class="clsBlockName"></div>
 </template>
 
 <script setup lang="ts">

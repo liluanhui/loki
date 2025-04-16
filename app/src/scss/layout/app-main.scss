@@ -9,6 +9,7 @@
   &-inner {
     width: $appWidth;
     min-height: calc(100vh - $topBarHeight);
+    padding: 20px 0;
     // background-color: var(--danger-1);
   }
 }
