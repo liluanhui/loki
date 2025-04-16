@@ -13,6 +13,7 @@ import "birdpaper-ui/theme/src/index.css";
 import BirdpaperIcon from "birdpaper-icon";
 import "birdpaper-icon/dist/index.css";
 
+import FpoUI from "@loki/fpo-ui";
 import "@loki/fpo-ui/style/index.scss";
 
 import VueWechatTitle from "vue-wechat-title";
@@ -24,5 +25,6 @@ app.use(router);
 app.use(VueWechatTitle);
 app.use(BirdpaperIcon);
 app.use(BirdpaperUI);
+app.use(FpoUI);
 
 app.mount("#app");

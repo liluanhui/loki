@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "@/views/home/index.vue";
+import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 
 const routes = [
@@ -16,11 +17,11 @@ const routes = [
         },
       },
       {
-        path: "/a",
-        name: "home",
-        component: home,
+        path: "/test",
+        name: "test",
+        component: test,
         meta: {
-          title: "首页",
+          title: "test",
         },
       },
     ],

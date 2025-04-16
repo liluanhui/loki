@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "types": ["birdpaper-ui/global", "birdpaper-icon/global"],
+    "types": ["birdpaper-ui/global", "birdpaper-icon/global", "@loki/fpo-ui/global"],
     "paths": {
       "@/*": ["src/*"]
     }

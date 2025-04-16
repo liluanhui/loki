@@ -26,15 +26,13 @@
 </template>
 
 <script lang="ts" setup>
-import { TheLogo } from "@loki/fpo-ui";
-
 defineOptions({ name: "TopBar" });
 const clsBlockName = "top-bar";
 
 const list: any[] = [
-  { title: "公开信", to: "/a" },
-  { title: "写一封信", to: "/a" },
-  { title: "工具箱", to: "/a" },
-  { title: "关于", to: "/a" },
+  { title: "公开信", to: "/test" },
+  { title: "写一封信", to: "/test" },
+  { title: "工具箱", to: "/test" },
+  { title: "关于", to: "/test" },
 ];
 </script>
