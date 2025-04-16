@@ -14,6 +14,13 @@ $searchBlockHeight: 64px;
   border: $borderSize solid $borderColor-2;
   padding: 10px 24px;
   gap: 12px;
+  opacity: 0.85;
+  transition: all 0.2s;
+
+  .bp-icon-icon-search2line {
+    fill: var(--gray-6);
+    transition: all 0.2s;
+  }
 
   &-input {
     flex: 1;
@@ -28,5 +35,19 @@ $searchBlockHeight: 64px;
       letter-spacing: 1px;
       @extend .font-quick !optional;
     }
+  }
+
+  &-tip {
+  }
+}
+
+.search-block-focus {
+  opacity: 1;
+  box-shadow: 0 4px 16px #0000000d;
+  transition: all 0.2s;
+
+  .bp-icon-icon-search2line {
+    fill: var(--primary-6);
+    transition: all 0.2s;
   }
 }
