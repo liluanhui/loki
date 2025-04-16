@@ -1,6 +1,7 @@
 <template>
   <div :class="[clsBlockName, isFocus && `${clsBlockName}-focus`]">
     <IconSearch2Line size="23" />
+    <!-- <IconLoader5Line size="23" spin /> -->
 
     <div :class="`${clsBlockName}-input`">
       <!-- <input v-model="text" type="text" placeholder="Search invoice number" /> -->
@@ -8,7 +9,11 @@
     </div>
 
     <div :class="`${clsBlockName}-tip`">
-      
+      <div class="shortcut-group">
+        <div class="shortcut-key">⌘</div>
+        <div class="shortcut-split">+</div>
+        <div class="shortcut-key">K</div>
+      </div>
     </div>
   </div>
 </template>
