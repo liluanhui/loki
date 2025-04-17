@@ -4,13 +4,12 @@
 .app-main {
   @include flex(row, center, center);
   position: relative;
-  margin-top: $topBarHeight;
+  padding-top: $topBarHeight;
   width: 100%;
 
   &-inner {
     width: $appWidth;
-    min-height: calc(100vh - $topBarHeight);
+    min-height: calc(100vh - $topBarHeight - $footerBarHeight);
     padding: 20px 0;
-    // background-color: var(--danger-1);
   }
 }

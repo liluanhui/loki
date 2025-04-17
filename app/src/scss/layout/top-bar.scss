@@ -2,9 +2,9 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 
 .top-bar {
+  @include flex(row, center, center);
   position: fixed;
   top: 0;
-  @include flex(row, center, center);
   width: 100%;
   height: $topBarHeight;
   box-sizing: border-box;
