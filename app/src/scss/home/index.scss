@@ -15,7 +15,20 @@
   }
 
   .quick-start {
-    margin: 50px 0 60px 0;
     @include flex(column, center, center);
+    padding: 100px 0 110px 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      aspect-ratio: 18 / 4;
+      background-image: radial-gradient(circle at center, rgb(255 154 46 / 100%) 1.5px, transparent 1px);
+      background-size: 8px 8px;
+      mask-image: radial-gradient(at center, #fff, transparent 72%);
+      -webkit-mask-image: radial-gradient(at center, #fff, transparent 72%);
+      opacity: 0.3;
+      z-index: 0;
+    }
   }
 }
