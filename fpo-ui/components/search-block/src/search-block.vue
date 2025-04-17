@@ -9,17 +9,14 @@
     </div>
 
     <div :class="`${clsBlockName}-tip`">
-      <div class="shortcut-group">
-        <div class="shortcut-key">⌘</div>
-        <div class="shortcut-split">+</div>
-        <div class="shortcut-key">K</div>
-      </div>
+      <shortcut-key :keys="['⌘', 'K']" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import shortcutKey from "../../shortcut-key/src/shortcut-key.vue";
 
 defineOptions({ name: "SearchBlock" });
 const clsBlockName = "search-block";

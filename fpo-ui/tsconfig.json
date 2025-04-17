@@ -13,7 +13,7 @@
     "baseUrl": ".",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "types": ["node", "birdpaper-ui/global", "birdpaper-icon/global"],
+    "types": ["node", "birdpaper-ui/global", "birdpaper-icon/global", "./global"],
     "paths": {
       "@/*": ["src/*"]
     }

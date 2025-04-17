@@ -38,26 +38,6 @@ $searchBlockHeight: 64px;
   }
 
   &-tip {
-    .shortcut-group {
-      @include flex(row, flex-start, center);
-      gap: 6px;
-      color: var(--gray-6);
-      font-size: 12px;
-      @extend .font-quick !optional;
-
-      .shortcut-split {
-        opacity: .8;
-      }
-
-      .shortcut-key {
-        @include flex(row, center, center);
-        background-color: var(--gray-1);
-        border: $borderSize solid var(--gray-2);
-        padding: 3px 6px;
-        border-radius: 4px;
-        font-weight: 500;
-      }
-    }
   }
 }
 
