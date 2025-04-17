@@ -3,17 +3,38 @@
 @use "@loki/fpo-ui/style/common/extend.scss" as *;
 
 .footer-bar {
-  @include flex(row, center, center);
+  @include flex(column, center, center);
   width: 100%;
   height: $footerBarHeight;
   background-color: var(--gray-0);
-  padding: 10px 0 20px 0;
   border-top: $borderSize solid $borderColor-2;
+  box-sizing: border-box;
   @extend .no-select;
-
+  
   &-inner {
-    @include flex(row, flex-start, center);
+    @include flex(row, flex-start, flex-start);
     width: $appWidth;
     height: $footerBarHeight;
+    
+    .first {
+      padding: 20px;
+      flex: 1;
+      height: 100%;
+      text-align: right;
+      border-right: $borderSize solid $borderColor-2;
+    }
+    .second {
+      padding: 20px;
+      flex: 1;
+      height: 100%;
+    }
   }
+}
+
+.footer-bar-number {
+  @include flex(row, center, center);
+  width: 100%;
+  padding: 14px 0;
+  background-color: var(--gray-0);
+  border-top: $borderSize solid $borderColor-2;
 }
