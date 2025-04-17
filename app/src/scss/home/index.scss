@@ -2,6 +2,8 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
+@use "./title-bar.scss" as *;
+
 .home-page {
   position: relative;
 
@@ -10,5 +12,10 @@
     top: calc($searchBlockHeight / -2);
     left: 50%;
     margin-left: calc($searchBlockWidth / -2);
+  }
+
+  .quick-start {
+    margin: 50px 0 60px 0;
+    @include flex(column, center, center);
   }
 }

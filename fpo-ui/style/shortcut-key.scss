@@ -4,7 +4,7 @@
 
 .shortcut-key {
   @include flex(row, flex-start, center);
-  gap: 6px;
+  gap: 8px;
   color: var(--gray-7);
   font-size: 12px;
   @extend .font-quick !optional;
