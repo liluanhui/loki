@@ -1,0 +1,15 @@
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+
+.app-main {
+  @include flex(row, center, center);
+  position: relative;
+  padding-top: $topBarHeight;
+  width: 100%;
+
+  &-inner {
+    width: $appWidth;
+    min-height: calc(100vh - $topBarHeight - $footerBarHeight);
+    padding: 20px 0;
+  }
+}

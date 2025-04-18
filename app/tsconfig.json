@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": false,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "types": ["birdpaper-ui/global", "birdpaper-icon/global", "@loki/fpo-ui/global"],
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
