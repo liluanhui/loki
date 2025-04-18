@@ -3,13 +3,15 @@
     <div :class="`${clsBlockName}-inner`">
       <div class="first"></div>
       <div class="second">
-        未来邮局已开业 <span>206</span> 天
-        <bp-statistic v-model="a" show-separator unit="封">
-          <template #prefix>已投递</template>
-        </bp-statistic>
-        <bp-statistic v-model="b" show-separator unit="封">
-          <template #prefix>待投递</template>
-        </bp-statistic>
+        <p>未来邮局已开业 <span class="number">206</span> 天</p>
+        <div class="mail-statistic">
+          <bp-statistic v-model="a" show-separator animation unit="封">
+            <template #prefix>已投递</template>
+          </bp-statistic>
+          <bp-statistic v-model="b" show-separator animation unit="封">
+            <template #prefix>待投递</template>
+          </bp-statistic>
+        </div>
       </div>
     </div>
   </footer>

@@ -10,12 +10,12 @@
   border-top: $borderSize solid $borderColor-2;
   box-sizing: border-box;
   @extend .no-select;
-  
+
   &-inner {
     @include flex(row, flex-start, flex-start);
     width: $appWidth;
     height: $footerBarHeight;
-    
+
     .first {
       padding: 20px;
       flex: 1;
@@ -23,10 +23,25 @@
       text-align: right;
       border-right: $borderSize solid $borderColor-2;
     }
+
     .second {
+      @include flex(column, flex-start, flex-start);
       padding: 20px;
       flex: 1;
       height: 100%;
+      color: var(--gray-9);
+      line-height: 1.8;
+      font-size: 13px;
+
+      .number {
+        font-size: 26px;
+        font-weight: 500;
+      }
+
+      .mail-statistic {
+        @include flex(row, flex-start, center);
+        gap: 20px;
+      }
     }
   }
 }
