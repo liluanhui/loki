@@ -75,6 +75,10 @@
       .mail-statistic {
         @include flex(row, flex-start, center);
         gap: 20px;
+
+        .bp-statistic {
+          color: var(--gray-8) !important;
+        }
       }
 
       .slogan-text {
