@@ -1,6 +1,6 @@
 <template>
   <div :class="clsBlockName">
-    <!-- <banner-block />
+    <banner-block />
     <search-block />
 
     <div class="quick-start">
@@ -11,7 +11,7 @@
     <div style="width: 1200px; height: 300px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
     
     <title-bar title="关注邮局" />
-    <div style="width: 1200px; height: 120px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div> -->
+    <div style="width: 1200px; height: 120px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
   </div>
 </template>
 
