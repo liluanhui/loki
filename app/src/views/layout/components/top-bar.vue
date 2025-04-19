@@ -14,8 +14,9 @@
       </div>
 
       <div :class="`${clsBlockName}-option`">
-        <IconTranslate2 size="16" />
-        <IconSunLine size="16" />
+        <lang-trigger />
+        <theme-trigger />
+        
         <bp-button-group size="small" status="warning" type="dashed">
           <bp-button>登录</bp-button>
           <bp-button>注册</bp-button>

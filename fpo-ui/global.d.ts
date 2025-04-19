@@ -4,6 +4,8 @@ declare module "vue" {
     BannerBlock: typeof import("fpo-ui")["BannerBlock"];
     SearchBlock: typeof import("fpo-ui")["SearchBlock"];
     ShortcutKey: typeof import("fpo-ui")["ShortcutKey"];
+    LangTrigger: typeof import("fpo-ui")["LangTrigger"];
+    ThemeTrigger: typeof import("fpo-ui")["ThemeTrigger"];
   }
 }
 

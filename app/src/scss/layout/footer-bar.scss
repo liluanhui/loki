@@ -17,12 +17,17 @@
     height: $footerBarHeight;
 
     .link-header {
-      display: block;
+      @include flex(row, flex-end, center);
+      gap: 4px;
       font-size: 13px;
       color: var(--gray-9);
       font-weight: 500;
       margin-bottom: 8px;
       font-style: normal;
+
+      .bp-icon-icon-information-line {
+        fill: var(--gray-5);
+      }
     }
 
     .first {
@@ -40,7 +45,7 @@
 
         .link-item {
           list-style: none;
-          font-size: 12px;
+          font-size: 13px;
           color: var(--gray-8);
           line-height: 2.2;
           letter-spacing: 0.4px;
@@ -58,19 +63,18 @@
       font-size: 13px;
       font-style: italic;
 
-      .number {
-        font-size: 24px;
-        font-weight: 500;
+      .open-time {
+        margin-top: 12px;
+
+        .number {
+          font-size: 24px;
+          font-weight: 500;
+        }
       }
 
       .mail-statistic {
         @include flex(row, flex-start, center);
         gap: 20px;
-        margin-top: 8px;
-
-        .bp-icon-icon-information-line {
-          fill: var(--gray-5);
-        }
       }
 
       .slogan-text {
