@@ -33,11 +33,12 @@
             <IconInformationLine size="14" />
           </bp-tooltip>
         </div>
-        <!-- <img  class="slogan-text" src="https://fpo-1251999712.cos.ap-guangzhou.myqcloud.com/logo/text.svg" alt="FPO" /> -->
       </div>
     </div>
   </footer>
   <div :class="`${clsBlockName}-number`">
+    <div class="tag">F.P.O</div>
+    <div class="copyright">Copyright © 2025 |</div>
     <bp-link status="gray" size="mini" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备17015354号</bp-link>
   </div>
 </template>
