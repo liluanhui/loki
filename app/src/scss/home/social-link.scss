@@ -1,0 +1,44 @@
+@use "@loki/fpo-ui/style/common/extend.scss" as *;
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+
+.social-link {
+  @include flex(row, center, center);
+  gap: 20px;
+  margin-bottom: 100px;
+
+  &-item {
+    @include flex(row, flex-start, center);
+    gap: 4px;
+    flex: 1;
+    height: 72px;
+    background-color: var(--gray-0);
+    border-radius: 16px;
+    padding: 10px;
+    border: $borderSize solid $borderColor-2;
+    cursor: pointer;
+  }
+
+  &-img {
+    height: 54px;
+    border-radius: 50%;
+  }
+
+  &-info {
+    @include flex(column, space-evenly, flex-start);
+    height: 100%;
+    
+    &-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--gray-8);
+      @extend .font-quick;
+    }
+
+    &-desc {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-6);
+    }
+  }
+}

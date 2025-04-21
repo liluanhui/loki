@@ -9,15 +9,16 @@
 
     <title-bar title="公开信" />
     <div style="width: 1200px; height: 300px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
-    
+
     <title-bar title="关注邮局" />
-    <div style="width: 1200px; height: 120px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
+    <social-link />
   </div>
 </template>
 
 <script setup lang="ts">
 import titleBar from "./components/title-bar.vue";
 import { IconQuillPenAiFill } from "birdpaper-icon";
+import socialLink from "./components/social-link.vue";
 
 defineOptions({ name: "HomePage" });
 const clsBlockName = "home-page";
