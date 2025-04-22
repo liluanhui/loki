@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "@/views/home/index.vue";
+import publicLetter from "@/views/public/index.vue";
 import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 
@@ -14,6 +15,14 @@ const routes = [
         component: home,
         meta: {
           title: "首页",
+        },
+      },
+      {
+        path: "/public",
+        name: "public",
+        component: publicLetter,
+        meta: {
+          title: "公开信",
         },
       },
       {
