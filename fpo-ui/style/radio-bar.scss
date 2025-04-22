@@ -1,3 +1,49 @@
 @use "./common/design.scss" as *;
 @use "./common/mixins.scss" as *;
 @use "./common/extend.scss" as *;
+
+.radio-bar {
+  @include flex(row, center, center);
+  gap: 6px;
+  width: max-content;
+  background-color: var(--gray-0);
+  padding: 7px 10px;
+  border-radius: 50px;
+  border: $borderSize solid $borderColor-2;
+  @extend .no-select;
+
+  .active {
+    color: var(--gray-0);
+    background-color: var(--warning-5);
+    border: $borderSize solid var(--warning-5);
+    font-weight: 500;
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--gray-0);
+      background-color: var(--warning-5);
+      border: $borderSize solid var(--warning-5);
+    }
+  }
+
+  &-item {
+    @include flex(row, center, center);
+    height: 28px;
+    padding: 0 11px;
+    background-color: var(--gray-0);
+    border: $borderSize solid var(--gray-0);
+    color: var(--gray-9);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: var(--warning-1);
+      border: $borderSize solid var(--warning-3);
+      transition: all 0.2s;
+    }
+  }
+}

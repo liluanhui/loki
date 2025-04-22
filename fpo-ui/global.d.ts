@@ -6,6 +6,7 @@ declare module "vue" {
     ShortcutKey: typeof import("fpo-ui")["ShortcutKey"];
     LangTrigger: typeof import("fpo-ui")["LangTrigger"];
     ThemeTrigger: typeof import("fpo-ui")["ThemeTrigger"];
+    RadioBar: typeof import("fpo-ui")["RadioBar"];
   }
 }
 
