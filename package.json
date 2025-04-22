@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "app:dev": "pnpm run -C app dev",
+    "odin": "pnpm run -C odin start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
