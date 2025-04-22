@@ -1,24 +1,30 @@
 <template>
   <div :class="clsBlockName">
     <radio-bar v-model="current" :option-list="radioBarList"></radio-bar>
+    <bp-button :icon="IconRefreshLine" status="warning" type="plain" shape="circle" size="large"></bp-button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { IconRefreshLine } from "birdpaper-icon";
 
 defineOptions({ name: "PublicPage" });
 const clsBlockName = "public-page";
 
-const current = ref("hot");
+const current = ref("new");
 const radioBarList = [
-  {
-    label: "推荐",
-    value: "hot",
-  },
   {
     label: "最新",
     value: "new",
+  },
+  {
+    label: "最多点赞",
+    value: "like",
+  },
+  {
+    label: "最多评论",
+    value: "comment",
   },
 ];
 </script>

@@ -4,5 +4,6 @@
 
 .public-page {
   @include flex(row, center, center);
+  gap: 10px;
   width: 100%;
 }
