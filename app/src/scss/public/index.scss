@@ -3,4 +3,6 @@
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
 .public-page {
+  @include flex(row, center, center);
+  width: 100%;
 }
