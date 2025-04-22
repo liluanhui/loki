@@ -14,7 +14,7 @@
           <span class="link-header">其它</span>
           <li class="link-item font-quick font-600">BirdpaperUI</li>
           <li class="link-item font-quick font-600">BirdpaperICON</li>
-          <li class="link-item">作者博客</li>
+          <li class="link-item">博客</li>
         </ul>
       </div>
 

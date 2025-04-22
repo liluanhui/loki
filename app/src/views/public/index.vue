@@ -1,7 +1,10 @@
 <template>
   <div :class="clsBlockName">
     <radio-bar v-model="current" :option-list="radioBarList"></radio-bar>
-    <bp-button :icon="IconRefreshLine" status="warning" type="plain" shape="circle" size="large"></bp-button>
+    <bp-button :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
+  </div>
+  <div class="mt-20px">
+    <div class="public-letter"></div>
   </div>
 </template>
 
