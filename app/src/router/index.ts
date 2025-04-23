@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "@/views/home/index.vue";
 import publicLetter from "@/views/public/index.vue";
+import write from "@/views/write/index.vue";
 import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 
@@ -23,6 +24,14 @@ const routes = [
         component: publicLetter,
         meta: {
           title: "公开信",
+        },
+      },
+      {
+        path: "/write",
+        name: "write",
+        component: write,
+        meta: {
+          title: "写信",
         },
       },
       {

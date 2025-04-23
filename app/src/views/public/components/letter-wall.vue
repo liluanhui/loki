@@ -7,7 +7,7 @@
     :horizontal-order="true"
     :gutter="14"
     fit-width>
-    <letter-item v-masonry-tile v-for="(item, index) in 20" :key="item" />
+    <letter-item v-masonry-tile v-for="(item, index) in 22" :key="item" />
   </div>
 </template>
 

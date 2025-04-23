@@ -38,7 +38,7 @@ const toHome = () => {
 
 const list: any[] = [
   { title: "公开信", to: "/public" },
-  { title: "写信", to: "/test" },
+  { title: "写信", to: "/write" },
   { title: "工具箱", to: "/test" },
   { title: "关于", to: "/test" },
 ];
