@@ -8,18 +8,25 @@
       <div class="header">
         <div class="sender-info">
           <bp-avatar size="small" image-url="https://cos.moya.plus/avatar/avatar_sam.jpg"></bp-avatar>
-          <div class="sender-name">itsSam</div>
+          <div class="sender-name">
+            <span class="sender-name-inner">布鲁是只傻猫</span>
+          </div>
         </div>
-        <div class="public-no">
-          <span class="public-no-inner">NO.***1001</span>
-        </div>
-      </div>
-      <div class="body"></div>
-      <div class="footer">
         <div class="time-ago">1 小时前</div>
+      </div>
+
+      <div class="body">
+        <div class="letter-to">寄给十年后的自己</div>
+        <div class="letter-title">十年后的你，还好吗？</div>
+      </div>
+
+      <div class="footer">
+        <div class="public-no">
+          <span class="public-no-inner">NO.23981001</span>
+        </div>
         <div class="statistic">
-          <IconThumbUpLine size="12" />
-          <IconChat1Line size="12" />
+          <span class="statistic-item"><IconThumbUpLine size="14" />122</span>
+          <span class="statistic-item"> <IconChat1Line size="14" />344</span>
         </div>
       </div>
     </div>
