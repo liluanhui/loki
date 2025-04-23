@@ -18,6 +18,8 @@ import "@loki/fpo-ui/style/index.scss";
 
 import VueWechatTitle from "vue-wechat-title";
 
+import { VueMasonryPlugin } from "vue-masonry";
+
 const app = createApp(App);
 
 app.use(createPinia());
@@ -26,5 +28,6 @@ app.use(VueWechatTitle);
 app.use(BirdpaperIcon);
 app.use(BirdpaperUI);
 app.use(FpoUI);
+app.use(VueMasonryPlugin);
 
 app.mount("#app");

@@ -4,13 +4,14 @@
     <bp-button :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
   </div>
   <div class="mt-20px">
-    <letter-item />
+    <letter-wall />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { IconRefreshLine } from "birdpaper-icon";
+import letterWall from "./components/letter-wall.vue";
 
 defineOptions({ name: "PublicPage" });
 const clsBlockName = "public-page";

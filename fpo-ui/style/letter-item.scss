@@ -5,12 +5,13 @@
 .letter-item {
   @include flex(column, flex-start, space-between);
   gap: 4px;
-  width: 260px;
+  width: 280px;
   height: 220px;
   background-color: var(--gray-0);
   border-radius: 12px;
   border: $borderSize solid $borderColor-2;
   padding: 12px;
+  margin-bottom: 14px;
   cursor: pointer;
   @extend .no-select;
 

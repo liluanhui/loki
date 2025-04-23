@@ -6,4 +6,8 @@
   @include flex(row, center, center);
   gap: 10px;
   width: 100%;
+
+  .letter-wall {
+    margin: 0 auto;
+  }
 }
