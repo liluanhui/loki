@@ -9,9 +9,70 @@
 }
 
 .public-letter {
+  @include flex(column, flex-start, space-between);
+  gap: 4px;
   width: 240px;
   height: 120px;
   background-color: var(--gray-0);
   border-radius: 12px;
   border: $borderSize solid $borderColor-2;
+  padding: 12px;
+  cursor: pointer;
+  @extend .no-select;
+
+  .header {
+    @include flex(row, space-between, center);
+
+    .sender-info {
+      @include flex(row, flex-start, center);
+      gap: 8px;
+
+      .sender-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--gray-9);
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .public-no {
+      transform: scale(0.9);
+
+      &-inner {
+        font-size: 12px;
+        color: var(--gray-6);
+        font-weight: 500;
+        letter-spacing: 1px;
+        @extend .font-quick;
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    width: 100%;
+    // background-color: var(--gray-1);
+  }
+
+  .footer {
+    @include flex(row, space-between, center);
+    gap: 8px;
+
+    .time-ago {
+      font-size: 12px;
+      color: var(--gray-4);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      padding-left: 4px;
+    }
+
+    .statistic {
+      @include flex(row, center, center);
+      gap: 10px;
+
+      svg[class*="-icon-"] {
+        fill: var(--gray-4);
+      }
+    }
+  }
 }

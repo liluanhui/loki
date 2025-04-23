@@ -4,7 +4,25 @@
     <bp-button :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
   </div>
   <div class="mt-20px">
-    <div class="public-letter"></div>
+    <div class="public-letter">
+      <div class="header">
+        <div class="sender-info">
+          <bp-avatar size="small" image-url="https://cos.moya.plus/avatar/avatar_sam.jpg"></bp-avatar>
+          <div class="sender-name">itsSam</div>
+        </div>
+        <div class="public-no">
+          <span class="public-no-inner">NO.***1001</span>
+        </div>
+      </div>
+      <div class="body"></div>
+      <div class="footer">
+        <div class="time-ago">1 小时前</div>
+        <div class="statistic">
+          <IconThumbUpLine size="12" />
+          <IconChat1Line size="12" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
