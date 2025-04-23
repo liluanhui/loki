@@ -7,6 +7,7 @@ declare module "vue" {
     LangTrigger: typeof import("fpo-ui")["LangTrigger"];
     ThemeTrigger: typeof import("fpo-ui")["ThemeTrigger"];
     RadioBar: typeof import("fpo-ui")["RadioBar"];
+    LetterItem: typeof import("fpo-ui")["LetterItem"];
   }
 }
 
