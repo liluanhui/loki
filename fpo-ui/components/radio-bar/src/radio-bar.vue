@@ -1,11 +1,11 @@
 <template>
-  <div :class="clsBlockName">
+  <div :class="cls">
     <div v-for="v in optionList" :class="[`${clsBlockName}-item`, { active: model === v.value }]" @click="onSelect(v)">{{ v.label }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
+import { computed, PropType } from "vue";
 
 const model = defineModel({ default: "" });
 const props = defineProps({
@@ -18,10 +18,19 @@ const props = defineProps({
     >,
     default: () => [],
   },
+  size: {
+    type: String,
+    default: "default",
+  },
 });
 
 defineOptions({ name: "RadioBar" });
 const clsBlockName = "radio-bar";
+
+const cls = computed(() => {
+  return [clsBlockName, `${clsBlockName}-size-${props.size}`];
+});
+
 const onSelect = (item: { label: string; value: string }) => {
   model.value = item.value;
 };

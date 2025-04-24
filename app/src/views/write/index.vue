@@ -11,7 +11,7 @@
               <!-- <bp-radio-group v-model="current" type="button">
                 <bp-radio v-for="v in radioBarList" :value="v.value">{{ v.label }}</bp-radio>
               </bp-radio-group> -->
-              <radio-bar v-model="current" :option-list="radioBarList"></radio-bar>
+              <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
             </div>
           </div>
           <div :class="`${clsBlockName}-form-item`">

@@ -4,11 +4,8 @@
 
 .radio-bar {
   @include flex(row, center, center);
-  gap: 6px;
   width: max-content;
   background-color: var(--gray-0);
-  padding: 7px 10px;
-  border-radius: 50px;
   border: $borderSize solid $borderColor-2;
   @extend .no-select;
 
@@ -28,13 +25,9 @@
 
   &-item {
     @include flex(row, center, center);
-    height: 28px;
-    padding: 0 11px;
     background-color: var(--gray-0);
     border: $borderSize solid var(--gray-0);
     color: var(--gray-9);
-    border-radius: 50px;
-    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.2px;
     cursor: pointer;
@@ -45,5 +38,31 @@
       border: $borderSize solid var(--warning-3);
       transition: all 0.2s;
     }
+  }
+}
+
+.radio-bar-size-default {
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 50px;
+
+  .radio-bar-item {
+    height: 28px;
+    padding: 0 11px;
+    border-radius: 50px;
+    font-size: 14px;
+  }
+}
+
+.radio-bar-size-small {
+  gap: 4px;
+  padding: 4px 6px;
+  border-radius: 50px;
+
+  .radio-bar-item {
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 50px;
+    font-size: 13px;
   }
 }
