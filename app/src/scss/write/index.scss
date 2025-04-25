@@ -2,7 +2,7 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
-$labelWidth: 50px;
+$labelWidth: 80px;
 
 .write-page {
   &-banner {
@@ -52,6 +52,7 @@ $labelWidth: 50px;
       }
 
       &-content {
+        @include flex(row, flex-start, center);
         width: calc(100% - $labelWidth);
       }
     }
