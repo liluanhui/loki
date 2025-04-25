@@ -8,6 +8,7 @@ declare module "vue" {
     ThemeTrigger: typeof import("fpo-ui")["ThemeTrigger"];
     RadioBar: typeof import("fpo-ui")["RadioBar"];
     LetterItem: typeof import("fpo-ui")["LetterItem"];
+    PublicTypeSelector: typeof import("fpo-ui")["PublicTypeSelector"];
   }
 }
 

@@ -6,3 +6,4 @@ export * from "./components/lang-trigger";
 export * from "./components/theme-trigger";
 export * from "./components/radio-bar";
 export * from "./components/letter-item";
+export * from "./components/public-type-selector";

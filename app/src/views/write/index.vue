@@ -41,9 +41,7 @@
           <div :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">公开设置</label>
             <div :class="`${clsBlockName}-form-item-content`">
-              <div class="public-type-option">
-                <div class="public-type-option-item" v-for="v in publicTypeList" ></div>
-              </div>
+              <public-type-selector />
             </div>
           </div>
         </div>
@@ -69,26 +67,6 @@ const radioBarList = [
   {
     label: "他人",
     value: "email",
-  },
-];
-
-const publicTypeList = [
-  {
-    name: "完全公开",
-    type: "full",
-    recipient_type: "self",
-    sender_avatar: "寄件人",
-    sender_name: "寄件人",
-    recipient_email: "11111111111@qq.com",
-    recipient_name: "收件人",
-  },
-  {
-    name: "隐私保护",
-    type: "privary",
-  },
-  {
-    name: "匿名",
-    type: "anonymity",
   },
 ];
 </script>

@@ -1,3 +1,13 @@
-import { TheLogo, BannerBlock, SearchBlock, ShortcutKey, LangTrigger, ThemeTrigger, RadioBar, LetterItem } from "./fpo-ui";
+import {
+  TheLogo,
+  BannerBlock,
+  SearchBlock,
+  ShortcutKey,
+  LangTrigger,
+  ThemeTrigger,
+  RadioBar,
+  LetterItem,
+  PublicTypeSelector,
+} from "./fpo-ui";
 
-export default [TheLogo, BannerBlock, SearchBlock, ShortcutKey, LangTrigger, ThemeTrigger, RadioBar, LetterItem];
+export default [TheLogo, BannerBlock, SearchBlock, ShortcutKey, LangTrigger, ThemeTrigger, RadioBar, LetterItem, PublicTypeSelector];
