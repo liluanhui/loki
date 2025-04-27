@@ -17,7 +17,7 @@
         <lang-trigger />
         <theme-trigger />
 
-        <bp-button-group size="small" status="warning" type="dashed">
+        <bp-button-group size="small" status="primary" type="dashed">
           <bp-button>登录</bp-button>
           <bp-button>注册</bp-button>
         </bp-button-group>

@@ -5,7 +5,7 @@
   @include flex(column, center, center);
   width: 1200px;
   height: 400px;
-  background-color: var(--warning-2);
+  background-color: var(--primary-2);
   border-radius: 16px;
   border: $borderSize solid $borderColor-2;
 }

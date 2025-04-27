@@ -15,6 +15,17 @@
   --primary-9: var(--brand-9);
   --primary-10: var(--brand-10);
 
+  --bp-primary-1: var(--brand-1) !important;
+  --bp-primary-2: var(--brand-2) !important;
+  --bp-primary-3: var(--brand-3) !important;
+  --bp-primary-4: var(--brand-4) !important;
+  --bp-primary-5: var(--brand-5) !important;
+  --bp-primary-6: var(--brand-6) !important;
+  --bp-primary-7: var(--brand-7) !important;
+  --bp-primary-8: var(--brand-8) !important;
+  --bp-primary-9: var(--brand-9) !important;
+  --bp-primary-10: var(--brand-10) !important;
+
   --danger-1: #ffece8;
   --danger-2: #fdcdc5;
   --danger-3: #fbaca3;
@@ -71,6 +82,17 @@
   --primary-dark-8: var(--brand-dark-8);
   --primary-dark-9: var(--brand-dark-9);
   --primary-dark-10: var(--brand-dark-10);
+
+  --bp-primary-dark-1: var(--brand-dark-1) !important;
+  --bp-primary-dark-2: var(--brand-dark-2) !important;
+  --bp-primary-dark-3: var(--brand-dark-3) !important;
+  --bp-primary-dark-4: var(--brand-dark-4) !important;
+  --bp-primary-dark-5: var(--brand-dark-5) !important;
+  --bp-primary-dark-6: var(--brand-dark-6) !important;
+  --bp-primary-dark-7: var(--brand-dark-7) !important;
+  --bp-primary-dark-8: var(--brand-dark-8) !important;
+  --bp-primary-dark-9: var(--brand-dark-9) !important;
+  --bp-primary-dark-10: var(--brand-dark-10) !important;
 
   --danger-dark-1: #4d000a;
   --danger-dark-2: #770611;
@@ -129,6 +151,17 @@
   --primary-9-rgb: 121, 46, 0;
   --primary-10-rgb: 77, 27, 0;
 
+  --bp-primary-1-rgb: 255, 247, 232 !important;
+  --bp-primary-2-rgb: 255, 228, 186 !important;
+  --bp-primary-3-rgb: 255, 207, 139 !important;
+  --bp-primary-4-rgb: 255, 182, 93 !important;
+  --bp-primary-5-rgb: 255, 154, 46 !important;
+  --bp-primary-6-rgb: 255, 125, 0 !important;
+  --bp-primary-7-rgb: 210, 95, 0 !important;
+  --bp-primary-8-rgb: 166, 69, 0 !important;
+  --bp-primary-9-rgb: 121, 46, 0 !important;
+  --bp-primary-10-rgb: 77, 27, 0 !important;
+
   --danger-1-rgb: 255, 236, 232;
   --danger-2-rgb: 253, 205, 197;
   --danger-3-rgb: 251, 172, 163;
@@ -184,6 +217,17 @@
   --primary-dark-8-rgb: var(--brand-8-rgb);
   --primary-dark-9-rgb: var(--brand-9-rgb);
   --primary-dark-10-rgb: var(--brand-10-rgb);
+
+  --bp-primary-dark-1-rgb: var(--brand-1-rgb) !important;
+  --bp-primary-dark-2-rgb: var(--brand-2-rgb) !important;
+  --bp-primary-dark-3-rgb: var(--brand-3-rgb) !important;
+  --bp-primary-dark-4-rgb: var(--brand-4-rgb) !important;
+  --bp-primary-dark-5-rgb: var(--brand-5-rgb) !important;
+  --bp-primary-dark-6-rgb: var(--brand-6-rgb) !important;
+  --bp-primary-dark-7-rgb: var(--brand-7-rgb) !important;
+  --bp-primary-dark-8-rgb: var(--brand-8-rgb) !important;
+  --bp-primary-dark-9-rgb: var(--brand-9-rgb) !important;
+  --bp-primary-dark-10-rgb: var(--brand-10-rgb) !important;
 
   --danger-dark-1-rgb: 77, 0, 10;
   --danger-dark-2-rgb: 119, 6, 17;
@@ -243,6 +287,17 @@
   --primary-9: var(--primary-dark-9);
   --primary-10: var(--primary-dark-10);
 
+  --bp-primary-1: var(--primary-dark-1) !important;
+  --bp-primary-2: var(--primary-dark-2) !important;
+  --bp-primary-3: var(--primary-dark-3) !important;
+  --bp-primary-4: var(--primary-dark-4) !important;
+  --bp-primary-5: var(--primary-dark-5) !important;
+  --bp-primary-6: var(--primary-dark-6) !important;
+  --bp-primary-7: var(--primary-dark-7) !important;
+  --bp-primary-8: var(--primary-dark-8) !important;
+  --bp-primary-9: var(--primary-dark-9) !important;
+  --bp-primary-10: var(--primary-dark-10) !important;
+
   --warning-1: var(--warning-dark-1);
   --warning-2: var(--warning-dark-2);
   --warning-3: var(--warning-dark-3);
@@ -298,6 +353,17 @@
   --primary-8-rgb: var(--primary-dark-8-rgb);
   --primary-9-rgb: var(--primary-dark-9-rgb);
   --primary-10-rgb: var(--primary-dark-10-rgb);
+
+  --bp-primary-1-rgb: var(--primary-dark-1-rgb) !important;
+  --bp-primary-2-rgb: var(--primary-dark-2-rgb) !important;
+  --bp-primary-3-rgb: var(--primary-dark-3-rgb) !important;
+  --bp-primary-4-rgb: var(--primary-dark-4-rgb) !important;
+  --bp-primary-5-rgb: var(--primary-dark-5-rgb) !important;
+  --bp-primary-6-rgb: var(--primary-dark-6-rgb) !important;
+  --bp-primary-7-rgb: var(--primary-dark-7-rgb) !important;
+  --bp-primary-8-rgb: var(--primary-dark-8-rgb) !important;
+  --bp-primary-9-rgb: var(--primary-dark-9-rgb) !important;
+  --bp-primary-10-rgb: var(--primary-dark-10-rgb) !important;
 
   --warning-1-rgb: var(--warning-dark-1-rgb);
   --warning-2-rgb: var(--warning-dark-2-rgb);
