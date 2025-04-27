@@ -53,6 +53,7 @@
               <public-type-selector v-model="public_type" />
             </div>
           </div>
+          <yuque-editor></yuque-editor>
         </div>
       </div>
     </div>
@@ -61,6 +62,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+// import yuqueEditor from "./components/yuque-editor.vue";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
