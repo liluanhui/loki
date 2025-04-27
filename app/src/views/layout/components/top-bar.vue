@@ -27,7 +27,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+
 defineOptions({ name: "TopBar" });
 const clsBlockName = "top-bar";
 
@@ -42,4 +44,6 @@ const list: any[] = [
   { title: "工具箱", to: "/test" },
   { title: "关于", to: "/test" },
 ];
+
+const { t, messages } = useI18n();
 </script>

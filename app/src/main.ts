@@ -20,6 +20,8 @@ import VueWechatTitle from "vue-wechat-title";
 
 import { VueMasonryPlugin } from "vue-masonry";
 
+import i18n from "./locales/i18n";
+
 const app = createApp(App);
 
 app.use(createPinia());
@@ -29,5 +31,6 @@ app.use(BirdpaperIcon);
 app.use(BirdpaperUI);
 app.use(FpoUI);
 app.use(VueMasonryPlugin);
+app.use(i18n);
 
 app.mount("#app");
