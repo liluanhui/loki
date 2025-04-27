@@ -3,9 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import toolbar from "./toolbar";
 import simpleToolbar from "./simple-toolbar";
+import { useStorage } from "@vueuse/core";
 
 defineOptions({ name: "YuqueEditor" });
 const clsBlockName = "yuque-editor";
@@ -33,6 +34,7 @@ const emits = defineEmits<{
 const editor = ref();
 const viewer = ref();
 const wordCount = ref(0);
+const currentTheme = useStorage("theme", "light");
 
 const initEditor = () => {
   const { createOpenEditor } = window["Doc"];
@@ -43,6 +45,7 @@ const initEditor = () => {
   el.classList.add("ne-doc-major-editor");
 
   editor.value = createOpenEditor(el, {
+    darkMode: currentTheme.value !== "light",
     layout: props.layout,
     input: {
       autoSpacing: true,
@@ -105,7 +108,26 @@ const initEditor = () => {
   });
 };
 
-const setContent = (title: string = "", content: string = "", type: string = "text/lake") => {
+const reRenderEditor = () => {
+  let data = "";
+  if (editor.value) {
+    data = getContent();
+    editor.value.destroy();
+  }
+  initEditor();
+  setContent(data);
+};
+
+watch(
+  () => currentTheme.value,
+  () => {
+    if (editor.value) {
+      reRenderEditor();
+    }
+  }
+);
+
+const setContent = (content: string = "", type: string = "text/lake") => {
   return editor.value.setDocument(type, content);
 };
 
