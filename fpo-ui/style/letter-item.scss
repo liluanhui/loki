@@ -96,10 +96,10 @@ $normalHeight: 210px;
       &-item {
         @include flex(row, flex-start, center);
         font-size: 12px;
-        color: var(--warning-6);
+        color: var(--primary-6);
 
         svg[class*="-icon-"] {
-          fill: var(--warning-6);
+          fill: var(--primary-6);
           margin-right: 4px;
         }
       }
