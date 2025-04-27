@@ -3,24 +3,23 @@
     <div :class="`${clsBlockName}-banner`"></div>
 
     <div :class="`${clsBlockName}-container`">
+      <div :class="`${clsBlockName}-option`"></div>
+
       <div :class="`${clsBlockName}-editor`">
         <div :class="`${clsBlockName}-form`">
           <div :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">寄给</label>
             <div :class="`${clsBlockName}-form-item-content`">
-              <!-- <bp-radio-group v-model="current" type="button">
-                <bp-radio v-for="v in radioBarList" :value="v.value">{{ v.label }}</bp-radio>
-              </bp-radio-group> -->
               <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
             </div>
           </div>
-          <div :class="`${clsBlockName}-form-item`">
+          <div v-if="current === 'email'" :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">收件人</label>
             <div :class="`${clsBlockName}-form-item-content`">
               <bp-input placeholder="输入邮件地址" :style="{ width: '260px' }" clearable> </bp-input>
             </div>
           </div>
-          <div :class="`${clsBlockName}-form-item`">
+          <div v-if="current === 'email'" :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">收件人称呼</label>
             <div :class="`${clsBlockName}-form-item-content`">
               <bp-input placeholder="输入对方的称呼" :style="{ width: '260px' }" clearable> </bp-input>
@@ -29,25 +28,33 @@
           <div :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">主题</label>
             <div :class="`${clsBlockName}-form-item-content`">
-              <bp-input placeholder="信件主题" :style="{ width: '480px' }" clearable :maxlength="25" show-limit> </bp-input>
+              <bp-input placeholder="信件主题" :style="{ width: '560px' }" clearable :maxlength="25" show-limit> </bp-input>
+            </div>
+          </div>
+          <div :class="`${clsBlockName}-form-item`">
+            <label :class="`${clsBlockName}-form-item-label`">投递时间</label>
+            <div :class="`${clsBlockName}-form-item-content`">
+              <bp-date-picker
+                placeholder="选择投递时间"
+                :style="{ width: '260px' }"
+                show-time
+                value-format="YYYY-MM-DD HH:mm:ss"></bp-date-picker>
             </div>
           </div>
           <div :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">是否公开</label>
             <div :class="`${clsBlockName}-form-item-content`">
-              <bp-switch></bp-switch>
+              <bp-switch v-model="isPublic"></bp-switch>
             </div>
           </div>
-          <div :class="`${clsBlockName}-form-item`">
+          <div v-if="isPublic" :class="`${clsBlockName}-form-item`">
             <label :class="`${clsBlockName}-form-item-label`">公开设置</label>
             <div :class="`${clsBlockName}-form-item-content`">
-              <public-type-selector />
+              <public-type-selector v-model="public_type" />
             </div>
           </div>
         </div>
       </div>
-
-      <div :class="`${clsBlockName}-option`"></div>
     </div>
   </div>
 </template>
@@ -58,7 +65,10 @@ import { ref } from "vue";
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
 
-const current = ref("email");
+const current = ref("self");
+const isPublic = ref(false);
+const public_type = ref("full");
+
 const radioBarList = [
   {
     label: "自己",
