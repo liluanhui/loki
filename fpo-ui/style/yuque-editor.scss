@@ -2,42 +2,40 @@
 @use "./common/mixins.scss" as *;
 @use "./common/extend.scss" as *;
 
-.yuque-editor {
-  .ne-layout-mode-fixed .ne-engine,
-  .ne-layout-mode-adapt .ne-engine {
-    min-height: calc(100vh - 720px);
+.ne-layout-mode-fixed .ne-engine,
+.ne-layout-mode-adapt .ne-engine {
+  min-height: calc(100vh - 720px);
+}
+
+.ne-editor {
+  width: 830px;
+  height: calc(100vh - 650px) !important;
+  border-top: none;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  .ne-ui {
+    padding: 0 16px !important;
+
+    &-inner-toolbar {
+      width: 100%;
+    }
   }
 
-  .ne-editor {
-    width: 830px;
-    height: calc(100vh - 650px) !important;
-    border-top: none;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+  .ne-editor-wrap {
+    border-radius: 10px;
 
-    .ne-ui {
-      padding: 0 16px !important;
-
-      &-inner-toolbar {
-        width: 100%;
-      }
+    &-content {
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
     }
+  }
 
-    .ne-editor-wrap {
-      border-radius: 10px;
+  .ne-toolbar-widget {
+    margin-left: 0;
+  }
 
-      &-content {
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 10px;
-      }
-    }
-
-    .ne-toolbar-widget {
-      margin-left: 0;
-    }
-
-    .ne-ui-toolbar-content {
-      justify-content: space-around;
-    }
+  .ne-ui-toolbar-content {
+    justify-content: space-around;
   }
 }

@@ -53,7 +53,11 @@
               <public-type-selector v-model="public_type" />
             </div>
           </div>
-          <yuque-editor></yuque-editor>
+
+          <div :class="`${clsBlockName}-form-item column-layout`">
+            <yuque-editor ref="editorRef"></yuque-editor>
+            <span class="word-count">字数 {{ editorRef?.wordCount }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -62,11 +66,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-// import yuqueEditor from "./components/yuque-editor.vue";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
 
+const editorRef = ref();
 const current = ref("self");
 const isPublic = ref(false);
 const public_type = ref("full");

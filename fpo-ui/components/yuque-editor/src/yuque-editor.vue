@@ -1,7 +1,5 @@
 <template>
-  <div :class="clsBlockName">
-    <div :id="editorId" @keydown="handleKeydown" tabindex="0" />
-  </div>
+  <div :id="editorId" @keydown="handleKeydown" tabindex="0" />
 </template>
 
 <script setup lang="ts">
@@ -102,8 +100,8 @@ const initEditor = () => {
   editor.value.execCommand("focus");
 
   editor.value.on("contentchange", () => {
-  wordCount.value = editor.value.queryCommandValue("wordCount");
-  emits("change", getContent());
+    wordCount.value = editor.value.queryCommandValue("wordCount");
+    emits("change", getContent());
   });
 };
 
