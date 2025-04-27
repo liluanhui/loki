@@ -20,8 +20,8 @@ const props = defineProps({
   placeholder: { type: String, default: "请输入文字" },
   paragraphTip: { type: String, default: "输入 / 唤起更多" },
   layout: { type: String, default: "fixed" },
-  isSimple: { type: Boolean, default: false },
-  disableQuickInput: { type: Boolean, default: false },
+  isSimple: { type: Boolean, default: true },
+  disableQuickInput: { type: Boolean, default: true },
   imagePath: { type: String, default: "/article/pics" },
 });
 
@@ -102,8 +102,8 @@ const initEditor = () => {
   editor.value.execCommand("focus");
 
   editor.value.on("contentchange", () => {
-    wordCount.value = editor.value.queryCommandValue("wordCount");
-    emits("change", getContent());
+  wordCount.value = editor.value.queryCommandValue("wordCount");
+  emits("change", getContent());
   });
 };
 

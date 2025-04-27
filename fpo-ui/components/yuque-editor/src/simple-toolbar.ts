@@ -4,6 +4,8 @@ export default {
   agentConfig: {
     default: {
       items: [
+        // toolbarItems.cardSelect,
+        // "|",
         toolbarItems.undo,
         toolbarItems.redo,
         toolbarItems.formatPainter,
@@ -20,23 +22,23 @@ export default {
         toolbarItems.color,
         toolbarItems.bgColor,
         "|",
-        // toolbarItems.alignment,
+        toolbarItems.alignment,
         toolbarItems.unorderedList,
         toolbarItems.orderedList,
-        // toolbarItems.indent,
-        // toolbarItems.lineHeight,
+        toolbarItems.indent,
+        toolbarItems.lineHeight,
         "|",
-        toolbarItems.taskList,
-        toolbarItems.link,
-        toolbarItems.quote,
+        // toolbarItems.taskList,
+        // toolbarItems.link,
+        // toolbarItems.quote,
         toolbarItems.hr,
       ],
     },
     // table选区工具栏
     table: {
       items: [
-        toolbarItems.cardSelect,
-        "|",
+        // toolbarItems.cardSelect,
+        // "|",
         toolbarItems.undo,
         toolbarItems.redo,
         toolbarItems.formatPainter,
