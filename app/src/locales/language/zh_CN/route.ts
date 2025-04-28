@@ -1,4 +1,5 @@
 export default {
+  home: "首页",
   public: "公开信",
   write: "写信",
   tool: "工具箱",

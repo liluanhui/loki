@@ -4,6 +4,29 @@ import publicLetter from "@/views/public/index.vue";
 import write from "@/views/write/index.vue";
 import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
+import { useStorage } from "@vueuse/core";
+
+const currentLang = useStorage("lang", "zh_CN");
+const siteTitle = {
+  zh_CN: "未来邮局",
+  en: "Feature Post Office.",
+};
+const routeName = {
+  zh_CN: {
+    home: "首页",
+    public: "公开信",
+    write: "写信",
+    tool: "工具箱",
+    about: "关于",
+  },
+  en: {
+    home: "Home",
+    public: "Public Letter",
+    write: "Write",
+    tool: "Toolbox",
+    about: "About",
+  },
+};
 
 const routes = [
   {
@@ -15,7 +38,7 @@ const routes = [
         name: "home",
         component: home,
         meta: {
-          title: "首页",
+          title: `${routeName[currentLang.value].home} | ${siteTitle[currentLang.value]}`,
         },
       },
       {
@@ -23,7 +46,7 @@ const routes = [
         name: "public",
         component: publicLetter,
         meta: {
-          title: "公开信",
+          title: `${routeName[currentLang.value].public} | ${siteTitle[currentLang.value]}`,
         },
       },
       {
@@ -31,7 +54,7 @@ const routes = [
         name: "write",
         component: write,
         meta: {
-          title: "写信",
+          title: `${routeName[currentLang.value].write} | ${siteTitle[currentLang.value]}`,
         },
       },
       {
@@ -39,7 +62,7 @@ const routes = [
         name: "test",
         component: test,
         meta: {
-          title: "test",
+          title: `${routeName[currentLang.value].home} | ${siteTitle[currentLang.value]}`,
         },
       },
     ],
