@@ -17,10 +17,7 @@
         <lang-trigger />
         <theme-trigger />
 
-        <bp-button-group size="small" status="primary" type="dashed">
-          <bp-button>登录</bp-button>
-          <bp-button>注册</bp-button>
-        </bp-button-group>
+        <bp-button size="small" status="primary" type="dashed">{{ t("common.login") }}</bp-button>
       </div>
     </div>
   </div>
@@ -38,12 +35,12 @@ const toHome = () => {
   router.push("/");
 };
 
-const list: any[] = [
-  { title: "公开信", to: "/public" },
-  { title: "写信", to: "/write" },
-  { title: "工具箱", to: "/test" },
-  { title: "关于", to: "/test" },
-];
+const { t } = useI18n();
 
-const { t, messages } = useI18n();
+const list: any[] = [
+  { title: t('route.public'), to: "/public" },
+  { title: t('route.write'), to: "/write" },
+  { title: t('route.tool'), to: "/test" },
+  { title: t('route.about'), to: "/test" },
+];
 </script>

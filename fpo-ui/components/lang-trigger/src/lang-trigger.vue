@@ -17,7 +17,7 @@ defineOptions({ name: "LangTrigger" });
 const clsBlockName = "lang-trigger";
 
 const langList = [
-  { title: "中文 - 简", value: "zh_CN" },
+  { title: "简体中文", value: "zh_CN" },
   { title: "English", value: "en" },
 ];
 

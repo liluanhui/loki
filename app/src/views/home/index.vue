@@ -4,7 +4,7 @@
     <search-block />
 
     <div class="quick-start">
-      <bp-button :icon="IconQuillPenAiFill" size="large" status="warning" type="dashed" shape="round">写一封信</bp-button>
+      <bp-button :icon="IconQuillPenAiFill" size="large" status="warning" type="dashed" shape="round">{{ t("route.write_btn") }}</bp-button>
     </div>
 
     <title-bar title="公开信" />
@@ -19,7 +19,10 @@
 import titleBar from "./components/title-bar.vue";
 import { IconQuillPenAiFill } from "birdpaper-icon";
 import socialLink from "./components/social-link.vue";
+import { useI18n } from "vue-i18n";
 
 defineOptions({ name: "HomePage" });
 const clsBlockName = "home-page";
+
+const { t } = useI18n();
 </script>
