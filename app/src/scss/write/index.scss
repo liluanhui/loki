@@ -40,7 +40,7 @@ $labelWidth: 74px;
 
     .bp-col {
       @include flex(row, flex-start, center);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .no-line {
@@ -71,6 +71,7 @@ $labelWidth: 74px;
         background: none;
         border: none !important;
         border-radius: 0;
+        padding: 0;
 
         &:hover {
           background: none;

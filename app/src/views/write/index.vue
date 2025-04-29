@@ -10,7 +10,7 @@
           <bp-row style="width: 100%">
             <bp-col :span="24">
               <div :class="`${clsBlockName}-form-item no-line`">
-                <label :class="`${clsBlockName}-form-item-label`">寄给</label>
+                <label :class="`${clsBlockName}-form-item-label`">寄给：</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
@@ -22,7 +22,9 @@
                 </div>
               </div>
             </bp-col>
+          </bp-row>
 
+          <bp-row style="width: 100%">
             <bp-col :span="24" v-if="current === 'email'">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">收件地址：</label>
@@ -37,8 +39,10 @@
                 </div>
               </div>
             </bp-col>
+          </bp-row>
 
-            <bp-col :span="24">
+          <bp-row style="width: 100%" :gutter="16">
+            <bp-col :span="16">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">主题：</label>
                 <div :class="`${clsBlockName}-form-item-content`">
@@ -46,7 +50,6 @@
                 </div>
               </div>
             </bp-col>
-
             <bp-col :span="8">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">投递时间：</label>
