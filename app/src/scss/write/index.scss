@@ -2,7 +2,7 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
-$labelWidth: 80px;
+$labelWidth: 74px;
 
 .write-page {
   &-banner {
@@ -20,7 +20,7 @@ $labelWidth: 80px;
 
   &-editor {
     flex: 1;
-    padding: 20px 24px;
+    padding: 20px 32px;
     background-color: var(--gray-0);
     border: $borderSize solid $borderColor-2;
     border-radius: 14px;
@@ -37,24 +37,44 @@ $labelWidth: 80px;
   &-form {
     width: 100%;
     @include flex(column, flex-start, flex-start);
-    gap: 20px;
+
+    .bp-col {
+      @include flex(row, flex-start, center);
+      margin-bottom: 14px;
+    }
+
+    .no-line {
+      border: none;
+    }
 
     &-item {
       @include flex(row, flex-start, center);
-      width: 100%;
-      gap: 14px;
+      width: max-content;
+      gap: 10px;
+      flex: 1;
+      padding-left: 2px;
+      border-bottom: $borderSize solid $borderColor-2;
 
       &-label {
-        width: $labelWidth;
-        text-align: right;
-        font-size: 14px;
+        text-align: left;
+        font-size: 13px;
         line-height: 32px;
-        color: var(--gray-8);
+        color: var(--gray-6);
       }
 
       &-content {
         @include flex(row, flex-start, center);
-        width: calc(100% - $labelWidth);
+        flex: 1;
+      }
+
+      .bp-input {
+        background: none;
+        border: none !important;
+        border-radius: 0;
+
+        &:hover {
+          background: none;
+        }
       }
 
       #yq-editor {
@@ -63,6 +83,7 @@ $labelWidth: 80px;
     }
 
     .column-layout {
+      width: 100%;
       @include flex(column, flex-start, flex-end);
 
       .word-count {

@@ -8,14 +8,13 @@
 }
 
 .ne-editor {
-  width: 830px;
   height: calc(100vh - 650px) !important;
   border-top: none;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 
   .ne-ui {
-    padding: 0 16px !important;
+    padding: 0 !important;
 
     &-inner-toolbar {
       width: 100%;
