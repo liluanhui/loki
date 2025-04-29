@@ -10,13 +10,13 @@
           <bp-row style="width: 100%">
             <bp-col :span="24">
               <div :class="`${clsBlockName}-form-item no-line`">
-                <label :class="`${clsBlockName}-form-item-label`">寄给：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="position: relative; left: -4px">
                   <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
               </div>
               <div :class="`${clsBlockName}-form-item no-line justify-end!`">
-                <label :class="`${clsBlockName}-form-item-label`">是否公开：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.isPublic }}</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="flex: none">
                   <bp-switch v-model="isPublic"></bp-switch>
                 </div>
@@ -27,7 +27,7 @@
           <bp-row style="width: 100%" :gutter="16">
             <bp-col :span="16">
               <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">主题：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.title }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <bp-input clearable :maxlength="25" show-limit> </bp-input>
                 </div>
@@ -35,7 +35,7 @@
             </bp-col>
             <bp-col :span="8">
               <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">投递时间：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.delivery_time }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <bp-date-picker :style="{ width: '100%' }" show-time value-format="YYYY-MM-DD HH:mm:ss"></bp-date-picker>
                 </div>
@@ -46,7 +46,7 @@
           <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
             <bp-col :span="16">
               <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">收件地址：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_email }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <bp-input clearable> </bp-input>
                 </div>
@@ -54,7 +54,7 @@
             </bp-col>
             <bp-col :span="8">
               <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">收件人称呼：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_name }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <bp-input clearable> </bp-input>
                 </div>
@@ -65,7 +65,7 @@
           <bp-row style="width: 100%" v-if="isPublic">
             <bp-col :span="24">
               <div v-if="isPublic" :class="`${clsBlockName}-form-item`" style="align-items: flex-start">
-                <label :class="`${clsBlockName}-form-item-label`">公开设置：</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.isPublic }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <public-type-selector v-model="public_type" />
                 </div>
@@ -75,7 +75,7 @@
 
           <div :class="`${clsBlockName}-form-item no-line column-layout`">
             <yuque-editor ref="editorRef"></yuque-editor>
-            <span class="word-count">字数 {{ editorRef?.wordCount }}</span>
+            <span class="word-count">{{ t("write.editor.word_count") }} {{ editorRef?.wordCount }}</span>
           </div>
         </div>
       </div>
@@ -85,22 +85,34 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
 
 const editorRef = ref();
 const current = ref("self");
-const isPublic = ref(true);
+const isPublic = ref(false);
 const public_type = ref("full");
+
+const { t } = useI18n();
+const formField = {
+  type: t("write.editor.send_field") + t("common.field_colon"),
+  isPublic: t("write.editor.is_public") + t("common.field_colon"),
+  title: t("write.editor.title") + t("common.field_colon"),
+  delivery_time: t("write.editor.delivery_time") + t("common.field_colon"),
+  recipient_email: t("write.editor.recipient_email") + t("common.field_colon"),
+  recipient_name: t("write.editor.recipient_name") + t("common.field_colon"),
+  public_type: t("write.editor.public_type") + t("common.field_colon"),
+};
 
 const radioBarList = [
   {
-    label: "自己",
+    label: t("write.editor.send_type.self"),
     value: "self",
   },
   {
-    label: "他人",
+    label: t("write.editor.send_type.other"),
     value: "email",
   },
 ];
