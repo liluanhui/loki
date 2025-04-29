@@ -11,12 +11,12 @@
             <bp-col :span="24">
               <div :class="`${clsBlockName}-form-item no-line`">
                 <label :class="`${clsBlockName}-form-item-label`">寄给：</label>
-                <div :class="`${clsBlockName}-form-item-content`">
+                <div :class="`${clsBlockName}-form-item-content`" style="position: relative; left: -4px">
                   <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
               </div>
               <div :class="`${clsBlockName}-form-item no-line justify-end!`">
-                <label :class="`${clsBlockName}-form-item-label`">是否公开</label>
+                <label :class="`${clsBlockName}-form-item-label`">是否公开：</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="flex: none">
                   <bp-switch v-model="isPublic"></bp-switch>
                 </div>
@@ -24,14 +24,16 @@
             </bp-col>
           </bp-row>
 
-          <bp-row style="width: 100%">
-            <bp-col :span="24" v-if="current === 'email'">
+          <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
+            <bp-col :span="12">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">收件地址：</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <bp-input clearable> </bp-input>
                 </div>
               </div>
+            </bp-col>
+            <bp-col :span="12">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">收件人称呼：</label>
                 <div :class="`${clsBlockName}-form-item-content`">

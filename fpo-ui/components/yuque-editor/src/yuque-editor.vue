@@ -18,7 +18,7 @@ const props = defineProps({
   enableToc: { type: Boolean, default: true },
   placeholder: { type: String, default: "请输入文字" },
   paragraphTip: { type: String, default: "输入 / 唤起更多" },
-  layout: { type: String, default: "fixed" },
+  layout: { type: String, default: "adapt" },
   isSimple: { type: Boolean, default: true },
   disableQuickInput: { type: Boolean, default: true },
   imagePath: { type: String, default: "/article/pics" },

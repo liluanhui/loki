@@ -52,8 +52,7 @@ $labelWidth: 74px;
       width: max-content;
       gap: 10px;
       flex: 1;
-      padding-left: 2px;
-      border-bottom: $borderSize solid $borderColor-2;
+      border-bottom: 1px solid rgba(var(--gray-2-rgb), 0.3);
 
       &-label {
         text-align: left;
