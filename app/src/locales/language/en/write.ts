@@ -12,5 +12,6 @@ export default {
     recipient_name: "Recipient Name",
     public_type: "Public Setting",
     word_count: "Word Count",
+    placeholder: "Input the content of the letter.",
   },
 };

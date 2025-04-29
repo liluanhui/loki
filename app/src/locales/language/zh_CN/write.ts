@@ -12,5 +12,6 @@ export default {
     recipient_name: "收件人称呼",
     public_type: "公开设置",
     word_count: "字数",
+    placeholder: "输入信件内容",
   },
 };

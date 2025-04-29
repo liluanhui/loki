@@ -65,7 +65,7 @@
           <bp-row style="width: 100%" v-if="isPublic">
             <bp-col :span="24">
               <div v-if="isPublic" :class="`${clsBlockName}-form-item`" style="align-items: flex-start">
-                <label :class="`${clsBlockName}-form-item-label`">{{ formField.isPublic }}</label>
+                <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <public-type-selector v-model="public_type" />
                 </div>
@@ -74,8 +74,8 @@
           </bp-row>
 
           <div :class="`${clsBlockName}-form-item no-line column-layout`">
-            <yuque-editor ref="editorRef"></yuque-editor>
-            <span class="word-count">{{ t("write.editor.word_count") }} {{ editorRef?.wordCount }}</span>
+            <yuque-editor ref="editorRef" :placeholder="t('write.editor.placeholder')" :paragraph-tip="''"></yuque-editor>
+            <span class="word-count">{{ t("write.editor.word_count") + t("common.field_colon") }} {{ editorRef?.wordCount }}</span>
           </div>
         </div>
       </div>
