@@ -4,10 +4,12 @@
 
 .public-type-selector {
   @include flex(row, flex-start, center);
-  width: 480px;
-  gap: 10px;
+  gap: 14px;
 
   .active {
+    opacity: 1;
+    transition: all 0.2s;
+
     .public-type-selector-item-title {
       background-color: var(--primary-6);
       color: var(--gray-0);
@@ -24,7 +26,14 @@
   &-item {
     @include flex(column, flex-start, center);
     flex: 1;
+    opacity: 0.6;
     cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      opacity: 1;
+      transition: all 0.2s;
+    }
 
     &-title {
       width: max-content;

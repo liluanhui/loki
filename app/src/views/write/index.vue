@@ -24,25 +24,6 @@
             </bp-col>
           </bp-row>
 
-          <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
-            <bp-col :span="12">
-              <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">收件地址：</label>
-                <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-input clearable> </bp-input>
-                </div>
-              </div>
-            </bp-col>
-            <bp-col :span="12">
-              <div :class="`${clsBlockName}-form-item`">
-                <label :class="`${clsBlockName}-form-item-label`">收件人称呼：</label>
-                <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-input clearable> </bp-input>
-                </div>
-              </div>
-            </bp-col>
-          </bp-row>
-
           <bp-row style="width: 100%" :gutter="16">
             <bp-col :span="16">
               <div :class="`${clsBlockName}-form-item`">
@@ -61,18 +42,36 @@
               </div>
             </bp-col>
           </bp-row>
-          <!-- <div :class="`${clsBlockName}-form-item`">
-            <label :class="`${clsBlockName}-form-item-label`">是否公开</label>
-            <div :class="`${clsBlockName}-form-item-content`">
-              <bp-switch v-model="isPublic"></bp-switch>
-            </div>
-          </div>
-          <div v-if="isPublic" :class="`${clsBlockName}-form-item`">
-            <label :class="`${clsBlockName}-form-item-label`">公开设置</label>
-            <div :class="`${clsBlockName}-form-item-content`">
-              <public-type-selector v-model="public_type" />
-            </div>
-          </div> -->
+
+          <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
+            <bp-col :span="16">
+              <div :class="`${clsBlockName}-form-item`">
+                <label :class="`${clsBlockName}-form-item-label`">收件地址：</label>
+                <div :class="`${clsBlockName}-form-item-content`">
+                  <bp-input clearable> </bp-input>
+                </div>
+              </div>
+            </bp-col>
+            <bp-col :span="8">
+              <div :class="`${clsBlockName}-form-item`">
+                <label :class="`${clsBlockName}-form-item-label`">收件人称呼：</label>
+                <div :class="`${clsBlockName}-form-item-content`">
+                  <bp-input clearable> </bp-input>
+                </div>
+              </div>
+            </bp-col>
+          </bp-row>
+
+          <bp-row style="width: 100%" v-if="isPublic">
+            <bp-col :span="24">
+              <div v-if="isPublic" :class="`${clsBlockName}-form-item`" style="align-items: flex-start">
+                <label :class="`${clsBlockName}-form-item-label`">公开设置：</label>
+                <div :class="`${clsBlockName}-form-item-content`">
+                  <public-type-selector v-model="public_type" />
+                </div>
+              </div>
+            </bp-col>
+          </bp-row>
 
           <div :class="`${clsBlockName}-form-item no-line column-layout`">
             <yuque-editor ref="editorRef"></yuque-editor>
@@ -92,7 +91,7 @@ const clsBlockName = "write-page";
 
 const editorRef = ref();
 const current = ref("self");
-const isPublic = ref(false);
+const isPublic = ref(true);
 const public_type = ref("full");
 
 const radioBarList = [

@@ -1,8 +1,8 @@
 <template>
   <div :class="clsBlockName">
-    <div :class="[`${clsBlockName}-item`, { active: v.type === model }]" v-for="v in publicTypeList">
+    <div :class="[`${clsBlockName}-item`, { active: v.type === model }]" v-for="v in publicTypeList" @click="onClick(v)">
       <div :class="`${clsBlockName}-item-title`">{{ v.name }}</div>
-      <letter-item size="small" @click="onClick(v)" />
+      <letter-item size="small" />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ const publicTypeList = [
   {
     name: "完全公开",
     type: "full",
-    // recipient_type: "self",
+    // recipient_type: "self"
     // sender_avatar: "寄件人",
     // sender_name: "寄件人",
     // recipient_email: "11111111111@qq.com",
