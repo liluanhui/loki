@@ -23,11 +23,6 @@ const publicTypeList = [
   {
     name: "完全公开",
     type: "full",
-    // recipient_type: "self"
-    // sender_avatar: "寄件人",
-    // sender_name: "寄件人",
-    // recipient_email: "11111111111@qq.com",
-    // recipient_name: "收件人",
   },
   {
     name: "隐私保护",

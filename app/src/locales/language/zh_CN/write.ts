@@ -6,6 +6,11 @@ export default {
       other: "他人",
     },
     is_public: "是否公开",
+    public_type_list: {
+      full: "完全公开",
+      privary: "隐私保护",
+      anonymity: "匿名",
+    },
     title: "主题",
     delivery_time: "投递时间",
     recipient_email: "收件地址",
