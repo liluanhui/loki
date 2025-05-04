@@ -9,6 +9,17 @@ import { businessError } from "src/utils/throw";
 @Injectable()
 export class UserService {
   /**
+   * 通过昵称查找用户
+   * @param nick_name
+   * @returns
+   */
+  async findOneByNickName(nick_name: string): Promise<FpoUser | undefined> {
+    return FpoUser.findOne({
+      where: { nick_name },
+    });
+  }
+
+  /**
    * 查询单个用户
    * @param account 可以是uid、email、phone
    * @returns User | undefined
