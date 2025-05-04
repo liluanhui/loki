@@ -11,5 +11,6 @@ import { FpoUser } from "src/models/fpo_user.model";
   imports: [SequelizeModule.forFeature([FpoUser, FpoRole, FpoRoleGroup, FpoPermission])],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}
