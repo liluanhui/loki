@@ -4,6 +4,7 @@ import { aesEncrypt } from "src/utils/encrypt";
 import { ConfigService } from "@nestjs/config";
 import { HttpService } from "@nestjs/axios";
 import { UserService } from "../user/user.service";
+import { businessError } from "src/utils/throw";
 
 @Injectable()
 @Dependencies(UserService, JwtService, ConfigService, HttpService)
@@ -22,9 +23,9 @@ export class AuthService {
    */
   async checkAuthByPassword(account: string, password: string): Promise<{ token: string; uid: string }> {
     const user = await this.userService.findOne(account);
-    if (!user) throw new HttpException("用户不存在", HttpStatus.OK);
+    if (!user) businessError("用户不存在");
 
-    if (user?.password !== password) throw new HttpException("用户名或密码错误", HttpStatus.OK);
+    if (user?.password !== password) businessError("用户名或密码错误");
 
     return {
       token: await this.genenrateToken({

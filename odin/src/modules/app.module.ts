@@ -26,7 +26,7 @@ const envPath = `.env.${process.env.NODE_ENV || "development"}`;
       port: parseInt(process.env.DB_PORT, 10) || 3306,
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE || 'moya',
+      database: process.env.DB_DATABASE || 'fpo',
       autoLoadModels: true,
       synchronize: true,
       define: {

@@ -80,14 +80,6 @@ export class FpoUser extends Model {
   intro: string;
 
   @Column({
-    type: DataType.ENUM("regular", "banned"),
-    comment: "账号状态，regular-正常，banned-禁用",
-    allowNull: false,
-    defaultValue: "regular",
-  })
-  status: string;
-
-  @Column({
     type: DataType.DATE,
     comment: "创建时间",
     allowNull: false,
@@ -105,5 +97,5 @@ export class FpoUser extends Model {
     targetKey: "id",
     as: "fpo_role",
   })
-  moya_role: FpoRole;
+  fpo_role: FpoRole;
 }
