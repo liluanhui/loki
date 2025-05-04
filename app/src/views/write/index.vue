@@ -91,11 +91,13 @@ defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
 
 const editorRef = ref();
-const current = ref("self");
-const isPublic = ref(false);
+const current = ref("email");
+const isPublic = ref(true);
 const public_type = ref("full");
 
 const { t } = useI18n();
+
+// Public type selector options
 const publicTypeList = [
   {
     name: t("public-type-selector.full"),
@@ -111,8 +113,8 @@ const publicTypeList = [
   },
 ];
 
+// Form field labels
 const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");
-
 const formField = {
   type: createFormField("send_field"),
   isPublic: createFormField("is_public"),
@@ -123,6 +125,7 @@ const formField = {
   public_type: createFormField("public_type"),
 };
 
+// Radio bar options
 const radioBarList = [
   {
     label: t("write.editor.send_type.self"),
