@@ -67,7 +67,7 @@
               <div v-if="isPublic" :class="`${clsBlockName}-form-item`" style="align-items: flex-start">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <public-type-selector v-model="public_type" />
+                  <public-type-selector v-model="public_type" :list="publicTypeList" />
                 </div>
               </div>
             </bp-col>
@@ -96,14 +96,31 @@ const isPublic = ref(false);
 const public_type = ref("full");
 
 const { t } = useI18n();
+const publicTypeList = [
+  {
+    name: t("public-type-selector.full"),
+    type: "full",
+  },
+  {
+    name: t("public-type-selector.privary"),
+    type: "privary",
+  },
+  {
+    name: t("public-type-selector.private"),
+    type: "anonymity",
+  },
+];
+
+const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");
+
 const formField = {
-  type: t("write.editor.send_field") + t("common.field_colon"),
-  isPublic: t("write.editor.is_public") + t("common.field_colon"),
-  title: t("write.editor.title") + t("common.field_colon"),
-  delivery_time: t("write.editor.delivery_time") + t("common.field_colon"),
-  recipient_email: t("write.editor.recipient_email") + t("common.field_colon"),
-  recipient_name: t("write.editor.recipient_name") + t("common.field_colon"),
-  public_type: t("write.editor.public_type") + t("common.field_colon"),
+  type: createFormField("send_field"),
+  isPublic: createFormField("is_public"),
+  title: createFormField("title"),
+  delivery_time: createFormField("delivery_time"),
+  recipient_email: createFormField("recipient_email"),
+  recipient_name: createFormField("recipient_name"),
+  public_type: createFormField("public_type"),
 };
 
 const radioBarList = [
