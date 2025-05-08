@@ -7,7 +7,7 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
   createdAt: "created_at",
   updatedAt: "updated_at",
 })
-export class fpoPublicMail extends Model {
+export class FpoPublicMail extends Model {
   @Column({
     type: DataType.STRING(11),
     primaryKey: true,

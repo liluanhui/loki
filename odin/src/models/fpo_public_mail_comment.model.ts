@@ -1,0 +1,85 @@
+import { Column, DataType, Model, Table } from "sequelize-typescript";
+
+@Table({
+  tableName: "fpo_public_mail_comment",
+  paranoid: true,
+  deletedAt: 'deleted_at',
+  createdAt: "created_at",
+  updatedAt: "updated_at",
+})
+export class FpoPublicMailComment extends Model {
+  @Column({
+    type: DataType.STRING(11),
+    primaryKey: true,
+    comment: "主键",
+  })
+  id: string;
+
+  @Column({
+    type: DataType.STRING(11),
+    comment: "用户ID",
+    allowNull: false,
+  })
+  uid: string;
+
+  @Column({
+    type: DataType.STRING(11),
+    comment: "公开信 ID",
+    allowNull: false,
+  })
+  mail_id: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    comment: '评论等级',
+    allowNull: false,
+  })
+  level: string;
+
+  @Column({
+    type: DataType.STRING(11),
+    comment: '父级ID',
+  })
+  last_id: string;
+
+  @Column({
+    type: DataType.STRING(11),
+    comment: '根ID',
+  })
+  root_id: string;
+
+  @Column({
+    type: DataType.STRING(500),
+    comment: '内容',
+    allowNull: false,
+  })
+  content: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    comment: '评论数',
+    allowNull: false,
+    defaultValue: 0,
+  })
+  comments: number;
+
+  @Column({
+    type: DataType.DATE,
+    comment: "删除时间",
+    allowNull: false,
+  })
+  deleted_at: Date;
+
+  @Column({
+    type: DataType.DATE,
+    comment: "创建时间",
+    allowNull: false,
+  })
+  created_at: Date;
+
+  @Column({
+    type: DataType.DATE,
+    comment: "更新时间",
+  })
+  updated_at: Date;
+}
