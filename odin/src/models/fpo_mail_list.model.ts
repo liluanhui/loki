@@ -71,14 +71,14 @@ export class FpoMailList extends Model {
   @Column({
     type: DataType.STRING(40),
     comment: "收件人邮箱地址",
-    allowNull: false,
+    allowNull: true,
   })
   recipient_email: string;
 
   @Column({
     type: DataType.STRING(30),
     comment: "收件人名称",
-    allowNull: false,
+    allowNull: true,
   })
   recipient_name: string;
 
