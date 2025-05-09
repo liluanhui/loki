@@ -6,7 +6,9 @@ export class DraftController {
   // Front 新增草稿
   @Post("add")
   @HttpCode(HttpStatus.OK)
-  async create(@Body() body: DraftForm) {}
+  async create(@Body() body: DraftForm) {
+    return body;
+  }
 
   // Front 编辑草稿
   @Post("edit")
