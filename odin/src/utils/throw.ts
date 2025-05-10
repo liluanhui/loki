@@ -13,7 +13,7 @@ export const throwException = (message: string, status: number) => {
  * 参数错误
  * @param message
  */
-export const paramsError = (message: string = "参数错误") => {
+export const paramsError = (message: string = "Params Error") => {
   throwException(message, HttpStatus.BAD_REQUEST);
 };
 

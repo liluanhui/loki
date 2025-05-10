@@ -10,31 +10,21 @@ export class DraftController {
   @HttpCode(HttpStatus.OK)
   async create(@Body() body: DraftForm, @Req() req: Request) {
     const { title, content, type, plan_deliver_at, public_type, recipient_type, recipient_email, recipient_name, word_count } = body;
-    if (!title || !content) {
-      paramsError(getResponseMsg("MailDraft", "TITLE_OR_CONTENT_EMPTY", req));
-    }
-    if (word_count && word_count > 10000) {
-      paramsError("字数不能超过10000个字");
-    }
 
-    if (["private", "publish"].indexOf(type) === -1) {
-      paramsError("邮件类型错误");
-    }
-    if (["full", "privary", "anonymity"].indexOf(public_type) === -1) {
-      paramsError("公开类型错误");
-    }
-    if (["self", "email"].indexOf(recipient_type) === -1) {
-      paramsError("收件人类型错误");
-    }
-
-    if (recipient_type && !isEmail(recipient_email) && recipient_type === "email") {
-      paramsError("收件人邮箱地址错误");
-    }
-    if (recipient_type && recipient_name.length > 30) {
-      paramsError("收件人名称过长，不能超过30个字符");
-    }
-    if (plan_deliver_at && new Date(plan_deliver_at).getTime() < Date.now()) {
-      paramsError("计划投递时间不能小于当前时间");
+    const validators = [
+      { condition: !title || !content, error: "TITLE_OR_CONTENT_EMPTY" },
+      { condition: word_count && word_count > 10000, error: "WORD_COUNT_LIMIT" },
+      { condition: !["private", "publish"].includes(type), error: "MAIL_TYPE_ERROR" },
+      { condition: !["full", "privary", "anonymity"].includes(public_type), error: "PUBLIC_TYPE_ERROR" },
+      { condition: !["self", "email"].includes(recipient_type), error: "RECIPIENT_TYPE_ERROR" },
+      { condition: recipient_type === "email" && !isEmail(recipient_email), error: "RECIPIENT_EMAIL_ERROR" },
+      { condition: recipient_type && recipient_name.length > 30, error: "RECIPIENT_NAME_LIMIT" },
+      { condition: plan_deliver_at && new Date(plan_deliver_at).getTime() < Date.now(), error: "PLAN_DELIVER_TIME_ERROR" },
+    ];
+    for (const { condition, error } of validators) {
+      if (condition) {
+        paramsError(getResponseMsg("MailDraft", error, req));
+      }
     }
 
     return body;
