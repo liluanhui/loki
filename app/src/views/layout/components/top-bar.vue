@@ -48,6 +48,7 @@ const list: any[] = [
 
 const { isLogin } = useUserStore();
 const accountCtx = ref(inject("account", undefined));
+
 const handleLoginClick = () => {
   if (!isLogin()) {
     accountCtx.value.login();

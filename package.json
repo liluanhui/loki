@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "birdpaper-ui": "^3.0.0-alpha.45",
+    "birdpaper-ui": "^3.0.0-alpha.50",
     "radash": "^12.1.0",
     "unocss": "^0.62.3",
     "@vueuse/components": "^10.11.0",

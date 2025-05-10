@@ -2,6 +2,16 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 
+.login-modal-footer-info {
+  text-align: center;
+  padding: 40px 0 10px 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--bp-gray-3);
+  font-weight: thin;
+  @extend .no-select;
+}
+
 .login-index {
   @include flex(row, space-between, center);
 
@@ -12,21 +22,54 @@
   }
 
   &-form {
-    flex: 1;
-    padding-right: 40px;
+    flex: 5;
+    padding-right: 24px;
 
     &-item {
+      @include flex(row, flex-start, center);
+
       &:not(:first-child) {
         margin-top: 20px;
       }
 
-      .bp-input {
-        input {
-          font-size: 14px;
-          
-          &::placeholder {
-            color: var(--bp-gray-4);
+      label {
+        font-size: 13px;
+        color: var(--bp-gray-8);
+      }
+
+      &-content {
+        width: 100%;
+
+        .bp-input {
+          input {
             font-size: 14px;
+
+            &::placeholder {
+              color: var(--bp-gray-4);
+              font-size: 14px;
+            }
+          }
+        }
+
+        .forgot-psw {
+          @include flex(row, flex-end, center);
+          margin-top: 10px;
+        }
+      }
+
+      .thrid-login-list {
+        @include flex(row, flex-start, center);
+
+        svg[class*="-icon-"] {
+          fill: var(--bp-gray-8);
+          border-radius: 50%;
+          padding: 2px;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background: var(--bp-gray-2);
+            transition: all 0.2s;
           }
         }
       }
@@ -34,7 +77,6 @@
 
     .btn-item {
       @include flex(row, space-between, center);
-      margin-top: 24px;
 
       .bp-button {
         font-size: 14px;
@@ -43,6 +85,16 @@
   }
 
   &-option {
-    flex: 1;
+    @include flex(row, center, center);
+    flex: 4;
+    border-left: $borderSize solid $borderColor-2;
+    padding-left: 24px;
+
+    .bg {
+      width: 100%;
+      height: 218.5px;
+      border-radius: 8px;
+      background-color: var(--brand-2);
+    }
   }
 }
