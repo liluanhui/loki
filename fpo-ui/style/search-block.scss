@@ -4,9 +4,24 @@
 
 $searchBlockWidth: 740px;
 $searchBlockHeight: 60px;
+$searchIconSize: 23px;
+$searchGap: 12px;
+$searchPadding: 10px 24px;
+$searchFontSize: 18px;
 
-$searchBlockWidth-tablet: 580px;
-$searchBlockHeight-tablet: 48px;
+$searchBlockWidth-tablet: 680px;
+$searchBlockHeight-tablet: 52px;
+$searchIconSize-tablet: 20px;
+$searchGap-tablet: 10px;
+$searchPadding-tablet: 10px 20px;
+$searchFontSize-tablet: 16px;
+
+$searchBlockWidth-mobile: 74%;
+$searchBlockHeight-mobile: 44px;
+$searchIconSize-mobile: 18px;
+$searchGap-mobile: 8px;
+$searchPadding-mobile: 0 18px;
+$searchFontSize-mobile: 14px;
 
 .search-block {
   @include flex(row, flex-start, center);
@@ -15,12 +30,14 @@ $searchBlockHeight-tablet: 48px;
   background-color: var(--gray-0);
   border-radius: $searchBlockHeight;
   border: $borderSize solid $borderColor-2;
-  padding: 10px 24px;
-  gap: 12px;
+  padding: $searchPadding;
+  gap: $searchGap;
   opacity: 0.85;
   transition: all 0.2s;
 
   svg[class*="-icon-"] {
+    width: $searchIconSize !important;
+    height: $searchIconSize !important;
     fill: var(--gray-6);
     transition: all 0.2s;
   }
@@ -32,7 +49,7 @@ $searchBlockHeight-tablet: 48px;
     input {
       width: 100%;
       height: 100%;
-      font-size: 18px;
+      font-size: $searchFontSize;
       color: var(--gray-9);
       font-weight: 500;
       letter-spacing: 1px;
@@ -40,8 +57,9 @@ $searchBlockHeight-tablet: 48px;
 
       &::placeholder {
         color: var(--bp-gray-5);
+        vertical-align: align;
         font-weight: 400;
-        font-size: 16px;
+        font-size: $searchFontSize;
       }
     }
   }
@@ -63,5 +81,59 @@ $searchBlockHeight-tablet: 48px;
     width: $searchBlockWidth-tablet;
     height: $searchBlockHeight-tablet;
     border-radius: $searchBlockHeight-tablet;
+    padding: $searchPadding-tablet;
+    gap: $searchGap-tablet;
+
+    svg[class*="-icon-"] {
+      width: $searchIconSize-tablet !important;
+      height: $searchIconSize-tablet !important;
+    }
+
+    &-input {
+      input {
+        font-size: $searchFontSize-tablet;
+
+        &::placeholder {
+          font-size: $searchFontSize-tablet;
+        }
+      }
+    }
+
+    &-tip {
+      .shortcut-key {
+        display: none;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .search-block {
+    width: $searchBlockWidth-mobile;
+    height: $searchBlockHeight-mobile;
+    border-radius: $searchBlockHeight-mobile;
+    padding: $searchPadding-mobile;
+    gap: $searchGap-mobile;
+
+    svg[class*="-icon-"] {
+      width: $searchIconSize-mobile !important;
+      height: $searchIconSize-mobile !important;
+    }
+
+    &-input {
+      input {
+        font-size: $searchFontSize-mobile;
+
+        &::placeholder {
+          font-size: $searchFontSize-mobile;
+        }
+      }
+    }
+
+    &-tip {
+      .shortcut-key {
+        display: none;
+      }
+    }
   }
 }

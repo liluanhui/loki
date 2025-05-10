@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName">
     <banner-block />
-    <!-- <search-block /> -->
+    <search-block />
 
     <!-- <div class="quick-start">
       <bp-button :icon="IconQuillPenAiFill" size="large" status="warning" type="dashed" shape="round">{{ t("route.write_btn") }}</bp-button>

@@ -42,3 +42,12 @@
     }
   }
 }
+
+@include mobile {
+  .home-page {
+    .search-block {
+      top: calc($searchBlockHeight-mobile / -2);
+      margin-left: calc($searchBlockWidth-mobile / -2);
+    }
+  }
+}
