@@ -9,6 +9,7 @@
     "lint:eslint": "eslint . --fix"
   },
   "dependencies": {
+    "@loki/odin": "workspace:*",
     "@loki/fpo-ui": "workspace:*",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",

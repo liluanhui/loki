@@ -10,13 +10,14 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "types": ["node"],
-    "typeRoots": ["./node_modules/@types/", "birdpaper-ui/global"],
+    "typeRoots": ["./node_modules/@types/", "@loki/odin/src/types", "birdpaper-ui/global"],
     "noImplicitAny": false,
     "baseUrl": ".",
     "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
+    "odin/**/*.ts",
     "packages/**/*.ts",
     "app/**/*.ts",
     "app/**/*.d.ts",
