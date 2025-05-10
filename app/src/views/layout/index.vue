@@ -2,7 +2,7 @@
   <div class="app-layout">
     <topBar />
     <appMain />
-    <!-- <footerBar /> -->
+    <footerBar />
 
     <!-- 全局登录弹窗 -->
     <login-modal ref="loginModalRef"></login-modal>

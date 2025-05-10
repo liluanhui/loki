@@ -3,15 +3,25 @@
     <banner-block />
     <search-block />
 
-    <!-- <div class="quick-start">
+    <div class="quick-start">
       <bp-button :icon="IconQuillPenAiFill" size="large" status="warning" type="dashed" shape="round">{{ t("route.write_btn") }}</bp-button>
-    </div> -->
+    </div>
 
-    <!-- <title-bar title="公开信" />
-    <div style="width: 1200px; height: 300px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
+    <title-bar title="公开信" />
+    <div class="public-letter-area">
+      <div class="public-letter-area-inner">
+        <letter-item v-for="(item, index) in 8" :key="item" />
+      </div>
+      <div class="public-letter-area-option">
+        <IconMore2Fill />
+        <bp-button size="large" type="dashed" shape="round">查看更多</bp-button>
+      </div>
+    </div>
 
     <title-bar title="关注邮局" />
-    <social-link /> -->
+    <div class="social-link-area">
+      <social-link />
+    </div>
   </div>
 </template>
 

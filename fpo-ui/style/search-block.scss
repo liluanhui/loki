@@ -17,11 +17,11 @@ $searchPadding-tablet: 10px 20px;
 $searchFontSize-tablet: 16px;
 
 $searchBlockWidth-mobile: 74%;
-$searchBlockHeight-mobile: 44px;
-$searchIconSize-mobile: 18px;
-$searchGap-mobile: 8px;
-$searchPadding-mobile: 0 18px;
-$searchFontSize-mobile: 14px;
+$searchBlockHeight-mobile: 42px;
+$searchIconSize-mobile: 16px;
+$searchGap-mobile: 6px;
+$searchPadding-mobile: 0 14px;
+$searchFontSize-mobile: 13px;
 
 .search-block {
   @include flex(row, flex-start, center);

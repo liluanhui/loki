@@ -1,11 +1,9 @@
 <template>
-  <div :class="clsBlockName">
-    <div :class="`${clsBlockName}-item`" v-for="v in list">
-      <img :class="`${clsBlockName}-img`" :src="v.img" :alt="v.title" />
-      <div :class="`${clsBlockName}-info`">
-        <div :class="`${clsBlockName}-info-title`">{{ v.title }}</div>
-        <div :class="`${clsBlockName}-info-desc`">{{ v.desc }}</div>
-      </div>
+  <div :class="`${clsBlockName}-item`" v-for="v in list">
+    <img :class="`${clsBlockName}-img`" :src="v.img" :alt="v.title" />
+    <div :class="`${clsBlockName}-info`">
+      <div :class="`${clsBlockName}-info-title`">{{ v.title }}</div>
+      <div :class="`${clsBlockName}-info-desc`">{{ v.desc }}</div>
     </div>
   </div>
 </template>

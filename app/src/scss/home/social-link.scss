@@ -3,10 +3,6 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 
 .social-link {
-  @include flex(row, center, center);
-  gap: 20px;
-  margin-bottom: 100px;
-
   &-item {
     @include flex(row, flex-start, center);
     gap: 4px;
