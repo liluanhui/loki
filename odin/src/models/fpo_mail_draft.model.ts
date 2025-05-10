@@ -36,7 +36,7 @@ export class FpoMailDraft extends Model {
     allowNull: false,
     defaultValue: "full",
   })
-  publich_type: string;
+  public_type: string;
 
   @Column({
     type: DataType.ENUM("self", "email"),
@@ -86,7 +86,7 @@ export class FpoMailDraft extends Model {
     comment: "字数",
     allowNull: false,
   })
-  word_count: string;
+  word_count: number;
 
   @Column({
     type: DataType.DATE,
