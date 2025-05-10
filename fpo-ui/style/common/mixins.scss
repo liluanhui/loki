@@ -21,6 +21,24 @@ $B: null;
   }
 }
 
+@mixin mobile {
+  @media screen and (max-width: 766px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
 @mixin flex($direction, $justify, $align) {
   display: flex;
   flex-direction: $direction;

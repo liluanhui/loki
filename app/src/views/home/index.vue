@@ -1,17 +1,17 @@
 <template>
   <div :class="clsBlockName">
     <banner-block />
-    <search-block />
+    <!-- <search-block /> -->
 
-    <div class="quick-start">
+    <!-- <div class="quick-start">
       <bp-button :icon="IconQuillPenAiFill" size="large" status="warning" type="dashed" shape="round">{{ t("route.write_btn") }}</bp-button>
-    </div>
+    </div> -->
 
-    <title-bar title="公开信" />
+    <!-- <title-bar title="公开信" />
     <div style="width: 1200px; height: 300px; background-color: #fff; border-radius: 16px; margin-bottom: 40px"></div>
 
     <title-bar title="关注邮局" />
-    <social-link />
+    <social-link /> -->
   </div>
 </template>
 

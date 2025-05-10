@@ -13,3 +13,12 @@
     padding: 20px 0;
   }
 }
+
+@include tablet {
+  .app-main {
+    &-inner {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}

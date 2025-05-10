@@ -5,6 +5,9 @@
 $searchBlockWidth: 740px;
 $searchBlockHeight: 60px;
 
+$searchBlockWidth-tablet: 580px;
+$searchBlockHeight-tablet: 48px;
+
 .search-block {
   @include flex(row, flex-start, center);
   width: $searchBlockWidth;
@@ -42,9 +45,6 @@ $searchBlockHeight: 60px;
       }
     }
   }
-
-  &-tip {
-  }
 }
 
 .search-block-focus {
@@ -55,5 +55,13 @@ $searchBlockHeight: 60px;
   svg[class*="-icon-"] {
     fill: var(--primary-6);
     transition: all 0.2s;
+  }
+}
+
+@include tablet {
+  .search-block {
+    width: $searchBlockWidth-tablet;
+    height: $searchBlockHeight-tablet;
+    border-radius: $searchBlockHeight-tablet;
   }
 }

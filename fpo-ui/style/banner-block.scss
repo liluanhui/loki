@@ -3,9 +3,11 @@
 
 .banner-block {
   @include flex(column, center, center);
-  width: 1200px;
-  height: 400px;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 400px;
   background-color: var(--primary-2);
   border-radius: 16px;
+  aspect-ratio: 3 / 1;
   border: $borderSize solid $borderColor-2;
 }
