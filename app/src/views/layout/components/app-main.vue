@@ -6,6 +6,9 @@
       </router-view>
     </div>
   </div>
+  
+  <!-- 全局登录弹窗 -->
+  <login-modal ref="loginModalRef"></login-modal>
 </template>
 
 <script lang="ts" setup>

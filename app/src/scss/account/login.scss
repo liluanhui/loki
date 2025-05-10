@@ -1,0 +1,48 @@
+@use "@loki/fpo-ui/style/common/extend.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+
+.login-index {
+  @include flex(row, space-between, center);
+
+  &-header {
+    font-size: 14px;
+    color: var(--bp-gray-8);
+    font-weight: 600;
+  }
+
+  &-form {
+    flex: 1;
+    padding-right: 40px;
+
+    &-item {
+      &:not(:first-child) {
+        margin-top: 20px;
+      }
+
+      .bp-input {
+        input {
+          font-size: 14px;
+          
+          &::placeholder {
+            color: var(--bp-gray-4);
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .btn-item {
+      @include flex(row, space-between, center);
+      margin-top: 24px;
+
+      .bp-button {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &-option {
+    flex: 1;
+  }
+}

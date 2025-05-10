@@ -17,13 +17,15 @@
         <lang-trigger />
         <theme-trigger />
 
-        <bp-button size="small" status="primary" type="dashed">{{ t("common.login") }}</bp-button>
+        <bp-button size="small" status="primary" type="dashed" @click="handleLoginClick">{{ t("common.login") }}</bp-button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useUserStore } from "@/stores/useUser";
+import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -38,9 +40,18 @@ const toHome = () => {
 const { t } = useI18n();
 
 const list: any[] = [
-  { title: t('route.public'), to: "/public" },
-  { title: t('route.write'), to: "/write" },
-  { title: t('route.tool'), to: "/test" },
-  { title: t('route.about'), to: "/test" },
+  { title: t("route.public"), to: "/public" },
+  { title: t("route.write"), to: "/write" },
+  { title: t("route.tool"), to: "/test" },
+  { title: t("route.about"), to: "/test" },
 ];
+
+const { isLogin } = useUserStore();
+const accountCtx = ref(inject("account", undefined));
+const handleLoginClick = () => {
+  if (!isLogin()) {
+    accountCtx.value.login();
+    return;
+  }
+};
 </script>
