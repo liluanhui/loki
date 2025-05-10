@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus } from "@nestjs/common";
 
 /**
  * 抛出异常
@@ -13,7 +13,7 @@ export const throwException = (message: string, status: number) => {
  * 参数错误
  * @param message
  */
-export const paramsError = (message: string = '参数错误') => {
+export const paramsError = (message: string = "参数错误") => {
   throwException(message, HttpStatus.BAD_REQUEST);
 };
 
@@ -23,4 +23,15 @@ export const paramsError = (message: string = '参数错误') => {
  */
 export const businessError = (message: string) => {
   throwException(message, HttpStatus.OK);
+};
+
+export const getResponseMsg = (module:string,messageEnum: string, req: Request) => {
+  let lang = req.headers["langs"] || "zh-CN";
+  // TODO: 这里需要根据目录结构获取支持的语言
+  if (["en", "zh-CN"].indexOf(lang) === -1) {
+    lang = "zh-CN";
+  }
+
+  const message = require(`../langs/${lang}/index`);
+  return message[module][messageEnum];
 };

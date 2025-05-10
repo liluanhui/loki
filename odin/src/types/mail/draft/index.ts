@@ -2,11 +2,11 @@ export class DraftForm {
   /**
    * 邮件内容
    */
-  content: string = '';
+  content: string = "";
   /**
    * 计划投递时间
    */
-  plan_deliver_at: string = '';
+  plan_deliver_at: string = "";
   /**
    * 公开类型，full-完全公开，privary-数据保密，anonymity-匿名
    */
@@ -26,7 +26,7 @@ export class DraftForm {
   /**
    * 邮件标题
    */
-  title: string = '';
+  title: string = "";
   /**
    * 邮件类型，private-私密，publish-公开
    */
@@ -38,8 +38,8 @@ export class DraftForm {
 }
 
 /**
-* 公开类型，full-完全公开，privary-数据保密，anonymity-匿名
-*/
+ * 公开类型，full-完全公开，privary-数据保密，anonymity-匿名
+ */
 export enum PublicType {
   Anonymity = "anonymity",
   Full = "full",
@@ -47,16 +47,16 @@ export enum PublicType {
 }
 
 /**
-* 收件人类型，self-自己，email-邮件地址
-*/
+ * 收件人类型，self-自己，email-邮件地址
+ */
 export enum RecipientType {
   Email = "email",
   Self = "self",
 }
 
 /**
-* 邮件类型，private-私密，publish-公开
-*/
+ * 邮件类型，private-私密，publish-公开
+ */
 export enum Type {
   Private = "private",
   Publish = "publish",
