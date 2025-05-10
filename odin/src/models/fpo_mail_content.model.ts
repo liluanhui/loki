@@ -39,7 +39,6 @@ export class FpoMailContent extends Model {
   @Column({
     type: DataType.DATE,
     comment: "删除时间",
-    allowNull: false,
   })
   deleted_at: Date;
 
