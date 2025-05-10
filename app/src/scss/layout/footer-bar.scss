@@ -116,3 +116,32 @@
     @extend .font-quick;
   }
 }
+
+@include mobile {
+  .footer-bar {
+    height: auto;
+
+    &-inner {
+      height: auto;
+      width: 100%;
+      @include flex(column, flex-start, flex-start);
+
+      .first,
+      .second {
+        width: 100%;
+      }
+
+      .first {
+        justify-content: space-evenly;
+      }
+
+      .second {
+        align-items: center;
+      }
+    }
+  }
+
+  .footer-bar-number {
+    padding-bottom: $saveButtonHeight;
+  }
+}

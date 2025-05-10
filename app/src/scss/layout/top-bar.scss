@@ -101,8 +101,17 @@
 
 @include mobile {
   .top-bar {
+    height: $topBarHeight-moblie;
+
     &-inner {
       justify-content: center;
+      height: $topBarHeight-moblie;
+
+      .the-logo {
+        &-img {
+          height: 22px;
+        }
+      }
     }
 
     &-menu,

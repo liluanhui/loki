@@ -2,8 +2,12 @@ $namespace: "fpo" !default;
 
 $appWidth: 1200px;
 $topBarHeight: 54px;
+$topBarHeight-moblie: 44px;
+
 $footerBarHeight: 160px;
 
 $borderSize: 0.5px;
 $borderColor-2: var(--gray-2);
 $borderColor-3: var(--gray-3);
+
+$saveButtonHeight: 140px;
