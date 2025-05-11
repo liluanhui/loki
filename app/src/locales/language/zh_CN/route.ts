@@ -4,6 +4,7 @@ export default {
   write: "写信",
   tool: "工具箱",
   about: "关于",
+  my: "我的",
 
   write_btn: "写一封信",
 };

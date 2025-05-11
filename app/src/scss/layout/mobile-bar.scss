@@ -1,0 +1,63 @@
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+@use "@loki/fpo-ui/style/common/extend.scss" as *;
+
+$mobileBarWidth: 80%;
+$mobileBarHeight: 56px;
+
+.mobile-bar {
+  @include flex(row, center, center);
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: $mobileBarWidth;
+  height: $mobileBarHeight;
+  background-color: var(--gray-0);
+  border: $borderSize solid var(--gray-2);
+  border-radius: $mobileBarHeight;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.08);
+  padding: 0 10px;
+  z-index: 9999;
+  @extend .no-select;
+
+  .active {
+    .mobile-bar-icon {
+      fill: var(--brand-6);
+      transition: all 0.2s;
+    }
+
+    .mobile-bar-inner {
+      color: var(--brand-6);
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+  }
+
+  &-item {
+    @include flex(column, center, center);
+    flex: 1;
+    gap: 3px;
+    outline: none;
+  }
+
+  &-icon {
+    fill: var(--gray-6);
+    transition: all 0.2s;
+  }
+
+  &-inner {
+    font-size: 12px;
+    font-weight: 400;
+    transform: scale(0.9);
+    color: var(--gray-5);
+    transition: all 0.2s;
+  }
+}
+
+@include mobile {
+  .mobile-bar {
+    display: flex;
+  }
+}

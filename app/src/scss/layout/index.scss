@@ -1,3 +1,8 @@
 @use "./top-bar.scss";
 @use "./app-main.scss";
 @use "./footer-bar.scss";
+@use "./mobile-bar.scss";
+
+.app-layout {
+  position: relative;
+}

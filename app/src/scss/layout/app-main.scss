@@ -22,3 +22,14 @@
     }
   }
 }
+
+
+@include mobile {
+  .app-main {
+    padding-top: $topBarHeight-moblie;
+    
+    &-inner {
+      min-height: calc(100vh - $topBarHeight-moblie - $footerBarHeight);
+    }
+  }
+}

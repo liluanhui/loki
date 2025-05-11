@@ -20,3 +20,20 @@
     }
   }
 }
+
+@include tablet {
+  .letter-wall {
+    .letter-item {
+      width: calc(100% / 3 - 10px);
+    }
+  }
+}
+
+
+@include mobile {
+  .letter-wall {
+    .letter-item {
+      width: 100%;
+    }
+  }
+}
