@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-container`">
-      <div :class="`${clsBlockName}-option`"></div>
+      <!-- <div :class="`${clsBlockName}-option`"></div> -->
 
       <div :class="`${clsBlockName}-editor`">
         <div :class="`${clsBlockName}-header`">

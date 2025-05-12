@@ -11,7 +11,6 @@ $mobileBarHeight: 56px;
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
   width: $mobileBarWidth;
   height: $mobileBarHeight;
   background-color: var(--gray-0);
@@ -21,12 +20,11 @@ $mobileBarHeight: 56px;
   padding: 0 10px;
   z-index: 9999;
   @extend .no-select;
+  transform: translateX(-50%);
 
   .active {
     .mobile-bar-icon {
       fill: var(--brand-6);
-      width: 20px !important;
-      height: 20px !important;
       transition: all 0.2s;
     }
 

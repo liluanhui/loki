@@ -22,6 +22,10 @@ import { VueMasonryPlugin } from "vue-masonry";
 
 import i18n from "./locales/i18n";
 
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+NProgress.configure({ showSpinner: false, easing: "linear", speed: 200, minimum: 0.2 });
+
 const app = createApp(App);
 
 app.use(router);
@@ -32,5 +36,6 @@ app.use(FpoUI);
 app.use(VueMasonryPlugin);
 app.use(i18n);
 app.use(pinia);
+app.use(NProgress);
 
 app.mount("#app");

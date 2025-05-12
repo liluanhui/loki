@@ -1,10 +1,11 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, RouteLocationNormalized } from "vue-router";
 import home from "@/views/home/index.vue";
 import publicLetter from "@/views/public/index.vue";
 import write from "@/views/write/index.vue";
 import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 import { useStorage } from "@vueuse/core";
+import NProgress from "nprogress";
 
 const currentLang = useStorage("lang", "zh_CN");
 const siteTitle = {
@@ -29,7 +30,7 @@ const routeName = {
 };
 
 // 动态生成 meta.title 的工具函数
-const generateTitle = (key: keyof typeof routeName["zh_CN"]) => {
+const generateTitle = (key: keyof (typeof routeName)["zh_CN"]) => {
   return `${routeName[currentLang.value][key]} | ${siteTitle[currentLang.value]}`;
 };
 
@@ -61,6 +62,15 @@ const router = createRouter({
   // @ts-ignore
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
+  NProgress.start();
+  next();
+});
+
+router.afterEach((to: RouteLocationNormalized) => {
+  NProgress.done();
 });
 
 export default router;

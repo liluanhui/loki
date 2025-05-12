@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName">
     <router-link custom v-for="(v, k) in navItem" :to="v.to" v-slot="{ navigate, isExactActive }">
-      <div :class="['mobile-bar-item', { active: isExactActive }]" @click="navigate">
+      <div :class="['mobile-bar-item', { active: isExactActive }]" @click="handleLink(navigate)">
         <component :is="v.icon" class="mobile-bar-icon" size="18" />
         <span class="mobile-bar-inner">{{ v.title }}</span>
       </div>
@@ -46,4 +46,8 @@ const navItem = [
     icon: IconUserSmileLine,
   },
 ];
+const handleLink = (navigate: () => void) => {
+  navigate();
+  window.scrollTo({ top: 0 });
+};
 </script>

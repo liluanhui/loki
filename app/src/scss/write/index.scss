@@ -11,7 +11,7 @@ $labelWidth: 74px;
   }
 
   &-editor {
-    flex: 1;
+    width: 100%;
     background-color: var(--gray-0);
     border: $borderSize solid $borderColor-2;
     border-radius: 14px;
@@ -51,6 +51,8 @@ $labelWidth: 74px;
         color: var(--gray-8);
         font-size: 13px;
         gap: 4px;
+        line-height: 32px;
+        font-weight: 500;
       }
     }
 
@@ -93,7 +95,6 @@ $labelWidth: 74px;
     .column-layout {
       @include flex(column, flex-start, flex-end);
       width: 100%;
-      overflow-x: hidden;
 
       .word-count {
         font-size: 12px;
@@ -123,6 +124,8 @@ $labelWidth: 74px;
     }
 
     &-form {
+      padding: 14px 20px;
+
       .bp-col {
         padding: 0 !important;
         margin-bottom: 20px !important;
@@ -142,7 +145,12 @@ $labelWidth: 74px;
         }
 
         .ne-editor {
-          max-width: 430px;
+          width: 100%;
+
+          .ne-ui-inner-toolbar{
+            overflow: auto;
+            width: 100%;
+          }
 
           .ant-popover-inner {
             overflow: auto;
