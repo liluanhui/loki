@@ -5,9 +5,9 @@
   @include flex(column, center, center);
   width: 100%;
   max-width: 1200px;
-  max-height: 400px;
+  max-height: 480px;
   background-color: var(--primary-2);
   border-radius: 16px;
-  aspect-ratio: 3 / 1;
+  aspect-ratio: 3 / 1.2;
   border: $borderSize solid $borderColor-2;
 }
