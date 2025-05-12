@@ -1,6 +1,6 @@
 <template>
   <div :class="cls">
-    <div v-for="v in optionList" :class="[`${clsBlockName}-item`, { active: model === v.value }]" @click="onSelect(v)">{{ v.label }}</div>
+    <div v-for="v in optionList" :class="[`${clsBlockName}-item`, { active: model === v[value] }]" @click="onSelect(v)">{{ v[label] }}</div>
   </div>
 </template>
 
@@ -10,17 +10,20 @@ import { computed, PropType } from "vue";
 const model = defineModel({ default: "" });
 const props = defineProps({
   optionList: {
-    type: Array as PropType<
-      {
-        label: string;
-        value: string;
-      }[]
-    >,
+    type: Array,
     default: () => [],
   },
   size: {
     type: String,
     default: "default",
+  },
+  label: {
+    type: String,
+    default: "label",
+  },
+  value: {
+    type: String,
+    default: "value",
   },
 });
 
@@ -31,7 +34,7 @@ const cls = computed(() => {
   return [clsBlockName, `${clsBlockName}-size-${props.size}`];
 });
 
-const onSelect = (item: { label: string; value: string }) => {
-  model.value = item.value;
+const onSelect = (item: any) => {
+  model.value = item[props.value];
 };
 </script>

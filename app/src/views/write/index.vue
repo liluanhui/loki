@@ -1,7 +1,5 @@
 <template>
   <div :class="clsBlockName">
-    <div :class="`${clsBlockName}-banner`"></div>
-
     <div :class="`${clsBlockName}-container`">
       <div :class="`${clsBlockName}-option`"></div>
 
@@ -25,7 +23,7 @@
           </bp-row>
 
           <bp-row style="width: 100%" :gutter="16">
-            <bp-col :span="16">
+            <bp-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.title }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
@@ -33,7 +31,7 @@
                 </div>
               </div>
             </bp-col>
-            <bp-col :span="8">
+            <bp-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.delivery_time }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
@@ -44,7 +42,7 @@
           </bp-row>
 
           <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
-            <bp-col :span="16">
+            <bp-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_email }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
@@ -52,7 +50,7 @@
                 </div>
               </div>
             </bp-col>
-            <bp-col :span="8">
+            <bp-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_name }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
@@ -64,10 +62,11 @@
 
           <bp-row style="width: 100%" v-if="isPublic">
             <bp-col :span="24">
-              <div v-if="isPublic" :class="`${clsBlockName}-form-item`" style="align-items: flex-start">
+              <div v-if="isPublic" :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <public-type-selector v-model="public_type" :list="publicTypeList" />
+                  <radio-bar v-model="public_type" size="small" label="name" value="type" :option-list="publicTypeList"></radio-bar>
                 </div>
               </div>
             </bp-col>
