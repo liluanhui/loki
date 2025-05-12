@@ -96,6 +96,7 @@
   gap: 2px;
   background-color: var(--gray-0);
   border-top: $borderSize solid $borderColor-2;
+  @extend .no-select;
 
   .tag {
     font-size: 12px;

@@ -143,11 +143,15 @@ $labelWidth: 74px;
         .public-type-selector {
           display: none;
         }
+        .ne-layout-mode-fixed .ne-engine,
+        .ne-layout-mode-adapt .ne-engine {
+          min-height: calc(100vh - 420px);
+        }
 
         .ne-editor {
           width: 100%;
 
-          .ne-ui-inner-toolbar{
+          .ne-ui-inner-toolbar {
             overflow: auto;
             width: 100%;
           }
