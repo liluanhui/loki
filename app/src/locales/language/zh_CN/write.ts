@@ -15,6 +15,7 @@ export default {
       privary: "隐私保护",
       anonymity: "匿名",
     },
+    public_config_text: "修改",
     title: "主题",
     delivery_time: "投递时间",
     recipient_email: "收件地址",

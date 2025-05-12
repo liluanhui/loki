@@ -42,7 +42,7 @@ const navItem = [
   },
   {
     title: t("route.my"),
-    to: "/write",
+    to: "/test",
     icon: IconUserSmileLine,
   },
 ];

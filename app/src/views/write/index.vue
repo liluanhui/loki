@@ -5,8 +5,8 @@
 
       <div :class="`${clsBlockName}-editor`">
         <div :class="`${clsBlockName}-header`">
-          <bp-button :icon="IconDraftLine" size="small" type="text">{{ t('write.editor.draft_text') }}</bp-button>
-          <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t('write.editor.send_text') }}</bp-button>
+          <bp-button :icon="IconDraftLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
+          <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t("write.editor.send_text") }}</bp-button>
         </div>
 
         <div :class="`${clsBlockName}-form`">
@@ -73,7 +73,7 @@
                   <public-type-selector v-model="public_type" :list="publicTypeList" style="margin-top: 8px" />
                   <div class="public-type-selector-mobile">
                     <span>{{ publicTypeList.find((v) => v.type === public_type).name }}</span>
-                    <bp-button type="text" size="small">修改</bp-button>
+                    <bp-button type="text" size="small">{{ t("write.editor.public_config_text") }}</bp-button>
                   </div>
                 </div>
               </div>

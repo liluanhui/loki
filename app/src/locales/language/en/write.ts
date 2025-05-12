@@ -10,6 +10,7 @@ export default {
       other: "Others",
     },
     is_public: "Public or not",
+    public_config_text: "Edit",
     title: "Subject",
     delivery_time: "Delivery Time",
     recipient_email: "Recipient Email",

@@ -100,7 +100,7 @@ const initEditor = () => {
 
   setContent();
 
-  editor.value.execCommand("focus");
+  // editor.value.execCommand("focus");
 
   editor.value.on("contentchange", () => {
     wordCount.value = editor.value.queryCommandValue("wordCount");

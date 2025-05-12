@@ -25,6 +25,8 @@ $mobileBarHeight: 56px;
   .active {
     .mobile-bar-icon {
       fill: var(--brand-6);
+      width: 20px !important;
+      height: 20px !important;
       transition: all 0.2s;
     }
 
