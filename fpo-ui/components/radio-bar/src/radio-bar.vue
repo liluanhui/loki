@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, PropType } from "vue";
 
 const model = defineModel({ default: "" });
 const props = defineProps({
@@ -15,6 +15,10 @@ const props = defineProps({
   },
   size: {
     type: String,
+    default: "default",
+  },
+  theme: {
+    type: String as PropType<"default" | "gray">,
     default: "default",
   },
   label: {
@@ -31,7 +35,7 @@ defineOptions({ name: "RadioBar" });
 const clsBlockName = "radio-bar";
 
 const cls = computed(() => {
-  return [clsBlockName, `${clsBlockName}-size-${props.size}`];
+  return [clsBlockName, `${clsBlockName}-theme-${props.theme}`, `${clsBlockName}-size-${props.size}`];
 });
 
 const onSelect = (item: any) => {

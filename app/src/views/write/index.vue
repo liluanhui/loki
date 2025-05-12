@@ -4,13 +4,18 @@
       <div :class="`${clsBlockName}-option`"></div>
 
       <div :class="`${clsBlockName}-editor`">
+        <div :class="`${clsBlockName}-header`">
+          <bp-button :icon="IconDraftLine" size="small" type="text">{{ t('write.editor.draft_text') }}</bp-button>
+          <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t('write.editor.send_text') }}</bp-button>
+        </div>
+
         <div :class="`${clsBlockName}-form`">
           <bp-row style="width: 100%">
             <bp-col :span="24">
               <div :class="`${clsBlockName}-form-item no-line`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="position: relative; left: -4px">
-                  <radio-bar v-model="current" size="small" :option-list="radioBarList"></radio-bar>
+                  <radio-bar v-model="current" theme="gray" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
               </div>
               <div :class="`${clsBlockName}-form-item no-line justify-end!`">
@@ -68,7 +73,7 @@
                   <public-type-selector v-model="public_type" :list="publicTypeList" style="margin-top: 8px" />
                   <div class="public-type-selector-mobile">
                     <span>{{ publicTypeList.find((v) => v.type === public_type).name }}</span>
-                    <bp-button type="text">修改</bp-button>
+                    <bp-button type="text" size="small">修改</bp-button>
                   </div>
                 </div>
               </div>
@@ -88,6 +93,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { IconSendPlaneFill, IconDraftLine } from "birdpaper-icon";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";

@@ -5,15 +5,43 @@
 .radio-bar {
   @include flex(row, center, center);
   width: max-content;
+  @extend .no-select;
+
+  .active {
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  &-item {
+    @include flex(row, center, center);
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+}
+
+.radio-bar-theme-default {
   background-color: var(--gray-0);
   border: $borderSize solid $borderColor-2;
-  @extend .no-select;
+
+  .radio-bar-item {
+    background-color: var(--gray-0);
+    border: $borderSize solid var(--gray-1);
+    color: var(--gray-9);
+
+    &:hover {
+      background-color: var(--primary-1);
+      border: $borderSize solid var(--primary-3);
+      transition: all 0.2s;
+    }
+  }
 
   .active {
     color: var(--gray-0);
     background-color: var(--brand-6);
     border: $borderSize solid var(--brand-6);
-    font-weight: 500;
     transition: all 0.2s;
 
     &:hover {
@@ -22,21 +50,34 @@
       border: $borderSize solid var(--brand-6);
     }
   }
+}
 
-  &-item {
-    @include flex(row, center, center);
-    background-color: var(--gray-0);
+.radio-bar-theme-gray {
+  background-color: var(--gray-1);
+  border: $borderSize solid $borderColor-2;
+
+  .radio-bar-item {
+    background-color: var(--gray-1);
     border: $borderSize solid var(--gray-1);
     color: var(--gray-9);
-    font-weight: 400;
-    letter-spacing: 0.2px;
-    cursor: pointer;
-    transition: all 0.2s;
 
     &:hover {
       background-color: var(--primary-1);
       border: $borderSize solid var(--primary-3);
       transition: all 0.2s;
+    }
+  }
+
+  .active {
+    color: var(--gray-0);
+    background-color: var(--brand-6);
+    border: $borderSize solid var(--brand-6);
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--gray-0);
+      background-color: var(--brand-6);
+      border: $borderSize solid var(--brand-6);
     }
   }
 }

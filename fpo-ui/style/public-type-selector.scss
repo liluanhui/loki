@@ -5,6 +5,7 @@
 .public-type-selector {
   @include flex(row, flex-start, center);
   gap: 14px;
+  @extend .no-select;
 
   .active {
     opacity: 1;

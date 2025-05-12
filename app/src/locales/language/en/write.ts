@@ -1,5 +1,9 @@
 export default {
   editor: {
+    draft_text: "Save Draft",
+    draft_text_loading: "Saving",
+    send_text: "Send",
+    send_text_loading: "Sending",
     send_field: "Send to",
     send_type: {
       self: "Myself",

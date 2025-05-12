@@ -12,7 +12,6 @@ $labelWidth: 74px;
 
   &-editor {
     flex: 1;
-    padding: 20px 32px;
     background-color: var(--gray-0);
     border: $borderSize solid $borderColor-2;
     border-radius: 14px;
@@ -26,8 +25,15 @@ $labelWidth: 74px;
     border-radius: 14px;
   }
 
+  &-header {
+    @include flex(row, flex-end, center);
+    padding: 16px 22px;
+    border-bottom: $borderSize dashed $borderColor-2;
+  }
+
   &-form {
     width: 100%;
+    padding: 20px 32px;
     @include flex(column, flex-start, flex-start);
 
     .bp-col {
@@ -60,6 +66,7 @@ $labelWidth: 74px;
         font-size: 13px;
         line-height: 32px;
         color: var(--gray-6);
+        @extend .no-select;
       }
 
       &-content {
@@ -90,6 +97,7 @@ $labelWidth: 74px;
       .word-count {
         font-size: 12px;
         color: var(--gray-6);
+        @extend .no-select;
       }
     }
   }
@@ -106,6 +114,10 @@ $labelWidth: 74px;
 @include mobile {
   .write-page {
     &-option {
+      display: none;
+    }
+
+    &-header {
       display: none;
     }
 
