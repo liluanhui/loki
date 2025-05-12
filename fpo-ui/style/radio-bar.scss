@@ -11,22 +11,22 @@
 
   .active {
     color: var(--gray-0);
-    background-color: var(--primary-5);
-    border: $borderSize solid var(--primary-5);
+    background-color: var(--brand-6);
+    border: $borderSize solid var(--brand-6);
     font-weight: 500;
     transition: all 0.2s;
 
     &:hover {
       color: var(--gray-0);
-      background-color: var(--primary-5);
-      border: $borderSize solid var(--primary-5);
+      background-color: var(--brand-6);
+      border: $borderSize solid var(--brand-6);
     }
   }
 
   &-item {
     @include flex(row, center, center);
     background-color: var(--gray-0);
-    border: $borderSize solid var(--gray-0);
+    border: $borderSize solid var(--gray-1);
     color: var(--gray-9);
     font-weight: 400;
     letter-spacing: 0.2px;

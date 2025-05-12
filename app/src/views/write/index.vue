@@ -35,7 +35,7 @@
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.delivery_time }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-date-picker :style="{ width: '100%' }" show-time value-format="YYYY-MM-DD HH:mm:ss"></bp-date-picker>
+                  <bp-date-picker :style="{ width: '100%' }" value-format="YYYY-MM-DD"></bp-date-picker>
                 </div>
               </div>
             </bp-col>
@@ -65,8 +65,11 @@
               <div v-if="isPublic" :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <public-type-selector v-model="public_type" :list="publicTypeList" />
-                  <radio-bar v-model="public_type" size="small" label="name" value="type" :option-list="publicTypeList"></radio-bar>
+                  <public-type-selector v-model="public_type" :list="publicTypeList" style="margin-top: 8px" />
+                  <div class="public-type-selector-mobile">
+                    <span>{{ publicTypeList.find((v) => v.type === public_type).name }}</span>
+                    <bp-button type="text">修改</bp-button>
+                  </div>
                 </div>
               </div>
             </bp-col>
