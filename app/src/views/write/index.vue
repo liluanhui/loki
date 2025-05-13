@@ -5,7 +5,7 @@
 
       <div :class="`${clsBlockName}-editor`">
         <div :class="`${clsBlockName}-header`">
-          <bp-button :icon="IconDraftLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
+          <bp-button :icon="IconSaveLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
           <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t("write.editor.send_text") }}</bp-button>
         </div>
 
@@ -73,9 +73,11 @@
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
                   <public-type-selector v-model="public_type" :list="publicTypeList" style="margin-top: 8px" />
+
+                  <!-- Mobile -->
                   <div class="public-type-selector-mobile">
                     <span>{{ publicTypeList.find((v) => v.type === public_type).name }}</span>
-                    <bp-button type="text" size="small">{{ t("write.editor.public_config_text") }}</bp-button>
+                    <bp-button type="text" size="small" @click="showPublicConfig">{{ t("write.editor.public_config_text") }}</bp-button>
                   </div>
                 </div>
               </div>
@@ -89,13 +91,17 @@
         </div>
       </div>
     </div>
+
+    <popup v-model:show="showPublicConfigPopup" position="bottom" :style="{ height: '40%' }" :duration="0.2" round safe-area-inset-bottom />
   </div>
 </template>
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { IconSendPlaneFill, IconDraftLine } from "birdpaper-icon";
+import { Popup } from "vant";
+import "vant/lib/popup/style/index";
+import { IconSendPlaneFill, IconSaveLine } from "birdpaper-icon";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
@@ -149,4 +155,12 @@ const radioBarList = [
     value: "email",
   },
 ];
+
+const showPublicConfigPopup = ref(false);
+const showPublicConfig = () => {
+  showPublicConfigPopup.value = true;
+};
+const hidePublicConfig = () => {
+  showPublicConfigPopup.value = false;
+};
 </script>

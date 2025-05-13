@@ -13,7 +13,6 @@ export default async () => {
       vue(),
       vueJsx(),
       UnoCSS(),
-      // vueDevTools(),
     ],
     resolve: {
       alias: {

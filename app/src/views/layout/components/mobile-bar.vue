@@ -4,8 +4,9 @@
       <div v-if="type === 'write'" :class="`${clsBlockName}-inner`">
         <bp-link :icon="IconArrowGoBackLine" style="margin-left: 6px" @click="goBack">{{ t("common.back") }}</bp-link>
         <div :class="`${clsBlockName}-btn-group`">
-          <bp-button :icon="IconDraftLine" type="text" shape="round">{{ t("write.editor.draft_text") }}</bp-button>
+          <bp-link :icon="IconSaveLine">{{ t("write.editor.draft_text") }}</bp-link>
           <bp-button :icon="IconSendPlaneFill" type="plain" shape="round">{{ t("write.editor.send_text") }}</bp-button>
+          <bp-button :icon="IconDraftLine" type="plain" shape="circle"></bp-button>
         </div>
       </div>
 
@@ -28,8 +29,9 @@ import {
   IconEditCircleLine,
   IconUserSmileLine,
   IconSendPlaneFill,
-  IconDraftLine,
+  IconSaveLine,
   IconArrowGoBackLine,
+  IconDraftLine,
 } from "birdpaper-icon";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -74,7 +76,11 @@ const handleLink = (navigate: () => void) => {
 
 const router = useRouter();
 const goBack = () => {
-  router.back();
+  if (router.options.history.state.back) {
+    router.back();
+  } else {
+    router.push("/");
+  }
   window.scrollTo({ top: 0 });
 };
 </script>
