@@ -30,9 +30,13 @@ import titleBar from "./components/title-bar.vue";
 import { IconQuillPenAiFill } from "birdpaper-icon";
 import socialLink from "./components/social-link.vue";
 import { useI18n } from "vue-i18n";
+import { inject } from "vue";
 
 defineOptions({ name: "HomePage" });
 const clsBlockName = "home-page";
+
+const mobileBarCtx: any = inject("mobile-bar");
+mobileBarCtx?.change("menu");
 
 const { t } = useI18n();
 </script>

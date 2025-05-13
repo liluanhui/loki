@@ -3,20 +3,23 @@
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
 .public-page {
-  @include flex(row, center, center);
-  gap: 10px;
-  width: 100%;
-}
+  &-header {
+    @include flex(row, center, center);
+    gap: 10px;
+    width: 100%;
+  }
 
-.letter-wall {
-  margin: 0 auto;
+  .letter-wall {
+    width: 100%;
+    margin: 0 auto;
 
-  .letter-item {
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border-color: var(--gray-2);
-      transition: all 0.2s ease;
+    .letter-item {
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        border-color: var(--gray-2);
+        transition: all 0.2s ease;
+      }
     }
   }
 }
@@ -28,7 +31,6 @@
     }
   }
 }
-
 
 @include mobile {
   .letter-wall {

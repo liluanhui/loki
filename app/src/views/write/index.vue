@@ -91,12 +91,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { IconSendPlaneFill, IconDraftLine } from "birdpaper-icon";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
+
+const mobileBarCtx: any = inject("mobile-bar");
+mobileBarCtx?.change("write");
 
 const editorRef = ref();
 const current = ref("email");
