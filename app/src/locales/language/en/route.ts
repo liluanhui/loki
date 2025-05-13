@@ -1,9 +1,10 @@
 export default {
   home: "Home",
-  public: "Public Letter",
+  public: "Open Letter",
   write: "Write",
   tool: "Toolbox",
   about: "About",
+  my: "Mine",
 
   write_btn: "Write a letter",
 };

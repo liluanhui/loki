@@ -42,7 +42,7 @@ $mobileBarHeight: 56px;
   &-item {
     @include flex(column, center, center);
     flex: 1;
-    gap: 3px;
+    gap: 2px;
     outline: none;
   }
 

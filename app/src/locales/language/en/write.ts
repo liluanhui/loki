@@ -6,10 +6,10 @@ export default {
     send_text_loading: "Sending",
     send_field: "Send to",
     send_type: {
-      self: "Myself",
+      self: "Self",
       other: "Others",
     },
-    is_public: "Public or not",
+    is_public: "Public",
     public_config_text: "Edit",
     title: "Subject",
     delivery_time: "Delivery Time",

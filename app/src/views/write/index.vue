@@ -11,13 +11,15 @@
 
         <div :class="`${clsBlockName}-form`">
           <bp-row style="width: 100%">
-            <bp-col :span="24">
+            <bp-col :span="15">
               <div :class="`${clsBlockName}-form-item no-line`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.type }}</label>
-                <div :class="`${clsBlockName}-form-item-content`" style="position: relative; left: -4px">
+                <div :class="`${clsBlockName}-form-item-content`">
                   <radio-bar v-model="current" theme="gray" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
               </div>
+            </bp-col>
+            <bp-col :span="9">
               <div :class="`${clsBlockName}-form-item no-line justify-end!`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.isPublic }}</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="flex: none">

@@ -2,7 +2,7 @@
   <div :class="clsBlockName">
     <transition name="slide-up-down" mode="out-in">
       <div v-if="type === 'write'" :class="`${clsBlockName}-inner`">
-        <bp-link :icon="IconArrowGoBackLine" style="margin-left: 6px" @click="goBack">返回</bp-link>
+        <bp-link :icon="IconArrowGoBackLine" style="margin-left: 6px" @click="goBack">{{ t("common.back") }}</bp-link>
         <div :class="`${clsBlockName}-btn-group`">
           <bp-button :icon="IconDraftLine" type="text" shape="round">{{ t("write.editor.draft_text") }}</bp-button>
           <bp-button :icon="IconSendPlaneFill" type="plain" shape="round">{{ t("write.editor.send_text") }}</bp-button>
