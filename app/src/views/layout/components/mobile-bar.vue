@@ -1,7 +1,14 @@
 <template>
-  <div :class="clsBlockName">
+  <div :class="clsBlockName" :style="{ width }">
     <transition name="slide-up-down" mode="out-in">
-      <div v-if="type === 'write'" :class="`${clsBlockName}-inner`">
+      <div v-if="type === 'confirm'" :class="`${clsBlockName}-inner`">
+        <div :class="`${clsBlockName}-btn-group`">
+          <bp-button :icon="IconCloseFill" type="plain" shape="round">关闭</bp-button>
+          <bp-button :icon="IconCheckFill" shape="round">确认</bp-button>
+        </div>
+      </div>
+
+      <div v-else-if="type === 'write'" :class="`${clsBlockName}-inner`">
         <bp-link :icon="IconArrowGoBackLine" style="margin-left: 6px" @click="goBack">{{ t("common.back") }}</bp-link>
         <div :class="`${clsBlockName}-btn-group`">
           <bp-link :icon="IconSaveLine">{{ t("write.editor.draft_text") }}</bp-link>
@@ -32,7 +39,10 @@ import {
   IconSaveLine,
   IconArrowGoBackLine,
   IconDraftLine,
+  IconCheckFill,
+  IconCloseFill
 } from "birdpaper-icon";
+import { watch, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -46,6 +56,22 @@ const props = defineProps({
 defineOptions({ name: "MobileBar" });
 const clsBlockName = "mobile-bar";
 const { t } = useI18n();
+const width = ref("80%");
+
+watch(
+  () => props.type,
+  (val) => {
+    const obj = {
+      menu: "80%",
+      write: "80%",
+      confirm: "max-content",
+    };
+
+    setTimeout(() => {
+      width.value = obj[val] || "80%";
+    }, 200);
+  }
+);
 
 const navItem = [
   {

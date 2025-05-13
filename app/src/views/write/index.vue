@@ -92,7 +92,14 @@
       </div>
     </div>
 
-    <popup v-model:show="showPublicConfigPopup" position="bottom" :style="{ height: '40%' }" :duration="0.2" round safe-area-inset-bottom />
+    <popup
+      v-model:show="showPublicConfigPopup"
+      position="bottom"
+      :style="{ height: '40%' }"
+      :duration="0.2"
+      round
+      safe-area-inset-bottom
+      @close="hidePublicConfig" />
   </div>
 </template>
 
@@ -159,8 +166,10 @@ const radioBarList = [
 const showPublicConfigPopup = ref(false);
 const showPublicConfig = () => {
   showPublicConfigPopup.value = true;
+  mobileBarCtx?.change("confirm");
 };
 const hidePublicConfig = () => {
   showPublicConfigPopup.value = false;
+  mobileBarCtx?.change("write");
 };
 </script>

@@ -2,7 +2,6 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/common/extend.scss" as *;
 
-$mobileBarWidth: 80%;
 $mobileBarHeight: 56px;
 
 .mobile-bar {
@@ -10,7 +9,6 @@ $mobileBarHeight: 56px;
   position: fixed;
   bottom: 20px;
   left: 50%;
-  width: $mobileBarWidth;
   height: $mobileBarHeight;
   background-color: var(--gray-0);
   border: $borderSize solid var(--gray-2);
@@ -19,7 +17,9 @@ $mobileBarHeight: 56px;
   padding: 0 13px;
   z-index: 9999;
   @extend .no-select;
+  overflow: hidden;
   transform: translateX(-50%);
+  transition: all 0.2s;
 
   &-inner {
     width: 100%;
