@@ -6,7 +6,6 @@ $mobileBarWidth: 80%;
 $mobileBarHeight: 56px;
 
 .mobile-bar {
-  @include flex(row, center, center);
   display: none;
   position: fixed;
   bottom: 20px;
@@ -22,13 +21,18 @@ $mobileBarHeight: 56px;
   @extend .no-select;
   transform: translateX(-50%);
 
+  &-inner {
+    width: 100%;
+    @include flex(row, space-between, center);
+  }
+
   .active {
     .mobile-bar-icon {
       fill: var(--brand-6);
       transition: all 0.2s;
     }
 
-    .mobile-bar-inner {
+    .mobile-bar-title {
       color: var(--brand-6);
       font-weight: bold;
       transition: all 0.2s;
@@ -47,7 +51,7 @@ $mobileBarHeight: 56px;
     transition: all 0.2s;
   }
 
-  &-inner {
+  &-title {
     font-size: 12px;
     font-weight: 400;
     transform: scale(0.9);

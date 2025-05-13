@@ -16,10 +16,9 @@ const clsBlockName = "app-main";
 </script>
 
 <style lang="scss" scoped>
-/* 淡入淡出过渡效果 */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.2s ease;
 }
 
 .fade-enter-from,
