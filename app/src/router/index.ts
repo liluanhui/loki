@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteLocationNormalized } from "vue-rou
 import home from "@/views/home/index.vue";
 import publicLetter from "@/views/public/index.vue";
 import write from "@/views/write/index.vue";
+import personal from "@/views/personal/index.vue";
 import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 import { useStorage } from "@vueuse/core";
@@ -19,6 +20,7 @@ const routeName = {
     write: "写信",
     tool: "工具箱",
     about: "关于",
+    personal: "个人中心",
   },
   en: {
     home: "Home",
@@ -26,6 +28,7 @@ const routeName = {
     write: "Write",
     tool: "Toolbox",
     about: "About",
+    personal: "Personal Center",
   },
 };
 
@@ -35,12 +38,14 @@ const generateTitle = (key: keyof (typeof routeName)["zh_CN"]) => {
 };
 
 // 路由配置数组
-const routeConfig: { path: string; name: string; component: any; titleKey: "home" | "public" | "write" | "tool" | "about" }[] = [
-  { path: "/", name: "home", component: home, titleKey: "home" },
-  { path: "/public", name: "public", component: publicLetter, titleKey: "public" },
-  { path: "/write", name: "write", component: write, titleKey: "write" },
-  { path: "/test", name: "test", component: test, titleKey: "home" }, // 示例：复用 home 的标题
-];
+const routeConfig: { path: string; name: string; component: any; titleKey: "home" | "public" | "write" | "tool" | "about" | "personal" }[] =
+  [
+    { path: "/", name: "home", component: home, titleKey: "home" },
+    { path: "/public", name: "public", component: publicLetter, titleKey: "public" },
+    { path: "/write", name: "write", component: write, titleKey: "write" },
+    { path: "/personal", name: "personal", component: personal, titleKey: "personal" },
+    { path: "/test", name: "test", component: test, titleKey: "home" }, // 示例：复用 home 的标题
+  ];
 
 // 动态生成 routes
 const routes = [
