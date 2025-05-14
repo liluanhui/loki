@@ -1,5 +1,6 @@
 export default {
   editor: {
+    draft_box: "草稿箱",
     draft_text: "存草稿",
     draft_text_loading: "正在保存",
     send_text: "发送",

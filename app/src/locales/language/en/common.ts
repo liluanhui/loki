@@ -3,4 +3,7 @@ export default {
   register: "Register",
   field_colon: "",
   back: "Back",
+  close: "Close",
+  confirm: "Confirm",
+  cancel: "Cancel",
 };

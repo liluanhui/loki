@@ -3,8 +3,6 @@
 @use "./common/extend.scss" as *;
 
 .public-type-selector {
-  @include flex(row, flex-start, center);
-  gap: 14px;
   @extend .no-select;
 
   .active {
@@ -53,4 +51,31 @@
       border-radius: 8px;
     }
   }
+}
+
+.public-type-selector-horizontal {
+  @include flex(row, flex-start, center);
+  gap: 14px;
+
+  .public-type-selector-item {
+    @include flex(column, flex-start, center);
+  }
+}
+
+.public-type-selector-vertical {
+  @include flex(column, flex-start, flex-start);
+  width: 100%;
+
+  .public-type-selector-item {
+    @include flex(row, space-between, center);
+    width: 100%;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+}
+
+.public-type-selector-popup {
+  @include flex(row, center, center);
+  width: 100%;
+  padding: 20px;
 }

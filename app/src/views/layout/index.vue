@@ -31,9 +31,9 @@ provide("account", {
 const mobileBarRef = useRef(mobileBar);
 const mobileBarType = ref("menu");
 provide("mobile-bar", {
-  change: (type: string, events: any = null) => {
+  change: (type: string, data: { events: any; props?: any } = { events: null }) => {
     mobileBarType.value = type;
-    mobileBarRef.value && (mobileBarRef.value.events = events);
+    mobileBarRef.value && (mobileBarRef.value.events = data.events);
   },
 });
 </script>

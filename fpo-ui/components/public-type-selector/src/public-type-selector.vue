@@ -1,5 +1,5 @@
 <template>
-  <div :class="clsBlockName">
+  <div :class="[clsBlockName, `${clsBlockName}-${layout}`]">
     <div :class="[`${clsBlockName}-item`, { active: v.type === model }]" v-for="v in list" @click="onClick(v)">
       <div :class="`${clsBlockName}-item-title`">{{ v.name }}</div>
       <letter-item size="small" />
@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+import { PropType } from "vue";
 import letterItem from "../../letter-item";
 
 defineOptions({ name: "publicTypeSelector" });
@@ -15,6 +16,10 @@ const clsBlockName = "public-type-selector";
 
 const model = defineModel({ type: String, default: "full" });
 const props = defineProps({
+  layout: {
+    type: String as PropType<"horizontal" | "vertical">,
+    default: "horizontal",
+  },
   list: {
     type: Array,
     default: () => [],

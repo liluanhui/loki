@@ -5,8 +5,13 @@
 
       <div :class="`${clsBlockName}-editor`">
         <div :class="`${clsBlockName}-header`">
-          <bp-button :icon="IconSaveLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
-          <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t("write.editor.send_text") }}</bp-button>
+          <div class="header-left">
+            <bp-link :icon="IconDraftLine" size="small">{{ t("write.editor.draft_box") }}</bp-link>
+          </div>
+          <div class="header-right">
+            <bp-button :icon="IconSaveLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
+            <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t("write.editor.send_text") }}</bp-button>
+          </div>
         </div>
 
         <div :class="`${clsBlockName}-form`">
@@ -95,11 +100,15 @@
     <popup
       v-model:show="showPublicConfigPopup"
       position="bottom"
-      :style="{ height: '40%' }"
+      :style="{ height: '440px' }"
       :duration="0.2"
       round
       safe-area-inset-bottom
-      @close="hidePublicConfig" />
+      @close="hidePublicConfig">
+      <div class="public-type-selector-popup">
+        <public-type-selector v-model="public_type" layout="vertical" :list="publicTypeList" />
+      </div>
+    </popup>
   </div>
 </template>
 
@@ -108,7 +117,7 @@ import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Popup } from "vant";
 import "vant/lib/popup/style/index";
-import { IconSendPlaneFill, IconSaveLine } from "birdpaper-icon";
+import { IconSendPlaneFill, IconSaveLine, IconDraftLine } from "birdpaper-icon";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
@@ -167,9 +176,11 @@ const showPublicConfigPopup = ref(false);
 const showPublicConfig = () => {
   showPublicConfigPopup.value = true;
   mobileBarCtx?.change("confirm", {
-    close: () => hidePublicConfig(),
-    confirm: () => {
-      console.log("Yes");
+    events: {
+      close: () => hidePublicConfig(),
+      confirm: () => {
+        console.log("Yes");
+      },
     },
   });
 };
