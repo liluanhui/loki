@@ -64,7 +64,7 @@ $mobileBarHeight: 56px;
   .mobile-bar {
     display: flex;
 
-    &-btn-group {
+    &-inner-btn-group {
       @include flex(row, space-between, center);
       .bp-link {
         margin-right: 12px;

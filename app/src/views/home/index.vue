@@ -36,7 +36,7 @@ defineOptions({ name: "HomePage" });
 const clsBlockName = "home-page";
 
 const mobileBarCtx: any = inject("mobile-bar");
-mobileBarCtx?.change("menu");
+mobileBarCtx?.change("menus");
 
 const { t } = useI18n();
 </script>

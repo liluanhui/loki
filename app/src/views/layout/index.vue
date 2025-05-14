@@ -16,7 +16,7 @@
 import topBar from "./components/top-bar.vue";
 import appMain from "./components/app-main.vue";
 import footerBar from "./components/footer-bar.vue";
-import mobileBar from "./components/mobile-bar.vue";
+import mobileBar from "./components/mobile-bar/index.vue";
 import { provide, ref } from "vue";
 import { useRef } from "@loki/fpo-ui/use/useCompRef";
 import loginModal from "@/views/account/login/login-modal.vue";
