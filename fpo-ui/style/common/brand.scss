@@ -45,3 +45,16 @@
   --brand-dark-9-rgb: 255, 229, 204;
   --brand-dark-10-rgb: 255, 242, 229;
 }
+
+.dark {
+  --brand-1: var(--brand-dark-1);
+  --brand-2: var(--brand-dark-2);
+  --brand-3: var(--brand-dark-3);
+  --brand-4: var(--brand-dark-4);
+  --brand-5: var(--brand-dark-5);
+  --brand-6: var(--brand-dark-6);
+  --brand-7: var(--brand-dark-7);
+  --brand-8: var(--brand-dark-8);
+  --brand-9: var(--brand-dark-9);
+  --brand-10: var(--brand-dark-10);
+}
