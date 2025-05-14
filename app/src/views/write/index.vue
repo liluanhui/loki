@@ -166,7 +166,12 @@ const radioBarList = [
 const showPublicConfigPopup = ref(false);
 const showPublicConfig = () => {
   showPublicConfigPopup.value = true;
-  mobileBarCtx?.change("confirm");
+  mobileBarCtx?.change("confirm", {
+    close: () => hidePublicConfig(),
+    confirm: () => {
+      console.log("Yes");
+    },
+  });
 };
 const hidePublicConfig = () => {
   showPublicConfigPopup.value = false;

@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName" :style="{ width }">
     <transition name="slide-up-down" mode="out-in">
-      <component :is="componentObj[props.type]" @back="goBack" />
+      <component :is="componentObj[props.type]" @back="goBack" @on-event="onEvent" />
     </transition>
   </div>
 </template>
@@ -24,6 +24,7 @@ defineOptions({ name: "MobileBar" });
 const clsBlockName = "mobile-bar";
 const width = ref("80%");
 const componentObj = { menus, write, confirm };
+const events = ref(null);
 
 watch(
   () => props.type,
@@ -40,6 +41,12 @@ watch(
   }
 );
 
+const onEvent = (name: string) => {
+  if (events.value && typeof events.value[name] === "function") {
+    events.value[name]();
+  }
+};
+
 const router = useRouter();
 const goBack = () => {
   if (router.options.history.state.back) {
@@ -49,6 +56,10 @@ const goBack = () => {
   }
   window.scrollTo({ top: 0 });
 };
+
+defineExpose({
+  events,
+});
 </script>
 
 <style lang="scss" scoped>
