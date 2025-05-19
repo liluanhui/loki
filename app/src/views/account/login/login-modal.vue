@@ -1,5 +1,5 @@
 <template>
-  <bp-modal v-model="modalShow" :title width="660px" hide-footer>
+  <bp-modal v-model="modalShow" :title width="720px" hide-footer>
     <login-index type="modal" @success="close"></login-index>
 
     <div class="login-modal-footer-info">F.P.O | 未来邮局</div>

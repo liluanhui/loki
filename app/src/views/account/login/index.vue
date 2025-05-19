@@ -4,12 +4,12 @@
       <div :class="`${clsBlockName}-header`">账号密码登录</div>
       <div :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
-          <bp-input size="large" placeholder="UID / 邮箱 / 手机号" clearable />
+          <bp-input v-model="form.uid" size="large" placeholder="UID / 邮箱 / 手机号" clearable />
         </div>
       </div>
       <div :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
-          <bp-input size="large" type="password" placeholder="输入密码" clearable />
+          <bp-input v-model="form.password" size="large" type="password" placeholder="输入密码" clearable />
           <div class="forgot-psw">
             <bp-link size="small">忘记密码</bp-link>
           </div>
@@ -17,7 +17,7 @@
       </div>
       <div :class="`${clsBlockName}-form-item btn-item`">
         <bp-button type="plain" size="large" full>注册</bp-button>
-        <bp-button full size="large">登录</bp-button>
+        <bp-button full size="large" :disabled="!form.uid || !form.password">登录</bp-button>
       </div>
       <div :class="`${clsBlockName}-form-item `">
         <label for="">其它登录：</label>
@@ -33,6 +33,11 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { LoginForm } from "@loki/odin/src/types/auth";
+
 defineOptions({ name: "LoginIndex" });
 const clsBlockName = "login-index";
+
+const form = ref<LoginForm>(new LoginForm());
 </script>
