@@ -20,7 +20,7 @@
               <div :class="`${clsBlockName}-form-item no-line`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <radio-bar v-model="current" theme="gray" size="small" :option-list="radioBarList"></radio-bar>
+                  <radio-bar v-model="form.recipient_type" theme="gray" size="small" :option-list="radioBarList"></radio-bar>
                 </div>
               </div>
             </bp-col>
@@ -28,7 +28,7 @@
               <div :class="`${clsBlockName}-form-item no-line justify-end!`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.isPublic }}</label>
                 <div :class="`${clsBlockName}-form-item-content`" style="flex: none">
-                  <bp-switch v-model="isPublic"></bp-switch>
+                  <bp-switch v-model="form.type" check-value="public" uncheck-value="private"></bp-switch>
                 </div>
               </div>
             </bp-col>
@@ -39,7 +39,7 @@
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.title }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-input clearable :maxlength="25" show-limit> </bp-input>
+                  <bp-input v-model="form.title" clearable :maxlength="25" show-limit> </bp-input>
                 </div>
               </div>
             </bp-col>
@@ -47,18 +47,18 @@
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.delivery_time }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-date-picker :style="{ width: '100%' }" value-format="YYYY-MM-DD"></bp-date-picker>
+                  <bp-date-picker v-model="form.plan_deliver_at" :style="{ width: '100%' }" value-format="YYYY-MM-DD"></bp-date-picker>
                 </div>
               </div>
             </bp-col>
           </bp-row>
 
-          <bp-row style="width: 100%" :gutter="16" v-if="current === 'email'">
+          <bp-row style="width: 100%" :gutter="16" v-if="form.recipient_type === 'email'">
             <bp-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_email }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-input clearable> </bp-input>
+                  <bp-input v-model="form.recipient_email" clearable> </bp-input>
                 </div>
               </div>
             </bp-col>
@@ -66,22 +66,21 @@
               <div :class="`${clsBlockName}-form-item`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.recipient_name }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <bp-input clearable> </bp-input>
+                  <bp-input v-model="form.recipient_name" clearable> </bp-input>
                 </div>
               </div>
             </bp-col>
           </bp-row>
-
-          <bp-row style="width: 100%" v-if="isPublic">
+          <bp-row style="width: 100%" v-if="form.type === 'public'">
             <bp-col :span="24">
-              <div v-if="isPublic" :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
+              <div :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <public-type-selector v-model="public_type" :list="publicTypeList" style="margin-top: 8px" />
+                  <public-type-selector v-model="form.public_type" v-bind="publicTypeSelectorAttr" style="margin-top: 8px" />
 
                   <!-- Mobile -->
                   <div class="public-type-selector-mobile">
-                    <span>{{ publicTypeList.find((v) => v.type === public_type).name }}</span>
+                    <span>{{ publicTypeList.find((v) => v.type === form.public_type).name }}</span>
                     <bp-button type="text" size="small" @click="showPublicConfig">{{ t("write.editor.public_config_text") }}</bp-button>
                   </div>
                 </div>
@@ -106,7 +105,7 @@
       safe-area-inset-bottom
       @close="hidePublicConfig">
       <div class="public-type-selector-popup">
-        <public-type-selector v-model="public_type" layout="vertical" :list="publicTypeList" />
+        <public-type-selector v-model="form.public_type" layout="vertical" :list="publicTypeList" v-bind="publicTypeSelectorAttr" />
       </div>
     </popup>
   </div>
@@ -117,6 +116,8 @@ import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Popup } from "vant";
 import "vant/lib/popup/style/index";
+import { DraftForm } from "@loki/odin/src/types/mail/draft";
+import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconDraftLine } from "birdpaper-icon";
 
 defineOptions({ name: "WritePage" });
@@ -126,27 +127,25 @@ const mobileBarCtx: any = inject("mobile-bar");
 mobileBarCtx?.change("write");
 
 const editorRef = ref();
-const current = ref("email");
-const isPublic = ref(true);
-const public_type = ref("full");
+const { userInfo } = useUserStore();
+const form = ref<DraftForm>(new DraftForm());
 
 const { t } = useI18n();
 
 // Public type selector options
 const publicTypeList = [
-  {
-    name: t("public-type-selector.full"),
-    type: "full",
-  },
-  {
-    name: t("public-type-selector.privary"),
-    type: "privary",
-  },
-  {
-    name: t("public-type-selector.private"),
-    type: "anonymity",
-  },
+  { name: t("public-type-selector.full"), type: "full" },
+  { name: t("public-type-selector.privary"), type: "privary" },
+  { name: t("public-type-selector.private"), type: "anonymity" },
 ];
+const publicTypeSelectorAttr = {
+  list: publicTypeList,
+  type: form.value.type,
+  avatar: userInfo.avatar,
+  nickName: userInfo.nick_name,
+  delivery_time: form.value.plan_deliver_at,
+  recipient_name: form.value.recipient_name,
+};
 
 // Form field labels
 const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");

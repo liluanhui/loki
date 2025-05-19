@@ -29,7 +29,7 @@ export class DraftForm {
    */
   title: string = "";
   /**
-   * 邮件类型，private-私密，publish-公开
+   * 邮件类型，private-私密，public-公开
    */
   type: Type = Type.Private;
   /**
@@ -56,9 +56,9 @@ export enum RecipientType {
 }
 
 /**
- * 邮件类型，private-私密，publish-公开
+ * 邮件类型，private-私密，public-公开
  */
 export enum Type {
   Private = "private",
-  Publish = "publish",
+  public = "public",
 }

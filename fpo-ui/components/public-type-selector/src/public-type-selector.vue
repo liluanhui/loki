@@ -24,6 +24,26 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  type: {
+    type: String as PropType<"self" | "email">,
+    default: "self",
+  },
+  avatar: {
+    type: String,
+    default: "",
+  },
+  nickName: {
+    type: String,
+    default: "",
+  },
+  delivery_time: {
+    type: String,
+    default: "",
+  },
+  recipient_name: {
+    type: String,
+    default: "",
+  },
 });
 
 const onClick = (v: any) => {

@@ -79,8 +79,9 @@ router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized
   if (_isLogin && !userInfo.uid) {
     getUserInfo();
     next();
+  } else {
+    next();
   }
-  next();
 });
 
 router.afterEach((to: RouteLocationNormalized) => {
