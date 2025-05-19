@@ -1,9 +1,9 @@
+import { _localStorage } from "@loki/fpo-ui/utils/localStorage";
 import { defineStore } from "pinia";
 import { Message } from "birdpaper-ui";
 import router from "../router/index";
-// import { login } from "@moya/eddie-api/auth";
-// import { currentAdmin } from "@moya/eddie-api/user";
 import { LoginForm } from "@loki/odin/src/types/auth";
+import { login } from "@loki/odin-api";
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -28,12 +28,12 @@ export const useUserStore = defineStore("user", {
      * @param {LoginForm} data
      */
     async handleLogin(data: LoginForm) {
-      // const res = await login(data);
-      // if (res.code != 0) {
-      //   throw new Error(res.msg);
-      // }
+      const res = await login(data);
+      if (res.code != 0) {
+        throw new Error(res.msg);
+      }
 
-      // _localStorage.save("_token", res.data.token);
+      _localStorage.save("_token", res.data.token);
       await this.getUserInfo();
 
       // 加入延时让弹框动画完成
@@ -55,18 +55,17 @@ export const useUserStore = defineStore("user", {
     },
     /** 执行退出账户 */
     handleLogout(noMessage = false, cbLogin = false) {
-      // _localStorage.remove("_token");
-      // this.$patch({ logined: false, userInfo: {} });
-      // cbLogin && router.replace({ name: "account-login" });
-      // !noMessage && Message.success("退出成功");
+      _localStorage.remove("_token");
+      this.$patch({ logined: false, userInfo: {} });
+      cbLogin && router.replace({ name: "account-login" });
+      !noMessage && Message.success("退出成功");
     },
     /** 判断用户是否登录 */
     isLogin(): boolean {
-      return false;
-      // const hasToken = !!_localStorage.find("_token");
+      const hasToken = !!_localStorage.find("_token");
 
-      // this.$patch({ logined: hasToken });
-      // return hasToken;
+      this.$patch({ logined: hasToken });
+      return hasToken;
     },
   },
 });
