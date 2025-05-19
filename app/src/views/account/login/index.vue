@@ -17,7 +17,7 @@
       </div>
       <div :class="`${clsBlockName}-form-item btn-item`">
         <bp-button type="plain" size="large" full>注册</bp-button>
-        <bp-button full size="large" :disabled="!form.uid || !form.password">登录</bp-button>
+        <bp-button full size="large" :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
       </div>
       <div :class="`${clsBlockName}-form-item `">
         <label for="">其它登录：</label>
@@ -35,9 +35,20 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { LoginForm } from "@loki/odin/src/types/auth";
+import { login } from "@loki/odin-api";
+import { Message } from "birdpaper-ui";
 
 defineOptions({ name: "LoginIndex" });
 const clsBlockName = "login-index";
 
 const form = ref<LoginForm>(new LoginForm());
+
+const handleLogin = async () => {
+  try {
+    const res = await login(form.value);
+    if (res.code != 0) throw new Error(res.msg);
+  } catch (err) {
+    Message.error((err as Error).message);
+  }
+};
 </script>
