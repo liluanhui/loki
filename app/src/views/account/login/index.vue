@@ -41,6 +41,8 @@ import { Message } from "birdpaper-ui";
 defineOptions({ name: "LoginIndex" });
 const clsBlockName = "login-index";
 
+const emits = defineEmits(["success"]);
+
 const loading = ref(false);
 const form = ref<LoginForm>(new LoginForm());
 
@@ -49,9 +51,12 @@ const handleLogin = async () => {
   try {
     loading.value = true;
     await useStore.handleLogin(form.value);
+    emits("success");
     return Message.success("登录成功");
   } catch (err) {
-    Message.error((err as Error).message);
+    setTimeout(() => {
+      Message.error((err as Error).message);
+    }, 400);
   } finally {
     setTimeout(() => {
       loading.value = false;

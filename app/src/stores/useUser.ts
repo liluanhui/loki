@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { Message } from "birdpaper-ui";
 import router from "../router/index";
 import { LoginForm } from "@loki/odin/src/types/auth";
-import { login } from "@loki/odin-api";
+import { current, login } from "@loki/odin-api";
 
 export const useUserStore = defineStore("user", {
   state: () => {
@@ -41,17 +41,17 @@ export const useUserStore = defineStore("user", {
     },
     /** 获取当前登录的用户信息 */
     async getUserInfo() {
-      // try {
-      //   const res = await currentAdmin();
-      //   if (res.code != 0) {
-      //     throw new Error(res.msg);
-      //   }
-      //   this.$patch({ userInfo: res.data });
-      //   await initPermission(res.data.permission);
-      //   return res.data;
-      // } catch (error) {
-      //   this.handleLogout(true);
-      // }
+      try {
+        const res = await current();
+        if (res.code != 0) {
+          throw new Error(res.msg);
+        }
+        this.$patch({ userInfo: res.data });
+        return res.data;
+      } catch (error) {
+        console.log('error: ', error);
+        this.handleLogout(true);
+      }
     },
     /** 执行退出账户 */
     handleLogout(noMessage = false, cbLogin = false) {

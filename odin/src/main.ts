@@ -7,7 +7,10 @@ import { SuccessResponse } from "./interceptor/successResponse";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: [],
+    origin: [
+      'http://127.0.0.1:5180',
+      'http://127.0.0.1:5181',
+    ],
   });
 
   app.useGlobalInterceptors(new SuccessResponse());
