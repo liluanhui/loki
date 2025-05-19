@@ -9,7 +9,7 @@ export const useUserStore = defineStore("user", {
   state: () => {
     return {
       /** 用户信息 */
-      userInfo: {},
+      userInfo: {} as any,
       /** 是否已登录 */
       logined: false,
     };

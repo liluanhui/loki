@@ -17,7 +17,8 @@
         <lang-trigger />
         <theme-trigger />
 
-        <bp-button size="small" status="primary" type="dashed" @click="handleLoginClick">{{ t("common.login") }}</bp-button>
+        <bp-button v-if="!isLogin()" size="small" status="primary" type="dashed" @click="handleLoginClick">{{ t("common.login") }}</bp-button>
+        <bp-button v-else size="small" status="primary" type="dashed" @click="handleLogout">LOGOUT</bp-button>
       </div>
     </div>
   </div>
@@ -46,7 +47,7 @@ const list: any[] = [
   { title: t("route.about"), to: "/test" },
 ];
 
-const { isLogin } = useUserStore();
+const { isLogin, handleLogout } = useUserStore();
 const accountCtx = ref(inject("account", undefined));
 
 const handleLoginClick = () => {

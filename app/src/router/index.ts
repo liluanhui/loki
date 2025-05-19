@@ -7,6 +7,7 @@ import test from "@/views/test/index.vue";
 import Layout from "@/views/layout/index";
 import { useStorage } from "@vueuse/core";
 import NProgress from "nprogress";
+import { useUserStore } from "@/stores/useUser";
 
 const currentLang = useStorage("lang", "zh_CN");
 const siteTitle = {
@@ -71,6 +72,14 @@ const router = createRouter({
 
 router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
   NProgress.start();
+  const { isLogin, getUserInfo, userInfo } = useUserStore();
+
+  const _isLogin = isLogin();
+
+  if (_isLogin && !userInfo.uid) {
+    getUserInfo();
+    next();
+  }
   next();
 });
 
