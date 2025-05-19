@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@loki/fpo-ui": "workspace:*",
+    "@loki/odin": "workspace:*",
+    "axios": "^1.4.0",
+    "crypto-js": "^4.1.1"
+  }
 }

@@ -294,6 +294,21 @@ importers:
         specifier: ^5.1.3
         version: 5.7.3
 
+  odin-api:
+    dependencies:
+      '@loki/fpo-ui':
+        specifier: workspace:*
+        version: link:../fpo-ui
+      '@loki/odin':
+        specifier: workspace:*
+        version: link:../odin
+      axios:
+        specifier: ^1.4.0
+        version: 1.8.4
+      crypto-js:
+        specifier: ^4.1.1
+        version: 4.2.0
+
 packages:
 
   '@ampproject/remapping@2.3.0':
@@ -2337,6 +2352,9 @@ packages:
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
+
+  crypto-js@4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
 
   css-tree@2.3.1:
     resolution: {integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==}
@@ -7334,6 +7352,8 @@ snapshots:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  crypto-js@4.2.0: {}
 
   css-tree@2.3.1:
     dependencies:
