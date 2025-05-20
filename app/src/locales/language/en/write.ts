@@ -1,5 +1,6 @@
 export default {
   editor: {
+    draft_box: "Draft Box",
     draft_text: "Save",
     draft_text_loading: "Saving",
     send_text: "Send",
@@ -10,6 +11,11 @@ export default {
       other: "Others",
     },
     is_public: "Public",
+    public_type_list: {
+      full: "Fully Public",
+      privary: "Privacy Protected",
+      anonymity: "Anonymous",
+    },
     public_config_text: "Edit",
     title: "Subject",
     delivery_time: "Delivery Time",
