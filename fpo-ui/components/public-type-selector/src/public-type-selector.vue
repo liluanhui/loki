@@ -2,7 +2,7 @@
   <div :class="[clsBlockName, `${clsBlockName}-${layout}`]">
     <div :class="[`${clsBlockName}-item`, { active: v.type === model }]" v-for="v in list" @click="onClick(v)">
       <div :class="`${clsBlockName}-item-title`">{{ v.name }}</div>
-      <letter-item size="small" />
+      <letter-item size="small" :avatar :nickName :type :deliveryTime :recipientName />
     </div>
   </div>
 </template>
@@ -36,11 +36,11 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  delivery_time: {
+  deliveryTime: {
     type: String,
     default: "",
   },
-  recipient_name: {
+  recipientName: {
     type: String,
     default: "",
   },

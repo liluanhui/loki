@@ -112,7 +112,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from "vue";
+import { computed, inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Popup } from "vant";
 import "vant/lib/popup/style/index";
@@ -138,14 +138,16 @@ const publicTypeList = [
   { name: t("public-type-selector.privary"), type: "privary" },
   { name: t("public-type-selector.private"), type: "anonymity" },
 ];
-const publicTypeSelectorAttr = {
-  list: publicTypeList,
-  type: form.value.type,
-  avatar: userInfo.avatar,
-  nickName: userInfo.nick_name,
-  delivery_time: form.value.plan_deliver_at,
-  recipient_name: form.value.recipient_name,
-};
+const publicTypeSelectorAttr = computed(() => {
+  return {
+    list: publicTypeList,
+    type: form.value.type,
+    avatar: userInfo.avatar,
+    nickName: userInfo.nick_name,
+    deliveryTime: form.value.plan_deliver_at,
+    recipientName: form.value.recipient_name,
+  };
+});
 
 // Form field labels
 const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");

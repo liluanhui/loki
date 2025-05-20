@@ -2,9 +2,9 @@
   <div :class="[clsBlockName, `${clsBlockName}-size-${size}`]">
     <div class="header">
       <div class="sender-info">
-        <bp-avatar size="small" image-url="https://cos.moya.plus/avatar/avatar_sam.jpg"></bp-avatar>
+        <bp-avatar size="small" :image-url="avatar"></bp-avatar>
         <div class="sender-name">
-          <span class="sender-name-inner">布鲁是只傻猫</span>
+          <span class="sender-name-inner">{{ nickName }}</span>
         </div>
       </div>
       <div v-if="size !== 'small'" class="time-ago">1 小时前</div>
@@ -37,6 +37,26 @@ const props = defineProps({
   size: {
     type: String as PropType<"small" | "normal">,
     default: "normal",
+  },
+  type: {
+    type: String as PropType<"self" | "email">,
+    default: "self",
+  },
+  avatar: {
+    type: String,
+    default: "",
+  },
+  nickName: {
+    type: String,
+    default: "",
+  },
+  deliveryTime: {
+    type: String,
+    default: "",
+  },
+  recipientName: {
+    type: String,
+    default: "",
   },
 });
 </script>
