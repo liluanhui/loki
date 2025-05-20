@@ -80,11 +80,11 @@
                 <div :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
                   <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                   <div :class="`${clsBlockName}-form-item-content`">
-                    <public-type-selector v-model="form.public_type" v-bind="publicTypeSelectorAttr" style="margin-top: 8px" />
-  
+                    <public-type-selector ref="publicTypeSelectorRef" v-model="form.public_type" v-bind="publicTypeSelectorAttr" style="margin-top: 8px" />
+
                     <!-- Mobile -->
                     <div class="public-type-selector-mobile">
-                      <span>{{ publicTypeList.find((v) => v.type === form.public_type).name }}</span>
+                      <span>{{ publicTypeSelectorRef?.list.find((v) => v.type === form.public_type).name }}</span>
                       <bp-button type="text" size="small" @click="showPublicConfig">{{ t("write.editor.public_config_text") }}</bp-button>
                     </div>
                   </div>
@@ -110,7 +110,7 @@
       safe-area-inset-bottom
       @close="hidePublicConfig">
       <div class="public-type-selector-popup">
-        <public-type-selector v-model="form.public_type" layout="vertical" :list="publicTypeList" v-bind="publicTypeSelectorAttr" />
+        <public-type-selector ref="publicTypeSelectorRef" v-model="form.public_type" layout="vertical" v-bind="publicTypeSelectorAttr" />
       </div>
     </popup>
   </div>
@@ -135,17 +135,9 @@ const editorRef = ref();
 const { userInfo } = useUserStore();
 const form = ref<DraftForm>(new DraftForm());
 
-const { t } = useI18n();
-
-// Public type selector options
-const publicTypeList = [
-  { name: t("public-type-selector.full"), type: "full" },
-  { name: t("public-type-selector.privary"), type: "privary" },
-  { name: t("public-type-selector.private"), type: "anonymity" },
-];
+const publicTypeSelectorRef = ref();
 const publicTypeSelectorAttr = computed(() => {
   return {
-    list: publicTypeList,
     type: form.value.recipient_type,
     avatar: userInfo.avatar,
     nickName: userInfo.nick_name,
@@ -155,6 +147,7 @@ const publicTypeSelectorAttr = computed(() => {
 });
 
 // Form field labels
+const { t } = useI18n();
 const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");
 const formField = {
   type: createFormField("send_field"),

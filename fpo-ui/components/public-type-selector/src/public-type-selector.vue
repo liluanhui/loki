@@ -9,6 +9,7 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
+import { useI18n } from "vue-i18n";
 import letterItem from "../../letter-item";
 
 defineOptions({ name: "publicTypeSelector" });
@@ -19,10 +20,6 @@ const props = defineProps({
   layout: {
     type: String as PropType<"horizontal" | "vertical">,
     default: "horizontal",
-  },
-  list: {
-    type: Array,
-    default: () => [],
   },
   type: {
     type: String as PropType<"self" | "email">,
@@ -46,7 +43,18 @@ const props = defineProps({
   },
 });
 
+const { t } = useI18n();
+const list = [
+  { name: t("public-type-selector.full"), type: "full" },
+  { name: t("public-type-selector.privary"), type: "privary" },
+  { name: t("public-type-selector.private"), type: "anonymity" },
+];
+
 const onClick = (v: any) => {
   model.value = v.type;
 };
+
+defineExpose({
+  list,
+});
 </script>
