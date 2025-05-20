@@ -4,31 +4,31 @@
       <div class="sender-info">
         <bp-avatar size="small" :image-url="avatar"></bp-avatar>
         <div class="sender-name">
-          <span class="sender-name-inner">{{ nickName }}</span>
+          <span class="sender-name-inner">{{ nickName || "--" }}</span>
         </div>
       </div>
-      <div v-if="size !== 'small'" class="time-ago">1 小时前</div>
+      <div v-if="size !== 'small'" class="time-ago">{{ createdAt || "--" }}</div>
     </div>
 
     <div class="body">
-      <div class="letter-to">寄给十年后的自己</div>
-      <div v-if="size !== 'small'" class="letter-title">十年后的你，还好吗？</div>
+      <div class="letter-to">寄给{{ deliveryTime || "--" }}后的{{ isSelf ? "自己" : recipientName || "--" }}</div>
+      <div v-if="size !== 'small'" class="letter-title">{{ title || "--" }}</div>
     </div>
 
     <div v-if="size !== 'small'" class="footer">
       <div class="public-no">
-        <span class="public-no-inner">NO.23981001</span>
+        <span class="public-no-inner">NO.{{ no || "--" }}</span>
       </div>
       <div class="statistic">
-        <span class="statistic-item"><IconThumbUpLine size="14" />122</span>
-        <span class="statistic-item"><IconChat1Line size="14" />344</span>
+        <span class="statistic-item"><IconThumbUpLine size="14" />{{ likes }}</span>
+        <span class="statistic-item"><IconChat1Line size="14" />{{ comments }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
+import { computed, PropType } from "vue";
 
 defineOptions({ name: "LetterItem" });
 const clsBlockName = "letter-item";
@@ -42,13 +42,17 @@ const props = defineProps({
     type: String as PropType<"self" | "email">,
     default: "self",
   },
+  no: {
+    type: String,
+  },
+  title: {
+    type: String,
+  },
   avatar: {
     type: String,
-    default: "",
   },
   nickName: {
     type: String,
-    default: "",
   },
   deliveryTime: {
     type: String,
@@ -58,5 +62,21 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  createdAt: {
+    type: String,
+    default: "",
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  comments: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const isSelf = computed(() => {
+  return props.type === "self";
 });
 </script>

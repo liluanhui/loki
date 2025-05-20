@@ -26,6 +26,10 @@ $normalHeight: 210px;
       @include flex(row, flex-start, center);
       gap: 8px;
 
+      .bp-avatar {
+        border: $borderSize solid $borderColor-2;
+      }
+
       .sender-name {
         &-inner {
           font-size: 14px;
@@ -102,5 +106,5 @@ $normalHeight: 210px;
 
 .letter-item-size-small {
   width: calc($normalWidth / 1.6);
-  height: calc($normalHeight / 2.1);
+  height: calc($normalHeight / 2);
 }
