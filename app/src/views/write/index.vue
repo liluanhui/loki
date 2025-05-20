@@ -99,7 +99,7 @@
     <popup
       v-model:show="showPublicConfigPopup"
       position="bottom"
-      :style="{ height: '440px' }"
+      :style="{ height: '460px' }"
       :duration="0.2"
       round
       safe-area-inset-bottom
@@ -141,7 +141,7 @@ const publicTypeList = [
 const publicTypeSelectorAttr = computed(() => {
   return {
     list: publicTypeList,
-    type: form.value.type,
+    type: form.value.recipient_type,
     avatar: userInfo.avatar,
     nickName: userInfo.nick_name,
     deliveryTime: form.value.plan_deliver_at,

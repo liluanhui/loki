@@ -38,6 +38,10 @@ const props = defineProps({
     type: String as PropType<"small" | "normal">,
     default: "normal",
   },
+  mode: {
+    type: String as PropType<"full" | "privary" | "anonymity">,
+    default: "full",
+  },
   type: {
     type: String as PropType<"self" | "email">,
     default: "self",
