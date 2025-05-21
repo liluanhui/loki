@@ -9,11 +9,11 @@
             <bp-link :icon="IconDraftLine" size="small">{{ t("write.editor.draft_box") }}</bp-link>
           </div>
           <div class="header-right">
-            <bp-button :icon="IconSaveLine" :loading="draftLoading" size="small" type="text" @click="saveDraft">
-              {{ t("write.editor.draft_text") }}
+            <bp-button :icon="IconSaveLine" :loading="draftLoading" :disabled="btnDisabled" size="small" type="text" @click="saveDraft">
+              {{ draftText }}
             </bp-button>
-            <bp-button :icon="IconSendPlaneFill" size="small" type="plain">
-              {{ t("write.editor.send_text") }}
+            <bp-button :icon="IconSendPlaneFill" :disabled="btnDisabled" size="small" type="plain">
+              {{ sendText }}
             </bp-button>
           </div>
         </div>
@@ -140,13 +140,16 @@ const { t } = useI18n();
 const editorRef = ref();
 const mobileBarCtx: any = inject("mobile-bar");
 const { userInfo } = useUserStore();
-const { form, formField, typeList, draftLoading, sendLoading, saveDraft } = useWrite();
+const { form, formField, typeList, draftLoading, sendLoading, draftText, sendText, btnDisabled, saveDraft } = useWrite();
 
 const init = () => {
   mobileBarCtx?.change("write", {
     props: {
       draftLoading,
       sendLoading,
+      draftText,
+      sendText,
+      btnDisabled,
     },
     events: {
       saveDraft: () => saveDraft(),

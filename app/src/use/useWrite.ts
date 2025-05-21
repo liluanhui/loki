@@ -1,14 +1,27 @@
 import { DraftForm } from "@loki/odin/src/types/mail/draft";
 import { Message } from "birdpaper-ui";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 export const useWrite = () => {
   const { t } = useI18n();
   const form = ref<DraftForm>(new DraftForm());
 
+  /** 草稿按钮 */
   const draftLoading = ref(false);
+  const draftText = computed(() => {
+    return draftLoading.value ? t("write.editor.draft_text_loading") : t("write.editor.draft_text");
+  });
+
+  /** 发送按钮 */
   const sendLoading = ref(false);
+  const sendText = computed(() => {
+    return sendLoading.value ? t("write.editor.send_text_loading") : t("write.editor.send_text");
+  });
+
+  const btnDisabled = computed(() => {
+    return !form.value.title;
+  });
 
   // 寄信类型
   const typeList = [
@@ -42,6 +55,9 @@ export const useWrite = () => {
     form,
     draftLoading,
     sendLoading,
+    draftText,
+    sendText,
+    btnDisabled,
     formField,
     typeList,
     saveDraft,
