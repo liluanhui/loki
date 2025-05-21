@@ -13,7 +13,7 @@ export default {
     is_public: "Public",
     public_type_list: {
       full: "Fully Public",
-      privary: "Privacy Protected",
+      privary: "Privacy",
       anonymity: "Anonymous",
     },
     public_config_text: "Edit",

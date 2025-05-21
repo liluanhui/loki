@@ -17,7 +17,7 @@
 
     <div v-if="size !== 'small'" class="footer">
       <div class="public-no">
-        <span class="public-no-inner">NO.{{ no || "--" }}</span>
+        <span class="public-no-inner">{{ _no || "--" }}</span>
       </div>
       <div class="statistic">
         <span class="statistic-item"> <IconThumbUpLine size="14" />{{ likes }} </span>
@@ -30,6 +30,9 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import { computed, PropType } from "vue";
+import dayjs from "dayjs";
+import localeData from "dayjs/plugin/localeData";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 defineOptions({ name: "LetterItem" });
 const clsBlockName = "letter-item";
@@ -50,7 +53,17 @@ const props = defineProps({
 });
 
 const { t, locale } = useI18n();
+dayjs.locale(locale.value === "zh_CN" ? "zh-cn" : "en");
+dayjs.extend(localeData);
+dayjs.extend(relativeTime);
+
 const isSelf = computed(() => props.type === "self");
+
+// 邮寄单号处理
+const _no = computed(() => {
+  return props.no ? `NO.${props.no}` : "--";
+});
+
 // 用户头像处理
 const _avatar = computed(() => {
   if (props.mode === "anonymity") {
@@ -81,13 +94,22 @@ const _recipientName = computed(() => {
   return props.recipientName;
 });
 
+// 投递时间处理
+const _deliveryTime = computed(() => {
+  return props.deliveryTime ? dayjs().to(dayjs(props.deliveryTime), true) : "";
+});
+
 const _letterTo = computed(() => {
+  if (!_deliveryTime.value) {
+    return "--";
+  }
   switch (locale.value) {
     case "zh_CN":
-      return `寄给${props.deliveryTime || "--"}后的${isSelf.value ? "自己" : _recipientName.value || "--"}`;
+      return `寄给 ${_deliveryTime.value}后的${isSelf.value ? "自己" : _recipientName.value}`;
     case "en":
-      return `To ${isSelf.value ? "self" : _recipientName.value || "--"}, ${props.deliveryTime || "--"} later`;
+      return `To ${isSelf.value ? "self" : _recipientName.value}, ${_deliveryTime.value} later`;
     default:
+      return `--`;
   }
 });
 </script>

@@ -1,5 +1,5 @@
 export default {
   full: "Fully Public",
-  privary: "Privacy Protected",
+  privary: "Privacy",
   private: "Anonymous",
 };
