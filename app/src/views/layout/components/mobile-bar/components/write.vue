@@ -5,7 +5,9 @@
       <bp-link :icon="IconSaveLine" :loading="draftLoading" @click="emits('on-event', 'saveDraft')">
         {{ t("write.editor.draft_text") }}
       </bp-link>
-      <bp-button :icon="IconSendPlaneFill" :loading="sendLoading" type="plain" shape="round">{{ t("write.editor.send_text") }}</bp-button>
+      <bp-button :icon="IconSendPlaneFill" :loading="sendLoading" type="plain" shape="round" @click="emits('on-event', 'send')">
+        {{ t("write.editor.send_text") }}
+      </bp-button>
       <bp-button :icon="IconDraftLine" type="plain" shape="circle"></bp-button>
     </div>
   </div>

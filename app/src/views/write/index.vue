@@ -138,10 +138,10 @@ const clsBlockName = "write-page";
 
 const { t } = useI18n();
 const editorRef = ref();
+const mobileBarCtx: any = inject("mobile-bar");
 const { userInfo } = useUserStore();
 const { form, formField, typeList, draftLoading, sendLoading, saveDraft } = useWrite();
 
-const mobileBarCtx: any = inject("mobile-bar");
 const init = () => {
   mobileBarCtx?.change("write", {
     props: {
@@ -149,9 +149,7 @@ const init = () => {
       sendLoading,
     },
     events: {
-      saveDraft: () => {
-        saveDraft();
-      },
+      saveDraft: () => saveDraft(),
       send: () => {
         console.log("send");
       },
@@ -192,5 +190,4 @@ const hidePublicConfig = () => {
 onMounted(() => {
   nextTick(() => init());
 });
-
 </script>

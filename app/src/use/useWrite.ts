@@ -31,7 +31,8 @@ export const useWrite = () => {
   // 保存草稿
   const saveDraft = async () => {
     try {
-      draftLoading.value = true;
+      // draftLoading.value = true;
+      Message.success("保存成功");
     } catch (err) {
       Message.error((err as Error).message);
     }
