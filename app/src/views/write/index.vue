@@ -9,8 +9,12 @@
             <bp-link :icon="IconDraftLine" size="small">{{ t("write.editor.draft_box") }}</bp-link>
           </div>
           <div class="header-right">
-            <bp-button :icon="IconSaveLine" size="small" type="text">{{ t("write.editor.draft_text") }}</bp-button>
-            <bp-button :icon="IconSendPlaneFill" size="small" type="plain">{{ t("write.editor.send_text") }}</bp-button>
+            <bp-button :icon="IconSaveLine" :loading="draftLoading" size="small" type="text" @click="saveDraft">
+              {{ t("write.editor.draft_text") }}
+            </bp-button>
+            <bp-button :icon="IconSendPlaneFill" size="small" type="plain">
+              {{ t("write.editor.send_text") }}
+            </bp-button>
           </div>
         </div>
 
@@ -20,7 +24,7 @@
               <div :class="`${clsBlockName}-form-item no-line`">
                 <label :class="`${clsBlockName}-form-item-label`">{{ formField.type }}</label>
                 <div :class="`${clsBlockName}-form-item-content`">
-                  <radio-bar v-model="form.recipient_type" theme="gray" size="small" :option-list="radioBarList"></radio-bar>
+                  <radio-bar v-model="form.recipient_type" theme="gray" size="small" :option-list="typeList"></radio-bar>
                 </div>
               </div>
             </bp-col>
@@ -80,7 +84,11 @@
                 <div :class="`${clsBlockName}-form-item no-line public-config`" style="align-items: flex-start">
                   <label :class="`${clsBlockName}-form-item-label`">{{ formField.public_type }}</label>
                   <div :class="`${clsBlockName}-form-item-content`">
-                    <public-type-selector ref="publicTypeSelectorRef" v-model="form.public_type" v-bind="publicTypeSelectorAttr" style="margin-top: 8px" />
+                    <public-type-selector
+                      ref="publicTypeSelectorRef"
+                      v-model="form.public_type"
+                      v-bind="publicTypeSelectorAttr"
+                      style="margin-top: 8px" />
 
                     <!-- Mobile -->
                     <div class="public-type-selector-mobile">
@@ -117,24 +125,41 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from "vue";
+import { computed, inject, nextTick, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Popup } from "vant";
 import "vant/lib/popup/style/index";
-import { DraftForm } from "@loki/odin/src/types/mail/draft";
 import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconDraftLine } from "birdpaper-icon";
+import { useWrite } from "@/use/useWrite";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
 
-const mobileBarCtx: any = inject("mobile-bar");
-mobileBarCtx?.change("write");
-
+const { t } = useI18n();
 const editorRef = ref();
 const { userInfo } = useUserStore();
-const form = ref<DraftForm>(new DraftForm());
+const { form, formField, typeList, draftLoading, sendLoading, saveDraft } = useWrite();
 
+const mobileBarCtx: any = inject("mobile-bar");
+const init = () => {
+  mobileBarCtx?.change("write", {
+    props: {
+      draftLoading,
+      sendLoading,
+    },
+    events: {
+      saveDraft: () => {
+        saveDraft();
+      },
+      send: () => {
+        console.log("send");
+      },
+    },
+  });
+};
+
+/** 公开类型选择器配置 */
 const publicTypeSelectorRef = ref();
 const publicTypeSelectorAttr = computed(() => {
   return {
@@ -146,31 +171,7 @@ const publicTypeSelectorAttr = computed(() => {
   };
 });
 
-// Form field labels
-const { t } = useI18n();
-const createFormField = (key: string) => t(`write.editor.${key}`) + t("common.field_colon");
-const formField = {
-  type: createFormField("send_field"),
-  isPublic: createFormField("is_public"),
-  title: createFormField("title"),
-  delivery_time: createFormField("delivery_time"),
-  recipient_email: createFormField("recipient_email"),
-  recipient_name: createFormField("recipient_name"),
-  public_type: createFormField("public_type"),
-};
-
-// Radio bar options
-const radioBarList = [
-  {
-    label: t("write.editor.send_type.self"),
-    value: "self",
-  },
-  {
-    label: t("write.editor.send_type.other"),
-    value: "email",
-  },
-];
-
+/** 移动端-公开类型选择器 */
 const showPublicConfigPopup = ref(false);
 const showPublicConfig = () => {
   showPublicConfigPopup.value = true;
@@ -187,4 +188,9 @@ const hidePublicConfig = () => {
   showPublicConfigPopup.value = false;
   mobileBarCtx?.change("write");
 };
+
+onMounted(() => {
+  nextTick(() => init());
+});
+
 </script>

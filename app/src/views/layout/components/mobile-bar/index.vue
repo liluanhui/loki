@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName" :style="{ width }">
     <transition name="slide-up-down" mode="out-in">
-      <component :is="componentObj[props.type]" @back="goBack" @on-event="onEvent" />
+      <component :is="componentObj[props.type]" v-bind="_props" @back="goBack" @on-event="onEvent" />
     </transition>
   </div>
 </template>
@@ -24,7 +24,8 @@ defineOptions({ name: "MobileBar" });
 const clsBlockName = "mobile-bar";
 const width = ref("80%");
 const componentObj = { menus, write, confirm };
-const events = ref(null);
+const _events = ref(null);
+const _props = ref({});
 
 watch(
   () => props.type,
@@ -42,8 +43,8 @@ watch(
 );
 
 const onEvent = (name: string) => {
-  if (events.value && typeof events.value[name] === "function") {
-    events.value[name]();
+  if (_events.value && typeof _events.value[name] === "function") {
+    _events.value[name]();
   }
 };
 
@@ -58,7 +59,8 @@ const goBack = () => {
 };
 
 defineExpose({
-  events,
+  _events,
+  _props,
 });
 </script>
 
