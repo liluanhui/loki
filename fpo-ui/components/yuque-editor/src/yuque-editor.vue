@@ -25,7 +25,13 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{
-  (e: "change", content: string): void;
+  (
+    e: "change",
+    data: {
+      content: string;
+      wordCount: number;
+    }
+  ): void;
   (e: "save"): void;
   (e: "publish"): void;
   (e: "reset"): void;
@@ -104,7 +110,10 @@ const initEditor = () => {
 
   editor.value.on("contentchange", () => {
     wordCount.value = editor.value.queryCommandValue("wordCount");
-    emits("change", getContent());
+    emits("change", {
+      content: getContent(),
+      wordCount: wordCount.value,
+    });
   });
 };
 

@@ -19,7 +19,7 @@ export default {
     public_config_text: "修改",
     title: "主题",
     delivery_time: "投递时间",
-    recipient_email: "收件地址",
+    recipient_email: "收件邮箱",
     recipient_name: "收件人称呼",
     public_type: "公开设置",
     word_count: "字数",

@@ -20,7 +20,7 @@ export const useWrite = () => {
   });
 
   const btnDisabled = computed(() => {
-    return !form.value.title;
+    return !form.value.title || !form.value.word_count;
   });
 
   // 寄信类型
@@ -44,7 +44,7 @@ export const useWrite = () => {
   // 保存草稿
   const saveDraft = async () => {
     try {
-      // draftLoading.value = true;
+      draftLoading.value = true;
       Message.success("保存成功");
     } catch (err) {
       Message.error((err as Error).message);

@@ -102,7 +102,11 @@
           </transition>
 
           <div :class="`${clsBlockName}-form-item no-line column-layout`">
-            <yuque-editor ref="editorRef" :placeholder="t('write.editor.placeholder')" :paragraph-tip="''"></yuque-editor>
+            <yuque-editor
+              ref="editorRef"
+              :placeholder="t('write.editor.placeholder')"
+              :paragraph-tip="''"
+              @change="onEditorChange"></yuque-editor>
             <span class="word-count">{{ t("write.editor.word_count") + t("common.field_colon") }} {{ editorRef?.wordCount }}</span>
           </div>
         </div>
@@ -158,6 +162,11 @@ const init = () => {
       },
     },
   });
+};
+
+const onEditorChange = (data: { content: string; wordCount: number }) => {
+  form.value.content = data.content;
+  form.value.word_count = data.wordCount;
 };
 
 /** 公开类型选择器配置 */

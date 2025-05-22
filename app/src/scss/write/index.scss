@@ -56,12 +56,23 @@ $labelWidth: 74px;
       }
     }
 
+    .show-error {
+      border-bottom: 1px solid var(--brand-6);
+      transition: all 0.2s;
+
+      label {
+        color: var(--brand-6);
+        transition: all 0.2s;
+      }
+    }
+
     &-item {
       @include flex(row, flex-start, center);
       width: max-content;
       gap: 10px;
       flex: 1;
       border-bottom: 1px solid rgba(var(--gray-2-rgb), 0.3);
+      transition: all 0.2s;
 
       &-label {
         text-align: left;
@@ -69,6 +80,7 @@ $labelWidth: 74px;
         line-height: 32px;
         color: var(--gray-6);
         @extend .no-select;
+        transition: all 0.2s;
       }
 
       &-content {
