@@ -4,6 +4,10 @@
       <div :class="`${clsBlockName}-option`"></div>
 
       <div :class="`${clsBlockName}-editor`">
+        <div class="mask-disabled" v-if="!isLogin()">
+          <bp-button type="plain" shape="round" @click="handleLoginClick">{{ t("common.login_now") }}</bp-button>
+        </div>
+
         <div :class="`${clsBlockName}-header`">
           <div class="header-left">
             <bp-link :icon="IconDraftLine" size="small">{{ t("write.editor.draft_box") }}</bp-link>
@@ -143,7 +147,7 @@ const clsBlockName = "write-page";
 const { t } = useI18n();
 const editorRef = ref();
 const mobileBarCtx: any = inject("mobile-bar");
-const { userInfo } = useUserStore();
+const { userInfo, isLogin } = useUserStore();
 const { form, formField, typeList, draftLoading, sendLoading, draftText, sendText, btnDisabled, saveDraft } = useWrite();
 
 const init = () => {
@@ -197,6 +201,14 @@ const showPublicConfig = () => {
 const hidePublicConfig = () => {
   showPublicConfigPopup.value = false;
   mobileBarCtx?.change("write");
+};
+
+const accountCtx = ref(inject("account", undefined));
+const handleLoginClick = () => {
+  if (!isLogin()) {
+    accountCtx.value.login();
+    return;
+  }
 };
 
 onMounted(() => {
