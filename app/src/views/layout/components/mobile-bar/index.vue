@@ -7,11 +7,12 @@
 </template>
 
 <script lang="ts" setup>
-import { watch, ref } from "vue";
+import { watch, ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import menus from "./components/menus.vue";
 import write from "./components/write.vue";
 import confirm from "./components/confirm.vue";
+import { useUserStore } from "@/stores/useUser";
 
 const props = defineProps({
   type: {
@@ -22,8 +23,12 @@ const props = defineProps({
 
 defineOptions({ name: "MobileBar" });
 const clsBlockName = "mobile-bar";
+const { isLogin } = useUserStore();
+
 const width = ref("80%");
-const componentObj = { menus, write, confirm };
+const componentObj = computed(() => {
+  return { menus, write: isLogin() ? write : menus, confirm };
+});
 const _events = ref(null);
 const _props = ref({});
 

@@ -19,7 +19,7 @@ $labelWidth: 74px;
 
     .mask-disabled {
       @include flex(row, center, center);
-      background-color: rgba(var(--gray-0-rgb), 0.6);
+      background-color: rgba(var(--gray-0-rgb), 0.4);
       position: absolute;
       top: 0;
       left: 0;
@@ -27,6 +27,7 @@ $labelWidth: 74px;
       height: 100%;
       border-radius: 14px;
       z-index: 1000;
+      backdrop-filter: blur(2px);
     }
   }
 

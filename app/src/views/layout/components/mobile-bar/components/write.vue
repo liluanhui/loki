@@ -20,6 +20,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconArrowGoBackLine, IconDraftLine } from "birdpaper-icon";
 import { useI18n } from "vue-i18n";
 
