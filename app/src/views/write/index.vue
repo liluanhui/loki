@@ -10,7 +10,7 @@
 
         <div :class="`${clsBlockName}-header`">
           <div class="header-left">
-            <bp-link :icon="IconDraftLine" size="small">{{ t("write.editor.draft_box") }}</bp-link>
+            <bp-link :icon="IconDraftLine" size="small" @click="openDraftBox">{{ t("write.editor.draft_box") }}</bp-link>
           </div>
           <div class="header-right">
             <bp-button :icon="IconSaveLine" :loading="draftLoading" :disabled="btnDisabled" size="small" type="text" @click="saveDraft">
@@ -129,6 +129,9 @@
         <public-type-selector ref="publicTypeSelectorRef" v-model="form.public_type" layout="vertical" v-bind="publicTypeSelectorAttr" />
       </div>
     </popup>
+
+    <!-- 草稿箱 -->
+    <draft-box ref="draftBoxRef" />
   </div>
 </template>
 
@@ -140,6 +143,7 @@ import "vant/lib/popup/style/index";
 import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconDraftLine } from "birdpaper-icon";
 import { useWrite } from "@/use/useWrite";
+import draftBox from "./components/draft-box.vue";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
@@ -209,6 +213,11 @@ const handleLoginClick = () => {
     accountCtx.value.login();
     return;
   }
+};
+
+const draftBoxRef = ref();
+const openDraftBox = () => {
+  draftBoxRef.value.open();
 };
 
 onMounted(() => {
