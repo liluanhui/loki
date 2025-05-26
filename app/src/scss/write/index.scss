@@ -1,6 +1,7 @@
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
+@import "./draft-box.scss";
 
 $labelWidth: 74px;
 

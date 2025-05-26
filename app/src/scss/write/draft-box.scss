@@ -1,0 +1,74 @@
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+@use "@loki/fpo-ui/style/search-block.scss" as *;
+
+.draft-box-body {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.draft-box-item {
+  @include flex(row, space-between, center);
+  width: 100%;
+  padding: 0 2px 14px 2px;
+  border-bottom: $borderSize solid $borderColor-2;
+  cursor: pointer;
+  @extend .no-select;
+
+  &:not(:last-child) {
+    margin-bottom: 14px;
+  }
+
+  &:hover {
+    .right {
+      .bp-button {
+        opacity: 1;
+        transition: all 0.2s;
+      }
+    }
+  }
+
+  .left {
+    width: 500px;
+
+    &:hover {
+      .title {
+        color: var(--brand-6);
+        transition: all 0.2s;
+      }
+    }
+
+    .title {
+      font-size: 14px;
+      color: var(--gray-9);
+      line-height: 1.8;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      @extend .text-ellipsis;
+    }
+
+    .remark {
+      @include flex(row, flex-start, center);
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray-5);
+      font-weight: 400;
+    }
+  }
+
+  .right {
+    padding: 0 20px;
+
+    &:hover {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+
+    .bp-button {
+      opacity: 0;
+      transition: all 0.2s;
+    }
+  }
+}
