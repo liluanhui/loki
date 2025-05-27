@@ -1,5 +1,5 @@
 <template>
-  <bp-modal v-model="show" title="草稿箱" :show-border="false" width="720px">
+  <bp-modal v-model="show" title="草稿箱" :show-border="false" width="720px" hide-footer>
     <div :class="`${clsBlockName}-body`">
       <bp-empty v-if="list.length === 0" />
 
@@ -7,12 +7,12 @@
         <div class="left">
           <div class="title">{{ v.title }}</div>
           <div class="remark">
-            <p>3 天前</p>
+            <p>{{ t("write.editor.update_at") }} {{ dayjs().to(dayjs(v.updated_at)) }}</p>
             <p>{{ v.word_count }} {{ t("write.editor.words") }}</p>
           </div>
         </div>
         <div class="right">
-          <bp-popconfirm position="left" content="确定删除草稿吗？">
+          <bp-popconfirm position="left" :content="t('write.editor.confirm_delete')" @confirm="init">
             <bp-button type="text" size="small">删除</bp-button>
           </bp-popconfirm>
         </div>
@@ -29,18 +29,27 @@ import { ref } from "vue";
 import { findDraftList } from "@loki/odin-api";
 import { DraftListItem } from "@loki/odin/src/types/mail/draft";
 import { useI18n } from "vue-i18n";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import localeData from "dayjs/plugin/localeData";
 
 defineOptions({ name: "DraftBox" });
 const clsBlockName = "draft-box";
+
+const { t, locale } = useI18n();
+dayjs.locale(locale.value === "zh_CN" ? "zh-cn" : "en");
+dayjs.extend(localeData);
+dayjs.extend(relativeTime);
 
 const total = ref(0);
 const form = ref({
   pageNum: 1,
   pageSize: 10,
 });
+
 const list = ref<DraftListItem[]>([]);
-const init = async () => {
-  const res = await findDraftList(form.value);
+const init = async (data?: { pageNum: number; pageSize: number }) => {
+  const res = await findDraftList({ ...form.value, ...data });
   if (res.code != 0) {
     throw new Error(res.msg);
   }
@@ -50,7 +59,6 @@ const init = async () => {
   total.value = res.data.total;
 };
 
-const { t } = useI18n();
 const show = ref(false);
 const open = () => {
   show.value = true;

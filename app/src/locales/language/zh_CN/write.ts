@@ -25,5 +25,7 @@ export default {
     word_count: "字数",
     words: "字",
     placeholder: "输入信件内容",
+    update_at: "更新于",
+    confirm_delete: "确认删除草稿吗？",
   },
 };

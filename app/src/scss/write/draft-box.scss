@@ -15,7 +15,7 @@
 .draft-box-item {
   @include flex(row, space-between, center);
   width: 100%;
-  padding: 0 2px 14px 2px;
+  padding: 0 2px 12px 2px;
   border-bottom: $borderSize solid $borderColor-2;
   cursor: pointer;
   @extend .no-select;
