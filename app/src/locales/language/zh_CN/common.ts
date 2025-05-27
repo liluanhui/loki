@@ -7,4 +7,7 @@ export default {
   close: "关闭",
   confirm: "确认",
   cancel: "取消",
+  delete: "删除",
+  edit: "编辑",
+  save: "保存",
 };

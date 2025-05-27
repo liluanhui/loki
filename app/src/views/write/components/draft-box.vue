@@ -1,5 +1,10 @@
 <template>
-  <bp-modal v-model="show" title="草稿箱" :show-border="false" width="720px" hide-footer>
+  <bp-modal
+    v-model="show"
+    :title="`${t('write.editor.draft_box')} ${total > 0 ? `(${total})` : ''}`"
+    :show-border="false"
+    width="720px"
+    hide-footer>
     <div :class="`${clsBlockName}-body`">
       <bp-empty v-if="list.length === 0" />
 
@@ -12,26 +17,32 @@
           </div>
         </div>
         <div class="right">
-          <bp-popconfirm position="left" :content="t('write.editor.confirm_delete')" @confirm="init">
-            <bp-button type="text" size="small">删除</bp-button>
+          <bp-popconfirm
+            position="left"
+            :content="t('write.editor.confirm_delete')"
+            :ok-text="t('common.confirm')"
+            :cancel-text="t('common.cancel')"
+            :onBeforeOk="() => handleDelete(v.id)">
+            <bp-button type="text" size="small">{{ t("common.delete") }}</bp-button>
           </bp-popconfirm>
         </div>
       </div>
     </div>
     <div :class="`${clsBlockName}-footer`">
-      <bp-pagination size="small" layout="prev,pager,next" :total="20"></bp-pagination>
+      <bp-pagination size="small" layout="prev,pager,next" :total></bp-pagination>
     </div>
   </bp-modal>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { findDraftList } from "@loki/odin-api";
+import { delDraft, findDraftList } from "@loki/odin-api";
 import { DraftListItem } from "@loki/odin/src/types/mail/draft";
 import { useI18n } from "vue-i18n";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import localeData from "dayjs/plugin/localeData";
+import { Message } from "birdpaper-ui";
 
 defineOptions({ name: "DraftBox" });
 const clsBlockName = "draft-box";
@@ -56,7 +67,22 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
   list.value = res.data.list;
   form.value.pageNum = res.data.pageNum;
   form.value.pageSize = res.data.pageSize;
-  total.value = res.data.total;
+  total.value = res.data.count;
+};
+
+const handleDelete = async (id: string) => {
+  try {
+    const res = await delDraft({ id });
+    if (res.code != 0) {
+      throw new Error(res.msg);
+    }
+    Message.success(res.msg);
+    init();
+    return true;
+  } catch (err) {
+    Message.error((err as Error).message);
+    return false;
+  }
 };
 
 const show = ref(false);

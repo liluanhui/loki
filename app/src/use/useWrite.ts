@@ -1,4 +1,4 @@
-import { addDraft } from "@loki/odin-api";
+import { addDraft, editDraft } from "@loki/odin-api";
 import { DraftForm } from "@loki/odin/src/types/mail/draft";
 import { Message } from "birdpaper-ui";
 import { computed, ref } from "vue";
@@ -47,15 +47,20 @@ export const useWrite = () => {
     try {
       draftLoading.value = true;
 
-      const res = await addDraft(form.value);
+      const api = form.value.id ? editDraft : addDraft;
+      const res = await api(form.value);
       if (res.code != 0) {
         throw new Error(res.msg);
+      }
+
+      if (!form.value.id) {
+        form.value.id = res.data;
       }
 
       Message.success("保存成功");
     } catch (err) {
       Message.error((err as Error).message);
-    } finally{
+    } finally {
       draftLoading.value = false;
     }
   };

@@ -7,4 +7,7 @@ export default {
   close: "Close",
   confirm: "Confirm",
   cancel: "Cancel",
+  delete: "Delete",
+  edit: "Edit",
+  save: "Save",
 };
