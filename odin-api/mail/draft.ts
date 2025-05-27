@@ -22,10 +22,10 @@ export const editDraft = (data: DraftForm) => {
   return post<string>(path, data);
 };
 
-// Front 编辑草稿
-export const 获取草稿详情 = (id: string) => {
+// Front 获取草稿详情
+export const draftDetail = (id: string) => {
   const path = `${namespace}/detail/${id}`;
-  return get(path);
+  return get<any>(path);
 };
 
 // Front 删除草稿

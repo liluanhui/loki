@@ -1,4 +1,4 @@
-import { addDraft, editDraft } from "@loki/odin-api";
+import { addDraft, draftDetail, editDraft } from "@loki/odin-api";
 import { DraftForm } from "@loki/odin/src/types/mail/draft";
 import { Message } from "birdpaper-ui";
 import { computed, ref } from "vue";
@@ -7,6 +7,8 @@ import { useI18n } from "vue-i18n";
 export const useWrite = () => {
   const { t } = useI18n();
   const form = ref<DraftForm>(new DraftForm());
+
+  const loading = ref(false);
 
   /** 草稿按钮 */
   const draftLoading = ref(false);
@@ -65,8 +67,25 @@ export const useWrite = () => {
     }
   };
 
+  // 加载草稿
+  const loadDraft = async (id: string) => {
+    try {
+      loading.value = true;
+      const res = await draftDetail(id);
+      if (res.code != 0) {
+        throw new Error(res.msg);
+      }
+      form.value = res.data;
+    } catch (err) {
+      Message.error((err as Error).message);
+    } finally {
+      loading.value = false;
+    }
+  };
+
   return {
     form,
+    loading,
     draftLoading,
     sendLoading,
     draftText,
@@ -75,5 +94,6 @@ export const useWrite = () => {
     formField,
     typeList,
     saveDraft,
+    loadDraft,
   };
 };

@@ -9,7 +9,7 @@
       <bp-empty v-if="list.length === 0" />
 
       <div v-else v-for="v in list" :class="`${clsBlockName}-item`">
-        <div class="left">
+        <div class="left" @click="handleSelect(v.id)">
           <div class="title">{{ v.title }}</div>
           <div class="remark">
             <p>{{ t("write.editor.update_at") }} {{ dayjs().to(dayjs(v.updated_at)) }}</p>
@@ -47,6 +47,10 @@ import { Message } from "birdpaper-ui";
 defineOptions({ name: "DraftBox" });
 const clsBlockName = "draft-box";
 
+const emits = defineEmits<{
+  (e: "select", id: string): void;
+}>();
+
 const { t, locale } = useI18n();
 dayjs.locale(locale.value === "zh_CN" ? "zh-cn" : "en");
 dayjs.extend(localeData);
@@ -68,6 +72,11 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
   form.value.pageNum = res.data.pageNum;
   form.value.pageSize = res.data.pageSize;
   total.value = res.data.count;
+};
+
+const handleSelect = (id: string) => {
+  emits("select", id);
+  show.value = false;
 };
 
 const handleDelete = async (id: string) => {

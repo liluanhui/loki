@@ -1,5 +1,6 @@
 export default {
   editor: {
+    loading_text: "Loading email content",
     draft_box: "Draft Box",
     draft_text: "Save",
     draft_text_loading: "Saving",

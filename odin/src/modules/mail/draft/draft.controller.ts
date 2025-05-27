@@ -34,7 +34,7 @@ export class DraftController {
       // 邮件字数限制
       { condition: word_count && word_count > 10000, error: "WORD_COUNT_LIMIT" },
       // 邮件类型校验
-      { condition: !["private", "publish"].includes(type), error: "MAIL_TYPE_ERROR" },
+      { condition: !["private", "public"].includes(type), error: "MAIL_TYPE_ERROR" },
       // 邮件类型校验
       { condition: !["full", "privary", "anonymity"].includes(public_type), error: "PUBLIC_TYPE_ERROR" },
       // 收件人类型校验
@@ -85,7 +85,7 @@ export class DraftController {
       // 邮件字数限制
       { condition: word_count && word_count > 10000, error: "WORD_COUNT_LIMIT" },
       // 邮件类型校验
-      { condition: !["private", "publish"].includes(type), error: "MAIL_TYPE_ERROR" },
+      { condition: !["private", "public"].includes(type), error: "MAIL_TYPE_ERROR" },
       // 邮件类型校验
       { condition: !["full", "privary", "anonymity"].includes(public_type), error: "PUBLIC_TYPE_ERROR" },
       // 收件人类型校验

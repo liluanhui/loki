@@ -1,5 +1,6 @@
 export default {
   editor: {
+    loading_text: "正在载入邮件内容",
     draft_box: "草稿箱",
     draft_text: "存草稿",
     draft_text_loading: "正在保存",
