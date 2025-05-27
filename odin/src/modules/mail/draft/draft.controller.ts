@@ -1,14 +1,26 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Req } from "@nestjs/common";
 import { FpoMailDraft } from "src/models/fpo_mail_draft.model";
 import { DraftForm } from "src/types/mail/draft";
-import { isEmail, randomString } from "src/utils/helper";
+import { handlePageLimit, isEmail, randomString } from "src/utils/helper";
 import { getResponseMsg, paramsError } from "src/utils/throw";
+import { DraftService } from "./draft.service";
 
 @Controller("mail/draft")
 export class DraftController {
+  constructor(private draftService: DraftService) {}
+
+  // Front 查询草稿列表
   @Get("list")
   @HttpCode(HttpStatus.OK)
-  async findList(@Req() req: Request) {}
+  async findList(@Query() query: { pageNum: number; pageSize: number }, @Req() req: Request) {
+    const { pageNum, pageSize } = query;
+    if (!pageNum || !pageSize) paramsError();
+
+    const { offset, limit } = handlePageLimit(pageNum, pageSize);
+    const { count, list } = await this.draftService.queryList(offset, limit, { uid: req["uid"] });
+
+    return { count, list, pageNum, pageSize };
+  }
 
   // Front 新增草稿
   @Post("add")

@@ -62,3 +62,12 @@ export enum Type {
   Private = "private",
   public = "public",
 }
+
+export interface DraftListItem {
+  created_at: string;
+  id: string;
+  title: string;
+  type: string;
+  updated_at: string;
+  word_count: number;
+}

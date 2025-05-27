@@ -1,7 +1,14 @@
+import { ListResponse } from "odin-api/request";
 import { get, post } from "../request/http";
-import { DraftForm } from "@loki/odin/src/types/mail/draft";
+import { DraftForm, DraftListItem } from "@loki/odin/src/types/mail/draft";
 
 const namespace = "/mail/draft";
+
+// Front 查询草稿列表
+export const findDraftList = (query: { pageNum: number; pageSize: number }) => {
+  const path = `${namespace}/list`;
+  return get<ListResponse<DraftListItem[]>>(path, query);
+};
 
 // Front 新增草稿
 export const addDraft = (data: DraftForm) => {
