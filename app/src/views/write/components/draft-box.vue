@@ -11,9 +11,14 @@
           </div>
         </div>
         <div class="right">
-          <bp-button type="text" size="small">删除</bp-button>
+          <bp-popconfirm position="left" content="确定删除草稿吗？">
+            <bp-button type="text" size="small">删除</bp-button>
+          </bp-popconfirm>
         </div>
       </div>
+    </div>
+    <div :class="`${clsBlockName}-footer`">
+      <bp-pagination size="small" layout="prev,pager,next" :total="20"></bp-pagination>
     </div>
   </bp-modal>
 </template>
@@ -23,6 +28,8 @@ import { ref } from "vue";
 
 defineOptions({ name: "DraftBox" });
 const clsBlockName = "draft-box";
+
+const list = ref([]);
 
 const show = ref(false);
 const open = () => {

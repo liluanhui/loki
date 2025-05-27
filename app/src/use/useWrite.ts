@@ -1,3 +1,4 @@
+import { addDraft } from "@loki/odin-api";
 import { DraftForm } from "@loki/odin/src/types/mail/draft";
 import { Message } from "birdpaper-ui";
 import { computed, ref } from "vue";
@@ -45,9 +46,17 @@ export const useWrite = () => {
   const saveDraft = async () => {
     try {
       draftLoading.value = true;
+
+      const res = await addDraft(form.value);
+      if (res.code != 0) {
+        throw new Error(res.msg);
+      }
+
       Message.success("保存成功");
     } catch (err) {
       Message.error((err as Error).message);
+    } finally{
+      draftLoading.value = false;
     }
   };
 

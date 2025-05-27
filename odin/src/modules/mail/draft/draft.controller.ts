@@ -6,6 +6,10 @@ import { getResponseMsg, paramsError } from "src/utils/throw";
 
 @Controller("mail/draft")
 export class DraftController {
+  @Get("list")
+  @HttpCode(HttpStatus.OK)
+  async findList(@Req() req: Request) {}
+
   // Front 新增草稿
   @Post("add")
   @HttpCode(HttpStatus.OK)
@@ -24,9 +28,9 @@ export class DraftController {
       // 收件人类型校验
       { condition: !["self", "email"].includes(recipient_type), error: "RECIPIENT_TYPE_ERROR" },
       // 收件人邮箱校验
-      { condition: recipient_type === "email" && !isEmail(recipient_email), error: "RECIPIENT_EMAIL_ERROR" },
+      { condition: recipient_type === "email" && recipient_email && !isEmail(recipient_email), error: "RECIPIENT_EMAIL_ERROR" },
       // 收件人名称长度限制
-      { condition: recipient_type && recipient_name.length > 30, error: "RECIPIENT_NAME_LIMIT" },
+      { condition: recipient_type === "email" && recipient_name && recipient_name.length > 30, error: "RECIPIENT_NAME_LIMIT" },
       // 投递时间校验
       { condition: plan_deliver_at && new Date(plan_deliver_at).getTime() < Date.now(), error: "PLAN_DELIVER_TIME_ERROR" },
     ];
@@ -75,9 +79,9 @@ export class DraftController {
       // 收件人类型校验
       { condition: !["self", "email"].includes(recipient_type), error: "RECIPIENT_TYPE_ERROR" },
       // 收件人邮箱校验
-      { condition: recipient_type === "email" && !isEmail(recipient_email), error: "RECIPIENT_EMAIL_ERROR" },
+      { condition: recipient_type === "email" && recipient_email && !isEmail(recipient_email), error: "RECIPIENT_EMAIL_ERROR" },
       // 收件人名称长度限制
-      { condition: recipient_type && recipient_name.length > 30, error: "RECIPIENT_NAME_LIMIT" },
+      { condition: recipient_type === "email" && recipient_name && recipient_name.length > 30, error: "RECIPIENT_NAME_LIMIT" },
       // 投递时间校验
       { condition: plan_deliver_at && new Date(plan_deliver_at).getTime() < Date.now(), error: "PLAN_DELIVER_TIME_ERROR" },
     ];

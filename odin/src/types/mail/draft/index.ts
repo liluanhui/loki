@@ -7,7 +7,7 @@ export class DraftForm {
   /**
    * 计划投递时间
    */
-  plan_deliver_at: string = "";
+  plan_deliver_at?: string;
   /**
    * 公开类型，full-完全公开，privary-数据保密，anonymity-匿名
    */

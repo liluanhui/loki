@@ -63,7 +63,7 @@ export class FpoMailDraft extends Model {
   @Column({
     type: DataType.DATE,
     comment: "计划投递时间",
-    allowNull: false,
+    allowNull: true,
   })
   plan_deliver_at: Date;
 
