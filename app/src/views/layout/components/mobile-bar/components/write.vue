@@ -14,13 +14,12 @@
         @click="emits('on-event', 'send')">
         {{ sendText }}
       </bp-button>
-      <bp-button :icon="IconDraftLine" type="plain" shape="circle"></bp-button>
+      <bp-button :icon="IconDraftLine" type="plain" shape="circle" @click="emits('on-event', 'openDraftBox')"></bp-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconArrowGoBackLine, IconDraftLine } from "birdpaper-icon";
 import { useI18n } from "vue-i18n";
 

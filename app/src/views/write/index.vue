@@ -157,7 +157,7 @@ const { userInfo, isLogin } = useUserStore();
 const { form, formField, typeList, loading, draftLoading, sendLoading, draftText, sendText, btnDisabled, saveDraft, loadDraft } =
   useWrite();
 
-const init = () => {
+const initMobileBar = () => {
   mobileBarCtx?.change("write", {
     props: {
       draftLoading,
@@ -170,6 +170,9 @@ const init = () => {
       saveDraft: () => saveDraft(),
       send: () => {
         console.log("send");
+      },
+      openDraftBox: () => {
+        // openDraftBox();
       },
     },
   });
@@ -207,7 +210,7 @@ const showPublicConfig = () => {
 };
 const hidePublicConfig = () => {
   showPublicConfigPopup.value = false;
-  mobileBarCtx?.change("write");
+  initMobileBar();
 };
 
 const accountCtx = ref(inject("account", undefined));
@@ -232,6 +235,6 @@ const onDraftSelect = (id: string) => {
 };
 
 onMounted(() => {
-  nextTick(() => init());
+  nextTick(() => initMobileBar());
 });
 </script>

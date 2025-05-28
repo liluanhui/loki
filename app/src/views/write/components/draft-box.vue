@@ -5,31 +5,38 @@
     :show-border="false"
     width="720px"
     hide-footer>
-    <div :class="`${clsBlockName}-body`">
-      <bp-empty v-if="list.length === 0" />
-
-      <div v-else v-for="v in list" :class="`${clsBlockName}-item`">
-        <div class="left" @click="handleSelect(v.id)">
-          <div class="title">{{ v.title }}</div>
-          <div class="remark">
-            <p>{{ t("write.editor.update_at") }} {{ dayjs().to(dayjs(v.updated_at)) }}</p>
-            <p>{{ v.word_count }} {{ t("write.editor.words") }}</p>
+    <bp-spin :spinning="loading">
+      <div :class="`${clsBlockName}-body`">
+        <bp-empty v-if="list.length === 0" />
+  
+        <div v-else v-for="v in list" :class="`${clsBlockName}-item`">
+          <div class="left" @click="handleSelect(v.id)">
+            <div class="title">{{ v.title }}</div>
+            <div class="remark">
+              <p>{{ t("write.editor.update_at") }} {{ dayjs().to(dayjs(v.updated_at)) }}</p>
+              <p>{{ v.word_count }} {{ t("write.editor.words") }}</p>
+            </div>
+          </div>
+          <div class="right">
+            <bp-popconfirm
+              position="left"
+              :content="t('write.editor.confirm_delete')"
+              :ok-text="t('common.confirm')"
+              :cancel-text="t('common.cancel')"
+              :onBeforeOk="() => handleDelete(v.id)">
+              <bp-button type="text" size="small">{{ t("common.delete") }}</bp-button>
+            </bp-popconfirm>
           </div>
         </div>
-        <div class="right">
-          <bp-popconfirm
-            position="left"
-            :content="t('write.editor.confirm_delete')"
-            :ok-text="t('common.confirm')"
-            :cancel-text="t('common.cancel')"
-            :onBeforeOk="() => handleDelete(v.id)">
-            <bp-button type="text" size="small">{{ t("common.delete") }}</bp-button>
-          </bp-popconfirm>
-        </div>
       </div>
-    </div>
+    </bp-spin>
     <div :class="`${clsBlockName}-footer`">
-      <bp-pagination size="small" layout="prev,pager,next" :total></bp-pagination>
+      <bp-pagination
+        size="small"
+        layout="prev,pager,next"
+        :total
+        @change="init({ pageNum: $event, pageSize: 10 })"
+        @size-change="init({ pageNum: 1, pageSize: $event })"></bp-pagination>
     </div>
   </bp-modal>
 </template>
@@ -62,16 +69,28 @@ const form = ref({
   pageSize: 10,
 });
 
+const loading = ref(false);
 const list = ref<DraftListItem[]>([]);
 const init = async (data?: { pageNum: number; pageSize: number }) => {
-  const res = await findDraftList({ ...form.value, ...data });
-  if (res.code != 0) {
-    throw new Error(res.msg);
+  try {
+    loading.value = true;
+    const res = await findDraftList({ ...form.value, ...data });
+    if (res.code != 0) {
+      throw new Error(res.msg);
+    }
+    list.value = res.data.list;
+    form.value.pageNum = res.data.pageNum;
+    form.value.pageSize = res.data.pageSize;
+    total.value = res.data.count;
+  } catch (err) {
+    Message.error((err as Error).message);
+    list.value = [];
+    total.value = 0;
+    form.value.pageNum = 1;
+    form.value.pageSize = 10;
+  } finally {
+    loading.value = false;
   }
-  list.value = res.data.list;
-  form.value.pageNum = res.data.pageNum;
-  form.value.pageSize = res.data.pageSize;
-  total.value = res.data.count;
 };
 
 const handleSelect = (id: string) => {
