@@ -1,11 +1,15 @@
 <template>
-  <popup v-model:show="show" position="bottom" :style="{ height: '100%' }" :duration="0.2" safe-area-inset-bottom>
-    <div class="popup-header">{{ t("write.editor.draft_box") }}</div>
-    <!-- {{ total > 0 ? `(${total})` : "" }} -->
+  <popup v-model:show="show" position="bottom" :style="{ height: '100%' }" :duration="0.2">
+    <div class="popup-header">{{ t("write.editor.draft_box") }} {{ total > 0 ? `(${total})` : "" }}</div>
 
     <div :class="`${clsBlockName}-body`">
       <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
-        <vant-list v-model:loading="loading" :finished finished-text="没有更多了">
+        <vant-list
+          v-model:loading="loading"
+          :finished
+          :offset="10"
+          finished-text="没有更多了"
+          @load="init({ pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
           <div v-for="v in list" class="draft-item">
             <div class="left" @click="handleSelect(v.id)">
               <div class="title">{{ v.title }}</div>
@@ -69,10 +73,17 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
     }
 
     setTimeout(() => {
-      list.value = res.data.list;
+      if (form.value.pageNum === 1) {
+        list.value = [];
+      }
+      for (let i = 0; i < res.data.list.length; i++) {
+        const element = res.data.list[i];
+        list.value.push(element);
+      }
       form.value.pageNum = res.data.pageNum;
       form.value.pageSize = res.data.pageSize;
       total.value = res.data.count;
+      finished.value = form.value.pageNum * form.value.pageSize >= total.value;
     }, 800);
   } catch (err) {
     Message.error((err as Error).message);
