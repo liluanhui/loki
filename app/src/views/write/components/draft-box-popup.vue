@@ -19,7 +19,7 @@
               </div>
             </div>
             <div class="right">
-              <bp-button type="secondary" status="danger" size="small">{{ t("common.delete") }}</bp-button>
+              <bp-button type="secondary" status="danger" size="small" @click="handleDelete(v.id)">{{ t("common.delete") }}</bp-button>
             </div>
           </div>
         </vant-list>
@@ -30,10 +30,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Popup, List as VantList, PullRefresh } from "vant";
+import { Popup, List as VantList, PullRefresh, showConfirmDialog } from "vant";
 import "vant/lib/popup/style/index";
 import "vant/lib/list/style/index";
 import "vant/lib/pull-refresh/style/index";
+import "vant/lib/dialog/style/index";
 import { delDraft, findDraftList } from "@loki/odin-api";
 import { DraftListItem } from "@loki/odin/src/types/mail/draft";
 import { useI18n } from "vue-i18n";
@@ -110,18 +111,33 @@ const handleSelect = (id: string) => {
 };
 
 const handleDelete = async (id: string) => {
-  try {
-    const res = await delDraft({ id });
-    if (res.code != 0) {
-      throw new Error(res.msg);
-    }
-    Message.success(res.msg);
-    init();
-    return true;
-  } catch (err) {
-    Message.error((err as Error).message);
-    return false;
-  }
+  showConfirmDialog({
+    message: t("write.editor.confirm_delete"),
+    confirmButtonText: t("common.confirm"),
+    cancelButtonText: t("common.cancel"),
+    confirmButtonColor: "#ff7d00",
+    beforeClose: async () => {
+      try {
+        const res = await delDraft({ id });
+        if (res.code != 0) {
+          throw new Error(res.msg);
+        }
+        for (let i = 0; i < list.value.length; i++) {
+          const element = list.value[i];
+          if (element.id === id) {
+            list.value.splice(i, 1);
+            total.value--;
+            break;
+          }
+        }
+        Message.success(res.msg);
+        return true;
+      } catch (err) {
+        Message.error((err as Error).message);
+        return false;
+      }
+    },
+  });
 };
 
 const show = ref(false);
