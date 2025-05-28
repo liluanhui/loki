@@ -9,7 +9,7 @@
       <div :class="`${clsBlockName}-body`">
         <bp-empty v-if="list.length === 0" />
   
-        <div v-else v-for="v in list" :class="`${clsBlockName}-item`">
+        <div v-else v-for="v in list" class="draft-item">
           <div class="left" @click="handleSelect(v.id)">
             <div class="title">{{ v.title }}</div>
             <div class="remark">

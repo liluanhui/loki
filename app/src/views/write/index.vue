@@ -134,6 +134,7 @@
 
     <!-- 草稿箱 -->
     <draft-box ref="draftBoxRef" @select="onDraftSelect" />
+    <draft-box-popup ref="draftBoxPopupRef" @select="onDraftSelect" />
   </div>
 </template>
 
@@ -146,6 +147,7 @@ import { useUserStore } from "@/stores/useUser";
 import { IconSendPlaneFill, IconSaveLine, IconDraftLine } from "birdpaper-icon";
 import { useWrite } from "@/use/useWrite";
 import draftBox from "./components/draft-box.vue";
+import draftBoxPopup from "./components/draft-box-popup.vue";
 
 defineOptions({ name: "WritePage" });
 const clsBlockName = "write-page";
@@ -172,7 +174,7 @@ const initMobileBar = () => {
         console.log("send");
       },
       openDraftBox: () => {
-        // openDraftBox();
+        openDraftBoxPopup();
       },
     },
   });
@@ -222,6 +224,10 @@ const handleLoginClick = () => {
 };
 
 const draftBoxRef = ref();
+const draftBoxPopupRef = ref();
+const openDraftBoxPopup = () => {
+  draftBoxPopupRef.value.open();
+};
 const openDraftBox = () => {
   draftBoxRef.value.open();
 };
@@ -229,7 +235,6 @@ const onDraftSelect = (id: string) => {
   loadDraft(id).then(() => {
     nextTick(() => {
       editorRef.value?.setContent(form.value.content);
-      editorRef.value?.focus();
     });
   });
 };

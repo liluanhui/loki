@@ -2,6 +2,20 @@
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
 
+.popup-header {
+  @include flex(row, center, center);
+  position: fixed;
+  width: 100%;
+  height: 42px;
+  border-bottom: $borderSize solid $borderColor-2;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gray-8);
+  background-color: var(--gray-0);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
 .draft-box-body {
   height: 600px;
   overflow-y: auto;
@@ -12,7 +26,7 @@
   margin-top: 20px;
 }
 
-.draft-box-item {
+.draft-item {
   @include flex(row, space-between, center);
   width: 100%;
   padding: 0 2px 12px 2px;
@@ -44,7 +58,7 @@
     }
 
     .title {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--gray-9);
       line-height: 1.8;
       font-weight: 500;
@@ -58,7 +72,7 @@
       gap: 8px;
       margin-top: 6px;
       font-size: 12px;
-      color: var(--gray-5);
+      color: var(--gray-4);
       font-weight: 400;
     }
   }
@@ -74,6 +88,26 @@
     .bp-button {
       opacity: 0;
       transition: all 0.2s;
+    }
+  }
+}
+
+.draft-box-popup-body {
+  height: calc(100% - 100px);
+  overflow-y: auto;
+  margin-top: 48px;
+  padding: 0 12px;
+
+  .van-pull-refresh {
+    height: 100%;
+    width: 100%;
+  }
+
+  .draft-item {
+    .right {
+      .bp-button {
+        opacity: 1;
+      }
     }
   }
 }
