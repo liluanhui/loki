@@ -8,7 +8,7 @@ export const MailDraft = {
   RECIPIENT_NAME_LIMIT: "收件人名称过长，不能超过30个字符",
   PLAN_DELIVER_TIME_ERROR: "计划投递时间不能小于当前时间",
   DRAFT_NOT_FOUND: "草稿不存在",
-  DRAFT_DELETE_SUCCESS: "草稿删除成功",
-  DRAFT_UPDATE_SUCCESS: "草稿更新成功",
-  DRAFT_CREATE_SUCCESS: "草稿创建成功",
+  DRAFT_DELETE_SUCCESS: "删除成功",
+  DRAFT_UPDATE_SUCCESS: "保存成功",
+  DRAFT_CREATE_SUCCESS: "保存成功",
 };

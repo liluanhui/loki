@@ -9,6 +9,6 @@ export const MailDraft = {
   PLAN_DELIVER_TIME_ERROR: "The planned delivery time cannot be less than the current time",
   DRAFT_NOT_FOUND: "Draft not found",
   DRAFT_DELETE_SUCCESS: "Draft deleted successfully",
-  DRAFT_UPDATE_SUCCESS: "Draft updated successfully",
-  DRAFT_CREATE_SUCCESS: "Draft created successfully",
+  DRAFT_UPDATE_SUCCESS: "Draft saved successfully",
+  DRAFT_CREATE_SUCCESS: "Draft saved successfully",
 };

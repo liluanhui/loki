@@ -67,7 +67,10 @@ export class DraftController {
       word_count,
     });
 
-    return id;
+    return {
+      data: id,
+      msg: getResponseMsg("MailDraft", "DRAFT_CREATE_SUCCESS", req),
+    };
   }
 
   // Front 编辑草稿
@@ -120,7 +123,10 @@ export class DraftController {
     draft.word_count = word_count;
     await draft.save();
 
-    return id;
+    return {
+      data: id,
+      msg: getResponseMsg("MailDraft", "DRAFT_UPDATE_SUCCESS", req),
+    };
   }
 
   // Front 获取草稿详情
@@ -163,6 +169,10 @@ export class DraftController {
     }
 
     await FpoMailDraft.destroy({ where: { id, uid: req["uid"] } });
-    return getResponseMsg("MailDraft", "DRAFT_DELETE_SUCCESS", req);
+
+    return {
+      data: id,
+      msg: getResponseMsg("MailDraft", "DRAFT_DELETE_SUCCESS", req),
+    };
   }
 }
