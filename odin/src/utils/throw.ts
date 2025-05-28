@@ -25,11 +25,11 @@ export const businessError = (message: string) => {
   throwException(message, HttpStatus.OK);
 };
 
-export const getResponseMsg = (module:string,messageEnum: string, req: Request) => {
-  let lang = req.headers["langs"] || "zh-CN";
+export const getResponseMsg = (module: string, messageEnum: string, req: Request) => {
+  let lang = req.headers["lang"] || "zh_CN";
   // TODO: 这里需要根据目录结构获取支持的语言
-  if (["en", "zh-CN"].indexOf(lang) === -1) {
-    lang = "zh-CN";
+  if (["en", "zh_CN"].indexOf(lang) === -1) {
+    lang = "zh_CN";
   }
 
   const message = require(`../langs/${lang}/index`);

@@ -21,9 +21,12 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("_token");
+    const lang = localStorage.getItem("lang") || "zh-CN";
+
     if (token) {
       config.headers.Authorization = token;
     }
+    config.headers.lang = lang;
     return config;
   },
   (error) => Promise.reject(error)
@@ -33,7 +36,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => (response.status === 200 ? Promise.resolve(response) : Promise.reject(response)),
   (error) => {
-    if(!error.response) {
+    if (!error.response) {
       window.location.href = "/network-error";
       return Promise.reject({ message: "Network error" });
     }

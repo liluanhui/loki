@@ -59,7 +59,7 @@ export const useWrite = () => {
         form.value.id = res.data;
       }
 
-      Message.success("保存成功");
+      Message.success(res.msg);
     } catch (err) {
       Message.error((err as Error).message);
     } finally {
