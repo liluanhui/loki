@@ -1,5 +1,5 @@
 <template>
-  <popup v-model:show="show" position="bottom" :style="{ height: '100%' }" :duration="0.2">
+  <popup v-model:show="show" position="bottom" :style="{ height: '90%' }" round :duration="0.2">
     <div class="popup-header">{{ t("write.editor.draft_box") }} {{ total > 0 ? `(${total})` : "" }}</div>
 
     <div :class="`${clsBlockName}-body`">

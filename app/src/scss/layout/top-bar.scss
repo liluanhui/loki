@@ -101,11 +101,11 @@
 
 @include mobile {
   .top-bar {
-    height: $topBarHeight-moblie;
+    height: $topBarHeight-mobile;
 
     &-inner {
       justify-content: center;
-      height: $topBarHeight-moblie;
+      height: $topBarHeight-mobile;
 
       .the-logo {
         &-img {
