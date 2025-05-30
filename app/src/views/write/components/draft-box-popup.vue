@@ -48,6 +48,7 @@ const clsBlockName = "draft-box-popup";
 
 const emits = defineEmits<{
   (e: "select", id: string): void;
+  (e: "close"): void;
 }>();
 
 const { t, locale } = useI18n();
@@ -107,7 +108,7 @@ const onRefresh = () => {
 
 const handleSelect = (id: string) => {
   emits("select", id);
-  show.value = false;
+  emits("close");
 };
 
 const handleDelete = async (id: string) => {

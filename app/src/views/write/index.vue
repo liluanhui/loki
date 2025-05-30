@@ -134,7 +134,7 @@
 
     <!-- 草稿箱 -->
     <draft-box ref="draftBoxRef" @select="onDraftSelect" />
-    <draft-box-popup ref="draftBoxPopupRef" @select="onDraftSelect" />
+    <draft-box-popup ref="draftBoxPopupRef" @select="onDraftSelect" @close="closeDraftBoxPopup" />
   </div>
 </template>
 
@@ -223,18 +223,20 @@ const handleLoginClick = () => {
   }
 };
 
+// 草稿箱操作
 const draftBoxRef = ref();
 const draftBoxPopupRef = ref();
 const openDraftBoxPopup = () => {
   draftBoxPopupRef.value.open();
   mobileBarCtx?.change("close", {
     events: {
-      close: () => {
-        draftBoxPopupRef.value.close();
-        initMobileBar();
-      },
+      close: () => closeDraftBoxPopup(),
     },
   });
+};
+const closeDraftBoxPopup = () => {
+  draftBoxPopupRef.value.close();
+  initMobileBar();
 };
 const openDraftBox = () => {
   draftBoxRef.value.open();
