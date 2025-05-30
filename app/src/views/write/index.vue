@@ -227,6 +227,14 @@ const draftBoxRef = ref();
 const draftBoxPopupRef = ref();
 const openDraftBoxPopup = () => {
   draftBoxPopupRef.value.open();
+  mobileBarCtx?.change("close", {
+    events: {
+      close: () => {
+        draftBoxPopupRef.value.close();
+        initMobileBar();
+      },
+    },
+  });
 };
 const openDraftBox = () => {
   draftBoxRef.value.open();

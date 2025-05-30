@@ -1,5 +1,5 @@
 <template>
-  <popup v-model:show="show" position="bottom" :style="{ height: '90%' }" round :duration="0.2">
+  <popup v-model:show="show" position="bottom" :style="{ height: '100%' }" :duration="0.2">
     <div class="popup-header">{{ t("write.editor.draft_box") }} {{ total > 0 ? `(${total})` : "" }}</div>
 
     <div :class="`${clsBlockName}-body`">
@@ -116,7 +116,8 @@ const handleDelete = async (id: string) => {
     confirmButtonText: t("common.confirm"),
     cancelButtonText: t("common.cancel"),
     confirmButtonColor: "#ff7d00",
-    beforeClose: async () => {
+  })
+    .then(async () => {
       try {
         const res = await delDraft({ id });
         if (res.code != 0) {
@@ -136,8 +137,8 @@ const handleDelete = async (id: string) => {
         Message.error((err as Error).message);
         return false;
       }
-    },
-  });
+    })
+    .catch(() => {});
 };
 
 const show = ref(false);
@@ -148,5 +149,8 @@ const open = () => {
 
 defineExpose({
   open,
+  close: () => {
+    show.value = false;
+  },
 });
 </script>
