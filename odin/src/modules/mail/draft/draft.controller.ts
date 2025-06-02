@@ -160,9 +160,8 @@ export class DraftController {
   @HttpCode(HttpStatus.OK)
   async delete(@Body() body: { id: string }, @Req() req: Request) {
     const { id } = body;
-    if (!id) {
-      paramsError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
-    }
+    if (!id) paramsError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
+    
     const draft = await FpoMailDraft.findOne({ where: { id, uid: req["uid"] } });
     if (!draft) {
       paramsError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
