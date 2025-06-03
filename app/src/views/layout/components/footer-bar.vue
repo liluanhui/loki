@@ -21,17 +21,19 @@
       <div class="second">
         <span class="link-header">
           邮局数据
-          <bp-tooltip content="投递统计非实时，目前为24h/次" theme="light">
+          <bp-tooltip content="目前统计为实时统计" theme="light">
             <IconInformationLine size="14" />
           </bp-tooltip>
         </span>
 
-        <div class="open-time">未来邮局已营业 <span class="number">206</span> 天</div>
+        <div class="open-time">
+          未来邮局已营业 <span class="number">{{ siteStatistic.operateTime }}</span> 天
+        </div>
         <div class="mail-statistic">
-          <bp-statistic v-model="a" show-separator animation unit="封" font-size="24px">
+          <bp-statistic v-model="siteStatistic.success" show-separator animation unit="封" font-size="24px">
             <template #prefix>已完成投递</template>
           </bp-statistic>
-          <bp-statistic v-model="b" show-separator animation unit="封" font-size="24px">
+          <bp-statistic v-model="siteStatistic.wait" show-separator animation unit="封" font-size="24px">
             <template #prefix>待投递</template>
           </bp-statistic>
         </div>
@@ -46,11 +48,40 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { getStatistic } from "@loki/odin-api/common/index";
+import { Message } from "birdpaper-ui";
+import { StatisticRes } from "@loki/odin/src/types/common";
+import { useStorage } from "@vueuse/core";
 
 defineOptions({ name: "FooterBar" });
 const clsBlockName = "footer-bar";
 
-const a = ref(10244);
-const b = ref(322);
+const siteStatistic = ref<StatisticRes>({
+  operateTime: 0,
+  success: 0,
+  wait: 0,
+});
+
+const appMode = useStorage("app-mode", "pc");
+const initStatistic = async () => {
+  try {
+    const res = await getStatistic();
+    if (res.code != 0) {
+      throw new Error(res.msg);
+    }
+    siteStatistic.value = res.data;
+  } catch (err) {
+    Message.error((err as Error).message);
+  }
+};
+watch(
+  () => appMode.value,
+  () => {
+    if (appMode.value !== "mobile") {
+      initStatistic();
+    }
+  },
+  { immediate: true }
+);
 </script>

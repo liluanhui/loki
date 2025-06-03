@@ -1,6 +1,7 @@
 import { Controller, Get, HttpCode, HttpStatus } from "@nestjs/common";
 import { CommonService } from "./common.service";
 import { Public } from "../auth/auth.decorator";
+import { StatisticRes } from "src/types/common";
 
 @Controller("common")
 export class CommonController {
@@ -10,7 +11,7 @@ export class CommonController {
   @Public()
   @Get("statistic")
   @HttpCode(HttpStatus.OK)
-  async getStatistic() {
+  async getStatistic(): Promise<StatisticRes> {
     const operateTime = this.commonService.getSiteOperationTime();
     const { wait, success } = await this.commonService.getMailCount();
 
