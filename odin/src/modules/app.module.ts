@@ -1,3 +1,4 @@
+import { PublicLetterModule } from "./publicLetter/publicletter.module";
 import { DraftModule } from "./mail/draft/draft.module";
 import { MailModule } from "./mail/mail.module";
 import { UserModule } from "./user/user.module";
@@ -14,6 +15,7 @@ const envPath = `.env.${process.env.NODE_ENV || "development"}`;
 
 @Module({
   imports: [
+    PublicLetterModule,
     DraftModule,
     MailModule,
     UserModule,
