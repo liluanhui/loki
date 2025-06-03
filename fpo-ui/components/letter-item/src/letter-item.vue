@@ -2,12 +2,16 @@
   <div :class="[clsBlockName, `${clsBlockName}-size-${size}`]">
     <div class="header">
       <div class="sender-info">
-        <bp-avatar size="small" :image-url="_avatar"></bp-avatar>
+        <bp-avatar size="small" :image-url="_avatar">
+          <template #error>
+            {{ nickName }}
+          </template>
+        </bp-avatar>
         <div class="sender-name">
           <span class="sender-name-inner">{{ _niclkName || "--" }}</span>
         </div>
       </div>
-      <div v-if="size !== 'small'" class="time-ago">{{ createdAt || "--" }}</div>
+      <div v-if="size !== 'small'" class="time-ago" :title="createdAt">{{ _createdAt || "--" }}</div>
     </div>
 
     <div class="body">
@@ -96,7 +100,12 @@ const _recipientName = computed(() => {
 
 // 投递时间处理
 const _deliveryTime = computed(() => {
-  return props.deliveryTime ? dayjs().to(dayjs(props.deliveryTime), true) : "";
+  return props.deliveryTime ? dayjs(props.createdAt).to(dayjs(props.deliveryTime), true) : "";
+});
+
+// 创建时间处理
+const _createdAt = computed(() => {
+  return props.createdAt ? dayjs().to(dayjs(props.createdAt)) : "";
 });
 
 const _letterTo = computed(() => {

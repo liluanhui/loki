@@ -37,7 +37,7 @@ $normalHeight: 210px;
           font-weight: 500;
           color: var(--gray-9);
           letter-spacing: 0.5px;
-          width: calc($normalWidth - 80px);
+          width: calc($normalWidth - 160px);
           @extend .text-ellipsis;
         }
       }
@@ -82,11 +82,12 @@ $normalHeight: 210px;
 
     .public-no {
       &-inner {
-        font-size: 12px;
-        color: var(--gray-6);
+        font-size: 11px;
+        color: var(--gray-4);
         font-weight: 500;
         letter-spacing: 1px;
         padding-left: 4px;
+        text-transform: uppercase;
         @extend .font-quick;
       }
     }
