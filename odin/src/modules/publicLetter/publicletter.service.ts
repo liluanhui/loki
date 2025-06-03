@@ -18,7 +18,8 @@ export class PublicLetterService {
     offset: number,
     limit: number,
     query: PublicLetterSearchParams,
-    uid?: string
+    uid?: string,
+    isSelf: boolean = false
   ): Promise<{ count: number; list: FpoPublicMail[] }> {
     const attributes = [
       "id",
@@ -42,13 +43,12 @@ export class PublicLetterService {
         }
       : {};
     if (query.public_type) where["public_type"] = query.public_type;
-    if (query.fpo_no) where["fpo_no"] = {[Op.in]: query.fpo_no.split(",")};
+    if (query.fpo_no) where["fpo_no"] = { [Op.in]: query.fpo_no.split(",") };
     if (query.recipient_type) where["recipient_type"] = query.recipient_type;
-    if (query.sender_id) where["sender_Id"] = query.sender_id;
+    if (query.sender_id || isSelf) where["sender_Id"] = isSelf ? uid : query.sender_id;
     if (query.startTime && query.endTime) {
       where["deliver_at"] = { [Op.between]: [query.startTime, query.endTime] };
     }
-    console.log('where: ', where);
 
     let { count, rows: list } = await FpoPublicMail.findAndCountAll({
       where,
@@ -60,7 +60,7 @@ export class PublicLetterService {
       include: [{ model: FpoMailContent, as: "content", attributes: [] }],
     });
 
-    // uid 评论点赞处理
+    // TODO uid 评论点赞处理
 
     return { count, list: list as unknown as any[] };
   }
@@ -100,7 +100,7 @@ export class PublicLetterService {
       throw new Error("公开信不存在或已被删除");
     }
 
-    // uid 评论点赞处理
+    // TODO uid 评论点赞处理
 
     return letter;
   }
