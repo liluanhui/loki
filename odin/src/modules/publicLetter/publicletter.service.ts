@@ -29,8 +29,10 @@ export class PublicLetterService {
       "recipient_email",
       "content_id",
       [col("content.title"), "title"],
+      [col("content.word_count"), "word_count"],
       "deliver_at",
       "comments",
+      "likes",
       "created_at",
     ] as string[];
 
@@ -40,11 +42,13 @@ export class PublicLetterService {
         }
       : {};
     if (query.public_type) where["public_type"] = query.public_type;
+    if (query.fpo_no) where["fpo_no"] = {[Op.in]: query.fpo_no.split(",")};
     if (query.recipient_type) where["recipient_type"] = query.recipient_type;
     if (query.sender_id) where["sender_Id"] = query.sender_id;
     if (query.startTime && query.endTime) {
       where["deliver_at"] = { [Op.between]: [query.startTime, query.endTime] };
     }
+    console.log('where: ', where);
 
     let { count, rows: list } = await FpoPublicMail.findAndCountAll({
       where,
@@ -82,8 +86,10 @@ export class PublicLetterService {
         "content_id",
         [col("content.title"), "title"],
         [col("content.content"), "content"],
+        [col("content.word_count"), "word_count"],
         "deliver_at",
         "comments",
+        "likes",
         "created_at",
       ],
       include: [{ model: FpoMailContent, as: "content", attributes: [] }],

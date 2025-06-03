@@ -92,6 +92,13 @@ export class FpoPublicMail extends Model {
   comments: number;
 
   @Column({
+    type: DataType.INTEGER,
+    comment: "点赞数",
+    allowNull: false,
+  })
+  likes: number;
+
+  @Column({
     type: DataType.DATE,
     comment: "删除时间",
   })

@@ -1,5 +1,9 @@
 export class PublicLetterSearchParams {
   /**
+   * 邮件单号
+   */
+  fpo_no?: string;
+  /**
    * 投递结束时间
    */
   endTime?: string;
