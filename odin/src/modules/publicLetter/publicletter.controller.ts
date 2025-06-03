@@ -1,9 +1,10 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Req } from "@nestjs/common";
 import { PublicLetterService } from "./publicletter.service";
 import { PublicLetterSearchParams } from "src/types/publicLetter";
-import { getResponseMsg, paramsError } from "src/utils/throw";
+import { businessError, getResponseMsg, paramsError } from "src/utils/throw";
 import { handlePageLimit } from "src/utils/helper";
 import { Public } from "../auth/auth.decorator";
+import { FpoPublicMail } from "src/models/fpo_public_mail.model";
 
 @Controller("publicLetter")
 export class PublicLetterController {
@@ -30,6 +31,10 @@ export class PublicLetterController {
   async detail(@Param("id") id: string, @Req() req: Request) {
     const letter = await this.publicLetterService.queryDetail(id, req["uid"]);
 
+    if (!letter) {
+      businessError(getResponseMsg("PublicLetterIndex", "LETTER_NOT_FOUND", req));
+    }
+
     return letter;
   }
 
@@ -51,6 +56,18 @@ export class PublicLetterController {
   @HttpCode(HttpStatus.OK)
   async delete(@Body() body: { id: string }, @Req() req: Request) {
     const { id } = body;
-    if (!id) paramsError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
+    if (!id) paramsError(getResponseMsg("PublicLetterIndex", "LETTER_NOT_FOUND", req));
+
+    const letter = await FpoPublicMail.findOne({ where: { id, sender_id: req["uid"] } });
+    if (!letter) {
+      businessError(getResponseMsg("PublicLetterIndex", "LETTER_NOT_FOUND", req));
+    }
+
+    await letter.destroy();
+
+    return {
+      data: id,
+      msg: getResponseMsg("PublicLetterIndex", "LETTER_DELETE_SUCCESS", req),
+    };
   }
 }

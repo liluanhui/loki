@@ -2,7 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Query, Req } 
 import { FpoMailDraft } from "src/models/fpo_mail_draft.model";
 import { DraftForm } from "src/types/mail/draft";
 import { handlePageLimit, isEmail, randomString } from "src/utils/helper";
-import { getResponseMsg, paramsError } from "src/utils/throw";
+import { businessError, getResponseMsg, paramsError } from "src/utils/throw";
 import { DraftService } from "./draft.service";
 
 @Controller("mail/draft")
@@ -164,10 +164,10 @@ export class DraftController {
     
     const draft = await FpoMailDraft.findOne({ where: { id, uid: req["uid"] } });
     if (!draft) {
-      paramsError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
+      businessError(getResponseMsg("MailDraft", "DRAFT_NOT_FOUND", req));
     }
 
-    await FpoMailDraft.destroy({ where: { id, uid: req["uid"] } });
+    await draft.destroy();
 
     return {
       data: id,

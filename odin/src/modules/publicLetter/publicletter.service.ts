@@ -96,10 +96,6 @@ export class PublicLetterService {
       raw: true,
     });
 
-    if (!letter) {
-      throw new Error("公开信不存在或已被删除");
-    }
-
     // TODO uid 评论点赞处理
 
     return letter;
