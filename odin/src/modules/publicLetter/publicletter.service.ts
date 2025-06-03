@@ -55,7 +55,7 @@ export class PublicLetterService {
       attributes,
       offset,
       limit,
-      order: [[query.sort, "DESC"]],
+      order: [[query.sort || "created_at", "ASC"]],
       raw: true,
       include: [{ model: FpoMailContent, as: "content", attributes: [] }],
     });
