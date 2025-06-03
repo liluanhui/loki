@@ -28,7 +28,7 @@ export class FpoPublicMail extends Model {
     allowNull: false,
     defaultValue: "full",
   })
-  publich_type: string;
+  public_type: string;
 
   @Column({
     type: DataType.STRING(11),
