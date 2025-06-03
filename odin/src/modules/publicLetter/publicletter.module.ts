@@ -4,9 +4,10 @@ import { PublicLetterService } from "./publicletter.service";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { FpoPublicMail } from "src/models/fpo_public_mail.model";
 import { FpoPublicMailComment } from "src/models/fpo_public_mail_comment.model";
+import { FpoMailContent } from "src/models/fpo_mail_content.model";
 
 @Module({
-  imports: [SequelizeModule.forFeature([FpoPublicMail, FpoPublicMailComment])],
+  imports: [SequelizeModule.forFeature([FpoPublicMail, FpoPublicMailComment, FpoMailContent])],
   controllers: [PublicLetterController],
   providers: [PublicLetterService],
 })

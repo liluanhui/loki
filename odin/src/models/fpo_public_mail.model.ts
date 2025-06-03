@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { FpoMailContent } from "./fpo_mail_content.model";
 
 @Table({
   tableName: "fpo_public_mail",
@@ -72,6 +73,9 @@ export class FpoPublicMail extends Model {
     allowNull: false,
   })
   content_id: string;
+
+  @BelongsTo(() => FpoMailContent, 'content_id')
+  content: FpoMailContent;
 
   @Column({
     type: DataType.DATE,

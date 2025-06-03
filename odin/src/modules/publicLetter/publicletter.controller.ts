@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus, Query, Req } from "@nestjs/common";
+import { Controller, Get, HttpCode, HttpStatus, Param, Query, Req } from "@nestjs/common";
 import { PublicLetterService } from "./publicletter.service";
 import { PublicLetterSearchParams } from "src/types/publicLetter";
 import { paramsError } from "src/utils/throw";
@@ -9,7 +9,7 @@ import { Public } from "../auth/auth.decorator";
 export class PublicLetterController {
   constructor(private publicLetterService: PublicLetterService) {}
 
-  // Front 查询公开信列表
+  // Front 获取公开信列表
   @Public()
   @Get("list")
   @HttpCode(HttpStatus.OK)
@@ -21,5 +21,15 @@ export class PublicLetterController {
     const { count, list } = await this.publicLetterService.queryList(offset, limit, query, req["uid"]);
 
     return { count, list, pageNum, pageSize };
+  }
+
+  // Front 获取公开信详情
+  @Public()
+  @Get("detail/:id")
+  @HttpCode(HttpStatus.OK)
+  async detail(@Param("id") id: string, @Req() req: Request) {
+    const letter = await this.publicLetterService.queryDetail(id, req["uid"]);
+
+    return letter;
   }
 }

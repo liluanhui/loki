@@ -1,10 +1,25 @@
 import { Injectable } from "@nestjs/common";
+import { col, Op } from "sequelize";
+import { FpoMailContent } from "src/models/fpo_mail_content.model";
 import { FpoPublicMail } from "src/models/fpo_public_mail.model";
 import { PublicLetterSearchParams } from "src/types/publicLetter";
 
 @Injectable()
 export class PublicLetterService {
-  async queryList(offset: number, limit: number, query: PublicLetterSearchParams, uid: string): Promise<{ count: number; list: any[] }> {
+  /**
+   * 查询公开信列表
+   * @param offset
+   * @param limit
+   * @param query
+   * @param uid
+   * @returns
+   */
+  async queryList(
+    offset: number,
+    limit: number,
+    query: PublicLetterSearchParams,
+    uid?: string
+  ): Promise<{ count: number; list: FpoPublicMail[] }> {
     const attributes = [
       "id",
       "fpo_no",
@@ -13,16 +28,23 @@ export class PublicLetterService {
       "recipient_type",
       "recipient_email",
       "content_id",
+      [col("content.title"), "title"],
       "deliver_at",
       "comments",
       "created_at",
-    ];
+    ] as string[];
 
-    let where = {};
+    let where = query.recipient
+      ? {
+          [Op.or]: [{ recipient_email: query.recipient }, { recipient_name: { [Op.like]: `%${query.recipient}%` } }],
+        }
+      : {};
     if (query.public_type) where["public_type"] = query.public_type;
     if (query.recipient_type) where["recipient_type"] = query.recipient_type;
     if (query.sender_id) where["sender_Id"] = query.sender_id;
-    if (query.recipient) where["recipient"] = `%${query.recipient}%`;
+    if (query.startTime && query.endTime) {
+      where["deliver_at"] = { [Op.between]: [query.startTime, query.endTime] };
+    }
 
     let { count, rows: list } = await FpoPublicMail.findAndCountAll({
       where,
@@ -30,8 +52,50 @@ export class PublicLetterService {
       offset,
       limit,
       order: [[query.sort, "DESC"]],
+      raw: true,
+      include: [{ model: FpoMailContent, as: "content", attributes: [] }],
     });
 
+    // uid 评论点赞处理
+
     return { count, list: list as unknown as any[] };
+  }
+
+  /**
+   * 查询公开信详情
+   * @param id
+   * @param uid
+   * @returns
+   */
+  async queryDetail(id: string, uid?: string): Promise<FpoPublicMail> {
+    const letter = await FpoPublicMail.findOne({
+      where: { id },
+      attributes: [
+        "id",
+        "fpo_no",
+        "public_type",
+        "sender_id",
+        "sender_name",
+        "recipient_type",
+        "recipient_email",
+        "recipient_name",
+        "content_id",
+        [col("content.title"), "title"],
+        [col("content.content"), "content"],
+        "deliver_at",
+        "comments",
+        "created_at",
+      ],
+      include: [{ model: FpoMailContent, as: "content", attributes: [] }],
+      raw: true,
+    });
+
+    if (!letter) {
+      throw new Error("公开信不存在或已被删除");
+    }
+
+    // uid 评论点赞处理
+
+    return letter;
   }
 }
