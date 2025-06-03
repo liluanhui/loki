@@ -1,7 +1,7 @@
 <template>
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-container`">
-      <div :class="`${clsBlockName}-option`"></div>
+      <!-- <div :class="`${clsBlockName}-option`"></div> -->
 
       <bp-spin :spinning="loading" :description="t('write.editor.loading_text')">
         <div :class="`${clsBlockName}-editor`">

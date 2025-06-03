@@ -1,14 +1,18 @@
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 @use "@loki/fpo-ui/style/search-block.scss" as *;
-@import "./draft-box.scss";
+@use "./draft-box.scss";
 
 $labelWidth: 74px;
 
 .write-page {
   &-container {
-    @include flex(row, flex-start, flex-start);
+    @include flex(row, center, flex-start);
     gap: 20px;
+  }
+
+  .bp-spin {
+    width: 80%;
   }
 
   &-editor {
@@ -142,6 +146,10 @@ $labelWidth: 74px;
 
 @include mobile {
   .write-page {
+    .bp-spin {
+      width: 100%;
+    }
+
     &-option {
       display: none;
     }
