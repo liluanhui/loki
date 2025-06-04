@@ -41,7 +41,7 @@
 import { ref } from "vue";
 import { LoginForm } from "@loki/odin/src/types/auth";
 import { useUserStore } from "@/stores/useUser";
-import { Message } from "birdpaper-ui";
+import { msg } from "@loki/fpo-ui";
 
 defineOptions({ name: "LoginIndex" });
 const clsBlockName = "login-index";
@@ -56,19 +56,20 @@ const form = ref<LoginForm>(new LoginForm());
 
 const useStore = useUserStore();
 const handleLogin = async () => {
-  try {
-    loading.value = true;
-    await useStore.handleLogin(form.value);
-    emits("success");
-    return Message.success("登录成功");
-  } catch (err) {
-    setTimeout(() => {
-      Message.error((err as Error).message);
-    }, 400);
-  } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 400);
-  }
+  msg.success();
+  // try {
+  //   loading.value = true;
+  //   await useStore.handleLogin(form.value);
+  //   emits("success");
+  //   return Message.success("登录成功");
+  // } catch (err) {
+  //   setTimeout(() => {
+  //     Message.error((err as Error).message);
+  //   }, 400);
+  // } finally {
+  //   setTimeout(() => {
+  //     loading.value = false;
+  //   }, 400);
+  // }
 };
 </script>

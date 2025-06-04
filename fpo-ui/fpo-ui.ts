@@ -8,3 +8,4 @@ export * from "./components/radio-bar";
 export * from "./components/letter-item";
 export * from "./components/public-type-selector";
 export * from "./components/yuque-editor";
+export * from "./components/fpo-message";
