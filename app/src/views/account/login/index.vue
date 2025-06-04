@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div :class="`${clsBlockName}-option`">
+    <div v-if="type === 'modal'" :class="`${clsBlockName}-option`">
       <div class="bg"></div>
     </div>
   </div>
@@ -41,6 +41,9 @@ import { Message } from "birdpaper-ui";
 defineOptions({ name: "LoginIndex" });
 const clsBlockName = "login-index";
 
+const props = defineProps({
+  type: { type: String, default: "modal" },
+});
 const emits = defineEmits(["success"]);
 
 const loading = ref(false);

@@ -3,7 +3,7 @@ import { generateTitle } from "./utils";
 import mzzx20250819 from "@/views/activity/20250819/index.vue";
 
 const list: { path: string; name: string; component: any; titleKey: string }[] = [
-  { path: "20250819", name: "public", component: mzzx20250819, titleKey: "mzzx20250819" },
+  { path: "20250819", name: "mzzx20250819", component: mzzx20250819, titleKey: "mzzx20250819" },
 ];
 
 const routes = [
