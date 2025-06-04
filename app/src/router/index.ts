@@ -4,6 +4,7 @@ import publicLetter from "@/views/public/index.vue";
 import write from "@/views/write/index.vue";
 import personal from "@/views/personal/index.vue";
 import test from "@/views/test/index.vue";
+import activity from "@/views/activity/index.vue";
 import Layout from "@/views/layout/index";
 import { useStorage } from "@vueuse/core";
 import NProgress from "nprogress";
@@ -22,6 +23,7 @@ const routeName = {
     tool: "工具箱",
     about: "关于",
     personal: "个人中心",
+    activity: "活动",
   },
   en: {
     home: "Home",
@@ -30,6 +32,7 @@ const routeName = {
     tool: "Toolbox",
     about: "About",
     personal: "Personal Center",
+    activity: "Activity",
   },
 };
 
@@ -39,21 +42,32 @@ const generateTitle = (key: keyof (typeof routeName)["zh_CN"]) => {
 };
 
 // 路由配置数组
-const routeConfig: { path: string; name: string; component: any; titleKey: "home" | "public" | "write" | "tool" | "about" | "personal" }[] =
-  [
-    { path: "/", name: "home", component: home, titleKey: "home" },
-    { path: "/public", name: "public", component: publicLetter, titleKey: "public" },
-    { path: "/write", name: "write", component: write, titleKey: "write" },
-    { path: "/personal", name: "personal", component: personal, titleKey: "personal" },
-    { path: "/test", name: "test", component: test, titleKey: "home" }, // 示例：复用 home 的标题
-  ];
+const appRoutes: { path: string; name: string; component: any; titleKey: "home" | "public" | "write" | "tool" | "about" | "personal" }[] = [
+  { path: "/", name: "home", component: home, titleKey: "home" },
+  { path: "/public", name: "public", component: publicLetter, titleKey: "public" },
+  { path: "/write", name: "write", component: write, titleKey: "write" },
+  { path: "/personal", name: "personal", component: personal, titleKey: "personal" },
+  { path: "/test", name: "test", component: test, titleKey: "home" }, // 示例：复用 home 的标题
+];
+
+// 独立路由
+const ownRoutes: { path: string; name: string; component: any; titleKey?: string; meta?: { title: string } }[] = [
+  {
+    path: "/a",
+    name: "activity",
+    component: activity,
+    meta: {
+      title: generateTitle("activity"),
+    },
+  },
+];
 
 // 动态生成 routes
 const routes = [
   {
     path: "/",
     component: Layout,
-    children: routeConfig.map((route) => ({
+    children: appRoutes.map((route) => ({
       path: route.path,
       name: route.name,
       component: route.component,
@@ -67,7 +81,7 @@ const routes = [
 const router = createRouter({
   // @ts-ignore
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes,
+  routes: [...routes, ...ownRoutes],
 });
 
 router.beforeEach(async (to: RouteLocationNormalized, _: RouteLocationNormalized, next: any) => {
