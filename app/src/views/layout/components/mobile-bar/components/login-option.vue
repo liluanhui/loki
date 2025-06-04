@@ -1,9 +1,9 @@
 <template>
   <div :class="`${clsBlockName}`">
-    <div :class="`${clsBlockName}-btn-group`">
+    <div :class="`${clsBlockName}-btn-group`" style="width: 100%;">
       <bp-button :icon="IconCloseFill" type="plain" shape="circle" @click="handleCancle"> </bp-button>
-      <bp-button type="plain" shape="round">注册</bp-button>
-      <bp-button shape="round">登录</bp-button>
+      <bp-button type="dashed" shape="round">注册</bp-button>
+      <bp-button full shape="round">登录</bp-button>
     </div>
   </div>
 </template>

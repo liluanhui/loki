@@ -42,7 +42,7 @@ watch(
       write: "80%",
       confirm: "max-content",
       close: "max-content",
-      loginOption: "max-content",
+      loginOption: "260px",
     };
 
     setTimeout(() => {

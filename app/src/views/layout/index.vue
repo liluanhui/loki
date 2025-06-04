@@ -8,7 +8,7 @@
     <mobile-bar ref="mobileBarRef" :type="mobileBarType" />
 
     <!-- 全局登录弹窗 -->
-    <login-modal ref="loginModalRef"></login-modal>
+    <app-login ref="appLoginRef"></app-login>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ import footerBar from "./components/footer-bar.vue";
 import mobileBar from "./components/mobile-bar/index.vue";
 import { provide, ref, watchEffect } from "vue";
 import { useRef } from "@loki/fpo-ui/use/useCompRef";
-import loginModal from "@/views/account/login/login-modal.vue";
+import appLogin from "@/views/account/login/app-login.vue";
 import { useStorage, useWindowSize } from "@vueuse/core";
 
 const { width } = useWindowSize();
@@ -35,9 +35,9 @@ watchEffect(() => {
 });
 
 // 全局登录弹窗
-const loginModalRef = useRef(loginModal);
+const appLoginRef = useRef(appLogin);
 provide("account", {
-  login: () => loginModalRef.value.open(),
+  login: () => appLoginRef.value.open(),
 });
 
 // 移动端导航栏
@@ -51,8 +51,8 @@ const lastMobileBar = ref({
 provide("mobile-bar", {
   change: (type: string, data: { events: any; props?: any } = { events: null, props: {} }) => {
     lastMobileBar.value.type = mobileBarType.value;
-    lastMobileBar.value.events = mobileBarRef.value._events || null;
-    lastMobileBar.value.props = mobileBarRef.value._props || {};
+    lastMobileBar.value.events = mobileBarRef.value?._events || null;
+    lastMobileBar.value.props = mobileBarRef.value?._props || {};
 
     mobileBarType.value = type;
 
