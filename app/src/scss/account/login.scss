@@ -13,7 +13,7 @@
 }
 
 .login-popup {
-  padding: 0 20px 24px 20px;
+  padding: 0 32px 24px 32px;
 
   &-header {
     @include flex(row, center, center);
@@ -38,20 +38,36 @@
       }
     }
   }
+
+  &-other {
+    margin-top: 54px;
+    @include flex(column, center, center);
+
+    label {
+      font-size: 12px;
+      color: var(--bp-gray-4);
+      letter-spacing: 0.4px;
+      margin-bottom: 16px;
+    }
+
+    .thrid-login-list {
+      .bp-icon {
+        fill: var(--brand-6);
+      }
+    }
+  }
 }
 
 .login-index {
   @include flex(row, space-between, center);
 
   &-header {
-    font-size: 14px;
-    color: var(--bp-gray-8);
-    font-weight: 600;
+    @include flex(row, center, center);
+    margin: 12px 0 30px 0;
   }
 
   &-form {
-    flex: 5;
-    padding-right: 24px;
+    flex: 1;
 
     &-item {
       @include flex(row, flex-start, center);
@@ -109,20 +125,6 @@
       .bp-button {
         font-size: 14px;
       }
-    }
-  }
-
-  &-option {
-    @include flex(row, center, center);
-    flex: 4;
-    border-left: $borderSize solid $borderColor-2;
-    padding-left: 24px;
-
-    .bg {
-      width: 100%;
-      height: 218.5px;
-      border-radius: 8px;
-      background-color: var(--brand-2);
     }
   }
 }

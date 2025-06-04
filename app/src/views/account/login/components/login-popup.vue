@@ -21,15 +21,15 @@
         </div>
         <div :class="`${clsBlockName}-form-item`">
           <div :class="`${clsBlockName}-form-item-content`">
-            <bp-button full>登录</bp-button>
+            <bp-button full :loading :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
           </div>
         </div>
-        <!-- <div :class="`${clsBlockName}-form-item `">
-          <label for="">其它登录：</label>
+        <div :class="`${clsBlockName}-other `">
+          <label for="">其它登录</label>
           <div class="thrid-login-list">
-            <IconGithubFill size="22" />
+            <IconGithubFill size="34" />
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </popup>

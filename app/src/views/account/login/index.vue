@@ -1,7 +1,10 @@
 <template>
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-form`">
-      <div :class="`${clsBlockName}-header`">账号密码登录</div>
+      <div :class="`${clsBlockName}-header`">
+        <!-- 账号密码登录 -->
+        <TheLogo />
+      </div>
       <div :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
           <bp-input v-model="form.uid" size="large" placeholder="UID / 邮箱 / 手机号" clearable />
@@ -25,9 +28,6 @@
           <IconGithubFill size="22" />
         </div>
       </div>
-    </div>
-    <div v-if="type === 'modal'" :class="`${clsBlockName}-option`">
-      <div class="bg"></div>
     </div>
   </div>
 </template>
