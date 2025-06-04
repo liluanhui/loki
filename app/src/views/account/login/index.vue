@@ -2,7 +2,6 @@
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-form`">
       <div :class="`${clsBlockName}-header`">
-        <!-- 账号密码登录 -->
         <TheLogo />
       </div>
       <div :class="`${clsBlockName}-form-item`">
@@ -20,12 +19,18 @@
       </div>
       <div v-if="type === 'modal'" :class="`${clsBlockName}-form-item btn-item`">
         <bp-button type="plain" size="large" full>注册</bp-button>
-        <bp-button full size="large" :loading :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
+        <bp-button full size="large" :loading :disabled="!form.uid || !form.password"
+          @click="handleLogin">登录</bp-button>
       </div>
-      <div :class="`${clsBlockName}-form-item `">
-        <label for="">其它登录：</label>
+      <div v-else :class="`${clsBlockName}-form-item`">
+        <div :class="`${clsBlockName}-form-item-content`">
+          <bp-button full :loading :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
+        </div>
+      </div>
+      <div :class="`${clsBlockName}-other`">
+        <label for="">其它登录</label>
         <div class="thrid-login-list">
-          <IconGithubFill size="22" />
+          <IconGithubFill size="34" />
         </div>
       </div>
     </div>

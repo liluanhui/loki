@@ -9,52 +9,21 @@
   letter-spacing: 2px;
   color: var(--bp-gray-3);
   font-weight: thin;
+  transform: scale(0.8);
   @extend .no-select;
 }
 
 .login-popup {
   padding: 0 32px 24px 32px;
 
-  &-header {
-    @include flex(row, center, center);
-    margin: 32px 0;
+  div[class*="-header"] {
+    margin: 32px 0 32px 0;
   }
 
-  &-form {
-    &-item {
-      margin-bottom: 16px;
-
-      &-content {
-        .forgot-psw {
-          @include flex(row, flex-end, center);
-          margin-top: 6px;
-        }
-      }
-
-      .bp-input,
-      .bp-button {
-        height: 40px;
-        border-radius: 8px;
-      }
-    }
-  }
-
-  &-other {
-    margin-top: 54px;
-    @include flex(column, center, center);
-
-    label {
-      font-size: 12px;
-      color: var(--bp-gray-4);
-      letter-spacing: 0.4px;
-      margin-bottom: 16px;
-    }
-
-    .thrid-login-list {
-      .bp-icon {
-        fill: var(--brand-6);
-      }
-    }
+  .bp-input,
+  .bp-button {
+    height: 42px;
+    border-radius: 8px;
   }
 }
 
@@ -124,6 +93,32 @@
 
       .bp-button {
         font-size: 14px;
+      }
+    }
+  }
+
+  &-other {
+    margin-top: 48px;
+    @include flex(column, center, center);
+
+    label {
+      font-size: 12px;
+      color: var(--bp-gray-4);
+      letter-spacing: 0.4px;
+      margin-bottom: 16px;
+    }
+
+    .thrid-login-list {
+      .bp-icon {
+        fill: var(--brand-6);
+        cursor: pointer;
+        opacity: 1;
+        transition: all 0.2s;
+
+        &:hover {
+          opacity: .6;
+          transition: all 0.2s;
+        }
       }
     }
   }
