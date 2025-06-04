@@ -1,0 +1,9 @@
+@use "@loki/fpo-ui/style/common/design.scss" as *;
+@use "@loki/fpo-ui/style/common/mixins.scss" as *;
+
+.activity-page {
+  max-width: 640px;
+  background-color: var(--gray-0);
+  height: 100%;
+  margin: 0 auto;
+}
