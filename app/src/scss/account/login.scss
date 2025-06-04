@@ -12,6 +12,10 @@
   @extend .no-select;
 }
 
+.login-popup {
+  padding: 12px;
+}
+
 .login-index {
   @include flex(row, space-between, center);
 

@@ -43,13 +43,29 @@ provide("account", {
 // 移动端导航栏
 const mobileBarRef = useRef(mobileBar);
 const mobileBarType = ref("menu");
+const lastMobileBar = ref({
+  type: "menu",
+  events: null,
+  props: {},
+});
 provide("mobile-bar", {
   change: (type: string, data: { events: any; props?: any } = { events: null, props: {} }) => {
+    lastMobileBar.value.type = mobileBarType.value;
+    lastMobileBar.value.events = mobileBarRef.value._events || null;
+    lastMobileBar.value.props = mobileBarRef.value._props || {};
+
     mobileBarType.value = type;
 
     if (mobileBarRef.value) {
       mobileBarRef.value._events = data.events;
       mobileBarRef.value._props = data.props;
+    }
+  },
+  reset: () => {
+    mobileBarType.value = lastMobileBar.value.type;
+    if (mobileBarRef.value) {
+      mobileBarRef.value._events = lastMobileBar.value.events;
+      mobileBarRef.value._props = lastMobileBar.value.props;
     }
   },
 });

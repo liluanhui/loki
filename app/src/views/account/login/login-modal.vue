@@ -3,14 +3,16 @@
     <login-index type="modal" @success="close"></login-index>
     <div class="login-modal-footer-info">F.P.O | 未来邮局</div>
   </bp-modal>
-  
-  <popup v-model:show="popupShow" position="bottom" :style="{ height: '80%' }" :duration="0.2" round safe-area-inset-bottom @close="close">
-    <login-index type="popup" @success="close"></login-index>
+
+  <popup v-model:show="popupShow" position="bottom" :style="{ height: '72%' }" :duration="0.2" round safe-area-inset-bottom @close="close">
+    <div class="login-popup">
+      <login-index type="popup" @success="close"></login-index>
+    </div>
   </popup>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import loginIndex from "./index.vue";
 import { useStorage } from "@vueuse/core";
 import { Popup } from "vant";
@@ -27,9 +29,18 @@ const appMode = useStorage("app-mode", "pc");
 const modalShow = ref<boolean>(false);
 const popupShow = ref<boolean>(false);
 
+const mobileBarCtx: any = inject("mobile-bar");
 const open = () => {
   if (appMode.value === "mobile") {
     popupShow.value = true;
+    mobileBarCtx?.change("loginOption", {
+      events: {
+        close: () => {
+          popupShow.value = false;
+          mobileBarCtx?.reset();
+        },
+      },
+    });
     return;
   }
   modalShow.value = true;

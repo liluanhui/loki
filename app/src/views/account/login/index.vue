@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div :class="`${clsBlockName}-form-item btn-item`">
+      <div v-if="type === 'modal'" :class="`${clsBlockName}-form-item btn-item`">
         <bp-button type="plain" size="large" full>注册</bp-button>
         <bp-button full size="large" :loading :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
       </div>
