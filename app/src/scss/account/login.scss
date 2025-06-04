@@ -13,7 +13,31 @@
 }
 
 .login-popup {
-  padding: 12px;
+  padding: 0 20px 24px 20px;
+
+  &-header {
+    @include flex(row, center, center);
+    margin: 32px 0;
+  }
+
+  &-form {
+    &-item {
+      margin-bottom: 16px;
+
+      &-content {
+        .forgot-psw {
+          @include flex(row, flex-end, center);
+          margin-top: 6px;
+        }
+      }
+
+      .bp-input,
+      .bp-button {
+        height: 40px;
+        border-radius: 8px;
+      }
+    }
+  }
 }
 
 .login-index {
