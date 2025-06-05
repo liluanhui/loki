@@ -11,6 +11,7 @@ import { IS_PUBLIC_KEY } from './auth.decorator';
 import { Reflector } from '@nestjs/core';
 import { aesDecryptHex } from 'src/utils/encrypt';
 import { ConfigService } from '@nestjs/config';
+import { getResponseMsg } from 'src/utils/throw';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -33,7 +34,7 @@ export class AuthGuard implements CanActivate {
     try {
       const token = this.extractTokenFromHeader(request);
       if (!token) {
-        throw new HttpException('请先登录', 401);
+        throw new HttpException(getResponseMsg("AuthIndex", "USER_NOT_LOGIN", request), 401);
       }
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
@@ -41,7 +42,7 @@ export class AuthGuard implements CanActivate {
 
       request['uid'] = payload.uid;
     } catch {
-      throw new HttpException('登录失效', 401);
+      throw new HttpException(getResponseMsg("AuthIndex", "USER_LOGIN_EXPIRED", request), 401);
     }
     return true;
   }
