@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { useStorage } from "@vueuse/core";
 import detailModal from "./components/detail-modal.vue";
-import { useRef } from "use/useCompRef";
+import { useRef } from "../../../use/useCompRef";
 
 defineOptions({ name: "LetterDetail" });
 const clsBlockName = "letter-detail";

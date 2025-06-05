@@ -1,5 +1,5 @@
 <template>
-  <bp-modal v-model="modalShow" width="320px" hide-footer hide-header>
+  <bp-modal v-model="modalShow" width="1100px" hide-footer hide-header>
   </bp-modal>
 </template>
 
