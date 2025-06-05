@@ -9,6 +9,7 @@ import {
   LetterItem,
   PublicTypeSelector,
   YuqueEditor,
+  LetterDetail,
 } from "./fpo-ui";
 
 export default [
@@ -22,4 +23,5 @@ export default [
   LetterItem,
   PublicTypeSelector,
   YuqueEditor,
+  LetterDetail,
 ];

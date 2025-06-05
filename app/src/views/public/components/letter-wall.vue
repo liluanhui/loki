@@ -20,12 +20,16 @@
       :createdAt="item.created_at"
       :type="item.recipient_type"
       :likes="item.likes"
-      :comments="item.comments" />
+      :comments="item.comments"
+      @click="onClick(item.id)" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { PropType } from "vue";
+
+defineOptions({ name: "LetterWall" });
+const clsBlockName = "letter-wall";
 
 const props = defineProps({
   list: {
@@ -33,7 +37,9 @@ const props = defineProps({
     default: () => [],
   },
 });
+const emits = defineEmits(["on-detail"]);
 
-defineOptions({ name: "LetterWall" });
-const clsBlockName = "letter-wall";
+const onClick = (id: string) => {
+  emits("on-detail", id);
+};
 </script>

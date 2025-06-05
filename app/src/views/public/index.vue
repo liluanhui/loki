@@ -5,8 +5,10 @@
       <bp-button :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
     </div>
     <div class="mt-20px">
-      <letter-wall v-if="list.length > 0" :list />
+      <letter-wall v-if="list.length > 0" :list @on-detail="onDetail" />
     </div>
+
+    <letter-detail ref="letterDetailRef" />
   </div>
 </template>
 
@@ -17,6 +19,8 @@ import letterWall from "./components/letter-wall.vue";
 import { PublicLetterSearchParams } from "@loki/odin/src/types/publicLetter";
 import { Message } from "birdpaper-ui";
 import { findPublicLetterList } from "@loki/odin-api/publicLetter";
+import { useRef } from "@loki/fpo-ui/use/useCompRef";
+import letterDetail from "@loki/fpo-ui/components/letter-detail";
 
 defineOptions({ name: "PublicPage" });
 const clsBlockName = "public-page";
@@ -47,4 +51,10 @@ const init = async () => {
 };
 
 init();
+
+const letterDetailRef = useRef(letterDetail);
+const onDetail = (id: string) => {
+  console.log("id: ", id);
+  // letterDetailRef.value.open(id);
+};
 </script>
