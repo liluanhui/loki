@@ -1,17 +1,16 @@
 <template>
-  <bp-modal v-model="modalShow" :title width="320px" hide-footer hide-header>
+  <bp-modal v-model="modalShow" width="320px" hide-footer hide-header>
     <login-index type="modal" @success="close"></login-index>
-    <div class="login-modal-footer-info">F.P.O | 未来邮局</div>
+    <div class="login-modal-footer-info">{{ t("common.footer_info") }}</div>
   </bp-modal>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import loginIndex from "../index.vue";
+import { useI18n } from "vue-i18n";
 
-const props = defineProps({
-  title: { type: String, default: "账号密码登录" },
-});
+const { t } = useI18n();
 const modalShow = ref<boolean>(false);
 
 const open = () => {

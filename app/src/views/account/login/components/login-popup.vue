@@ -13,9 +13,6 @@ import { Popup } from "vant";
 import "vant/lib/popup/style/index";
 import loginIndex from "../index.vue";
 
-const props = defineProps({
-  title: { type: String, default: "登录邮局，给未来寄封信" },
-});
 const clsBlockName = "login-popup";
 const popupShow = ref<boolean>(false);
 

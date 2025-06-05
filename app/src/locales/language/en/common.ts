@@ -10,4 +10,5 @@ export default {
   delete: "Delete",
   edit: "Edit",
   save: "Save",
+  footer_info: "F.P.O"
 };

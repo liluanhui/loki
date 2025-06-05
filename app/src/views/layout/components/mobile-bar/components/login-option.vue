@@ -1,8 +1,8 @@
 <template>
   <div :class="`${clsBlockName}`">
-    <div :class="`${clsBlockName}-btn-group`" style="width: 100%;">
+    <div :class="`${clsBlockName}-btn-group`" style="width: 100%">
       <bp-button :icon="IconCloseFill" type="dashed" shape="circle" @click="handleCancle"> </bp-button>
-      <bp-button type="plain" shape="round">注册新账号</bp-button>
+      <bp-button type="plain" shape="round">{{ t("common.register") }}</bp-button>
     </div>
   </div>
 </template>

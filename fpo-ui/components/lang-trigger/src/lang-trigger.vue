@@ -24,7 +24,7 @@ const langList = [
 const currentLang = useStorage("lang", "zh_CN");
 
 const handleSelect = (value: string) => {
-  currentLang.value = currentLang.value === "zh_CN" ? "en" : "zh_CN";
+  currentLang.value = value;
 };
 
 watch(

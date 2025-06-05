@@ -1,7 +1,7 @@
 export default {
   login: "登录",
   login_now: "立即登录",
-  register: "注册",
+  register: "注册账号",
   field_colon: "：",
   back: "返回",
   close: "关闭",
@@ -10,4 +10,5 @@ export default {
   delete: "删除",
   edit: "编辑",
   save: "保存",
+  footer_info: "未来邮局"
 };
