@@ -54,7 +54,6 @@ init();
 
 const letterDetailRef = useRef(letterDetail);
 const onDetail = (id: string) => {
-  console.log("id: ", id);
-  // letterDetailRef.value.open(id);
+  letterDetailRef.value.open(id);
 };
 </script>
