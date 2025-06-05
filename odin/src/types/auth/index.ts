@@ -1,8 +1,8 @@
 export class LoginForm {
   /** 用户名 */
-  uid: string = '1';
+  uid: string = '';
   /** 密码 */
-  password: string = '1';
+  password: string = '';
 }
 
 export interface LoginRes {

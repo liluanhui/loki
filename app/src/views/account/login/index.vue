@@ -6,12 +6,12 @@
       </div>
       <div :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
-          <bp-input v-model="form.uid" size="large" placeholder="UID / 邮箱 / 手机号" clearable />
+          <bp-input name="uid" v-model="form.uid" size="large" placeholder="UID / 邮箱 / 手机号" clearable />
         </div>
       </div>
       <div :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
-          <bp-input v-model="form.password" size="large" type="password" placeholder="输入密码" clearable />
+          <bp-input name="password" v-model="form.password" size="large" type="password" placeholder="输入密码" clearable />
           <div class="forgot-psw">
             <bp-link size="small">忘记密码</bp-link>
           </div>
@@ -19,8 +19,7 @@
       </div>
       <div v-if="type === 'modal'" :class="`${clsBlockName}-form-item btn-item`">
         <bp-button type="plain" size="large" full>注册</bp-button>
-        <bp-button full size="large" :loading :disabled="!form.uid || !form.password"
-          @click="handleLogin">登录</bp-button>
+        <bp-button full size="large" :loading :disabled="!form.uid || !form.password" @click="handleLogin">登录</bp-button>
       </div>
       <div v-else :class="`${clsBlockName}-form-item`">
         <div :class="`${clsBlockName}-form-item-content`">
@@ -56,20 +55,19 @@ const form = ref<LoginForm>(new LoginForm());
 
 const useStore = useUserStore();
 const handleLogin = async () => {
-  msg.success();
-  // try {
-  //   loading.value = true;
-  //   await useStore.handleLogin(form.value);
-  //   emits("success");
-  //   return Message.success("登录成功");
-  // } catch (err) {
-  //   setTimeout(() => {
-  //     Message.error((err as Error).message);
-  //   }, 400);
-  // } finally {
-  //   setTimeout(() => {
-  //     loading.value = false;
-  //   }, 400);
-  // }
+  try {
+    loading.value = true;
+    await useStore.handleLogin(form.value);
+    emits("success");
+    return msg.success("登录成功");
+  } catch (err) {
+    setTimeout(() => {
+      msg.error((err as Error).message);
+    }, 400);
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+    }, 400);
+  }
 };
 </script>
