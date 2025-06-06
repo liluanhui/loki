@@ -66,8 +66,10 @@
       height: calc(60vh - 116px);
       overflow-y: auto;
 
-      .yq-editor {
-        height: 100%;
+      #yq-editor {
+        .ne-viewer-body{
+          color: var(--gray-10)
+        }
       }
     }
 
