@@ -42,6 +42,18 @@ const viewer = ref();
 const wordCount = ref(0);
 const currentTheme = useStorage("theme", "light");
 
+const initViewer = () => {
+  const { createOpenViewer } = window["Doc"];
+  if (!createOpenViewer) return;
+
+  const el = document.getElementById(props.editorId);
+  viewer.value = createOpenViewer(el, {
+    toc: {
+      enable: false,
+    },
+  });
+};
+
 const initEditor = () => {
   const { createOpenEditor } = window["Doc"];
   if (!createOpenEditor) return;
@@ -161,13 +173,13 @@ onMounted(() => {
       initEditor();
       return;
     }
-    // initViewer();
+    initViewer();
   });
 });
 
 defineExpose({
   initEditor,
-  // initViewer,
+  initViewer,
   setViewerContent,
   setContent,
   getContent,

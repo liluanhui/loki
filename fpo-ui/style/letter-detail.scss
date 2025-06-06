@@ -1,3 +1,75 @@
 @use "./common/design.scss" as *;
 @use "./common/mixins.scss" as *;
 @use "./common/extend.scss" as *;
+
+.detail-inner {
+  @include flex(row, center, flex-start);
+  gap: 12px;
+  height: 80vh;
+
+  &-mail {
+    flex: 1;
+
+    &-info {
+      @include flex(row, space-between, center);
+      border-bottom: $borderSize dashed $borderColor-3;
+      padding-bottom: 12px;
+
+      .sender-info {
+        @include flex(row, flex-start, center);
+        gap: 10px;
+
+        .bp-avatar {
+          border: $borderSize solid $borderColor-2;
+        }
+
+        .sender-name {
+          &-inner {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-9);
+            letter-spacing: 0.5px;
+            width: 300px;
+            @extend .text-ellipsis;
+          }
+        }
+      }
+
+      .time-ago {
+        font-size: 12px;
+        color: var(--gray-6);
+        font-weight: 400;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    &-title {
+      margin-top: 20px;
+      font-weight: 500;
+      font-size: 16px;
+      width: 848px;
+      padding: 0 4px;
+      line-height: 1.6;
+      @extend .text-ellipsis;
+    }
+
+    &-content{
+      margin-top: 12px;
+      padding: 0 4px;
+      height: calc(80vh - 100px);
+      overflow-y: auto;
+
+      .yq-editor{
+        height: 100%;
+      }
+    }
+  }
+
+  &-comment {
+    width: 300px;
+    height: 100%;
+    border-left: $borderSize solid $borderColor-2;
+    // background-color: var(--gray-2);
+  }
+}
