@@ -29,4 +29,5 @@ export default {
     update_at: "Last modified at",
     confirm_delete: "Are you sure you want to delete this draft?",
   },
+  sent: "send"
 };

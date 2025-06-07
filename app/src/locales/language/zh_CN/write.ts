@@ -29,4 +29,5 @@ export default {
     update_at: "更新于",
     confirm_delete: "确认删除草稿吗？",
   },
+  sent: "寄出"
 };

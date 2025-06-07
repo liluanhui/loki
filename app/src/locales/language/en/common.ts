@@ -11,5 +11,5 @@ export default {
   edit: "Edit",
   save: "Save",
   footer_info: "F.P.O",
-  delivered_at: "Delivered at",
+  delivered_at: "Delivered",
 };

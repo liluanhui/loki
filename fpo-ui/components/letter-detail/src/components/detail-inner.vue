@@ -6,12 +6,13 @@
           <bp-avatar :image-url="_avatar" size="large"> </bp-avatar>
           <div class="sender-name">
             <span class="sender-name-inner">{{ sender_name || "--" }}</span>
-            <span class="sender-name-to">{{ t('write.editor.send_field') + `
-              ${isSelf ? t('write.editor.send_type.self') : _recipientName}` || '--' }}</span>
+            <span class="sender-name-to">
+              {{ t('write.editor.send_field') + ` ${isSelf ? t('write.editor.send_type.self') : _recipientName}` }}
+            </span>
           </div>
         </div>
         <div class="time-ago">
-          <span class="send-at">{{ _createdAt }}</span>
+          <span class="send-at">{{ _createdAt + ` ${t('write.sent')}` }}</span>
           <span class="delive-at">{{ t('common.delivered_at') + ` ${_deliveryAt}` }}</span>
         </div>
       </div>
@@ -22,7 +23,7 @@
 
       <div :class="`${clsBlockName}-mail-footer`">
         <div class="public-no">
-          <span class="public-no-inner">NO.{{ _no }}</span>
+          <span class="public-no-inner">{{ _no }}</span>
         </div>
       </div>
     </div>
