@@ -11,7 +11,7 @@
           <span class="sender-name-inner">{{ _niclkName || "--" }}</span>
         </div>
       </div>
-      <div v-if="size !== 'small'" class="time-ago" :title="createdAt">{{ _createdAt || "--" }}</div>
+      <div v-if="size !== 'small'" class="time-ago" :title="deliveryTime">{{ _deliveryAt || "--" }}</div>
     </div>
 
     <div class="body">
@@ -98,8 +98,8 @@ const _recipientName = computed(() => {
   return props.recipientName;
 });
 
-// 投递时间处理
-const _deliveryTime = computed(() => {
+// 寄往时间处理
+const _toTime = computed(() => {
   return props.deliveryTime ? dayjs(props.createdAt).to(dayjs(props.deliveryTime), true) : "";
 });
 
@@ -108,15 +108,19 @@ const _createdAt = computed(() => {
   return props.createdAt ? dayjs().to(dayjs(props.createdAt)) : "";
 });
 
+const _deliveryAt = computed(() => {
+  return props.deliveryTime ? dayjs().to(dayjs(props.deliveryTime)) : "";
+});
+
 const _letterTo = computed(() => {
-  if (!_deliveryTime.value) {
+  if (!_toTime.value) {
     return "--";
   }
   switch (locale.value) {
     case "zh_CN":
-      return `寄给 ${_deliveryTime.value}后的${isSelf.value ? "自己" : _recipientName.value}`;
+      return `寄给 ${_toTime.value}后的${isSelf.value ? "自己" : _recipientName.value}`;
     case "en":
-      return `To ${isSelf.value ? "self" : _recipientName.value}, ${_deliveryTime.value} later`;
+      return `To ${isSelf.value ? "self" : _recipientName.value}, ${_toTime.value} later`;
     default:
       return `--`;
   }

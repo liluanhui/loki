@@ -10,5 +10,6 @@ export default {
   delete: "Delete",
   edit: "Edit",
   save: "Save",
-  footer_info: "F.P.O"
+  footer_info: "F.P.O",
+  delivered_at: "Delivered at",
 };

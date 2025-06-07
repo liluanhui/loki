@@ -10,5 +10,6 @@ export default {
   delete: "删除",
   edit: "编辑",
   save: "保存",
-  footer_info: "未来邮局"
+  footer_info: "未来邮局",
+  delivered_at: "投递于",
 };

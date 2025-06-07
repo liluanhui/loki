@@ -6,12 +6,13 @@
           <bp-avatar :image-url="_avatar" size="large"> </bp-avatar>
           <div class="sender-name">
             <span class="sender-name-inner">{{ sender_name || "--" }}</span>
-            <span class="sender-name-to">{{ "寄给 Sam" }}</span>
+            <span class="sender-name-to">{{ t('write.editor.send_field') + `
+              ${isSelf ? t('write.editor.send_type.self') : _recipientName}` || '--' }}</span>
           </div>
         </div>
         <div class="time-ago">
-          <span class="send-at">10年前</span>
-          <!-- <span class="delive-at">投递于 2025-12-31</span> -->
+          <span class="send-at">{{ _createdAt }}</span>
+          <span class="delive-at">{{ t('common.delivered_at') + ` ${_deliveryAt}` }}</span>
         </div>
       </div>
 
@@ -38,6 +39,8 @@
 import YuqueEditor from "../../../yuque-editor";
 import { useRef } from "../../../../use/useCompRef";
 import { computed } from "vue";
+import dayjs from "dayjs";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps({
   id: { type: String },
@@ -57,6 +60,7 @@ const props = defineProps({
 defineOptions({ name: "DetailInner" });
 const clsBlockName = "detail-inner";
 
+const { t } = useI18n();
 const viewerRef = useRef(YuqueEditor);
 const setContent = (content: string) => {
   viewerRef.value?.setViewerContent(content);
@@ -75,6 +79,27 @@ const _avatar = computed(() => {
     return "";
   }
   return props.avatar;
+});
+
+// 收件人处理
+const _recipientName = computed(() => {
+  if (props.mode === "anonymity") {
+    return "***";
+  }
+  if (props.mode === "privary") {
+    return props.recipient_name.slice(0, 1) + "**";
+  }
+  return props.recipient_name;
+});
+
+// 投递时间处理
+const _deliveryAt = computed(() => {
+  return props.deliver_at ? dayjs().to(dayjs(props.deliver_at)) : "";
+});
+
+// 创建时间处理
+const _createdAt = computed(() => {
+  return props.created_at ? dayjs().to(dayjs(props.created_at)) : "";
 });
 
 defineExpose({
