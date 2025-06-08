@@ -1,3 +1,9 @@
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 
+.activity-20250819 {
+  background-color: var(--brand-1);
+  padding: 16px;
+  height: 100%;
+  overflow-y: auto;
+}
