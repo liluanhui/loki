@@ -29,9 +29,11 @@ export class PublicLetterService {
       "sender_name",
       "recipient_type",
       "recipient_email",
-      "content_id",
+      "recipient_name",
+      "public_type",
       [col("content.title"), "title"],
       [col("content.word_count"), "word_count"],
+      [col("sender.avatar"), "avatar"],
       "deliver_at",
       "comments",
       "likes",
@@ -58,10 +60,28 @@ export class PublicLetterService {
       limit,
       order: [[query.sort || "created_at", "ASC"]],
       raw: true,
-      include: [{ model: FpoMailContent, as: "content", attributes: [] }],
+      include: [
+        { model: FpoMailContent, as: "content", attributes: [] },
+        { model: FpoUser, as: "sender", attributes: [] },
+      ],
     });
 
     // TODO uid 评论点赞处理
+
+    // 处理公开类型
+    for (const letter of list) {
+      switch (letter.public_type) {
+        case "privary":
+          letter.recipient_name = letter.recipient_name?.replace(/(.{1})(.*)/, "$1**");
+          letter.sender_name = letter.sender_name.slice(0, 1) + "**";
+          break;
+        case "anonymity":
+          letter.avatar = "";
+          letter.recipient_name = "***";
+          letter.sender_name = `***${letter.fpo_no.slice(-4)}`;
+          break;
+      }
+    }
 
     return { count, list: list as unknown as any[] };
   }
@@ -112,7 +132,7 @@ export class PublicLetterService {
       case "anonymity":
         letter.avatar = "";
         letter.recipient_name = "***";
-        letter.sender_name = "***";
+        letter.sender_name = `***${letter.fpo_no.slice(-4)}`;
         break;
     }
 
