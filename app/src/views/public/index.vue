@@ -5,7 +5,14 @@
       <bp-button v-if="appMode === 'pc'" :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
     </div>
     <div class="mt-20px">
-      <letter-wall v-if="list.length > 0" :list @on-detail="onDetail" />
+      <letter-wall
+        ref="letterWallRef"
+        :list
+        :finished
+        :page-num="Number(form.pageNum)"
+        :page-size="Number(form.pageSize)"
+        @on-detail="onDetail"
+        @on-refresh="init" />
     </div>
 
     <letter-detail ref="letterDetailRef" />
@@ -13,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from "vue";
+import { inject, nextTick, onMounted, ref } from "vue";
 import { IconRefreshLine } from "birdpaper-icon";
 import letterWall from "./components/letter-wall.vue";
 import { PublicLetterSearchParams } from "@loki/odin/src/types/publicLetter";
@@ -35,23 +42,43 @@ const radioBarList = [
   { label: "最多评论", value: "comment" },
 ];
 
+const finished = ref(false);
+const letterWallRef = useRef(letterWall);
+
 const list = ref([]);
 const count = ref(0);
 const form = ref<PublicLetterSearchParams>(new PublicLetterSearchParams());
-const init = async () => {
+const init = async (data?: { pageNum: number; pageSize: number }) => {
   try {
-    const res = await findPublicLetterList(form.value);
+    letterWallRef.value.loading = true;
+    const res = await findPublicLetterList({ ...form.value, ...data });
     if (res.code != 0) {
       throw new Error(res.msg);
     }
-    list.value = res.data.list;
+    if (form.value.pageNum === 1) {
+      list.value = [];
+    }
+
+    list.value = [...list.value, ...res.data.list];
+    form.value.pageNum = res.data.pageNum;
+    form.value.pageSize = res.data.pageSize;
     count.value = res.data.count;
+    finished.value = list.value.length >= count.value;
   } catch (err) {
     Message.error((err as Error).message);
+  } finally {
+    setTimeout(() => {
+      letterWallRef.value.loading = false;
+      letterWallRef.value.refreshing = false;
+    }, 800);
   }
 };
 
-init();
+onMounted(() => {
+  nextTick(() => {
+    init({ pageNum: 1, pageSize: 12 });
+  });
+});
 
 const appMode = useStorage("app-mode", "pc");
 

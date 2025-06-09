@@ -8,13 +8,12 @@ $normalHeight: 210px;
 .letter-item {
   @include flex(column, flex-start, stretch);
   gap: 4px;
-  width: $normalWidth;
+  width: 100%;
   height: $normalHeight;
   background-color: var(--gray-0);
   border-radius: 12px;
   border: $borderSize solid $borderColor-2;
   padding: 12px;
-  margin-bottom: 14px;
   cursor: pointer;
   @extend .no-select;
   transition: all 0.2s ease;
@@ -123,17 +122,5 @@ $normalHeight: 210px;
         }
       }
     }
-  }
-}
-
-@include tablet {
-  .letter-item {
-    width: calc(100% / 3 - 10px);
-  }
-}
-
-@include mobile {
-  .letter-item {
-    width: 100%;
   }
 }

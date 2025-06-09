@@ -1,18 +1,13 @@
 <template>
   <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
     <vant-list
+      v-if="list.length > 0"
       v-model:loading="loading"
       :finished
-      :offset="10"
       finished-text="没有更多了"
       :class="clsBlockName"
-      v-masonry="20"
-      column-width=".letter-item"
-      transition-duration="0s"
-      :horizontal-order="true"
-      :gutter="14"
-      fit-width>
-      <letter-item v-masonry-tile v-for="(item, index) in list" :key="index" v-bind="item" @click="onClick(item.id)" />
+      @load="emits('on-refresh', { pageNum: Number(pageNum) + 1, pageSize: pageSize })">
+      <letter-item v-for="(item, index) in list" :key="item.id" v-bind="item" @click="onClick(item.id)" />
     </vant-list>
   </pull-refresh>
 </template>
@@ -28,17 +23,15 @@ defineOptions({ name: "LetterWall" });
 const clsBlockName = "letter-wall";
 
 const props = defineProps({
-  list: {
-    type: Array as PropType<any>,
-    default: () => [],
-  },
+  list: { type: Array as PropType<any>, default: () => [] },
+  finished: { type: Boolean, default: false },
+  pageSize: { type: Number, default: 12 },
+  pageNum: { type: Number, default: 1 },
 });
-const emits = defineEmits(["on-detail"]);
+const emits = defineEmits(["on-detail", "on-refresh"]);
 
-const refreshing = ref(false);
 const loading = ref(true);
-const finished = ref(false);
-
+const refreshing = ref(true);
 const appMode = useStorage("app-mode", "pc");
 
 const onRefresh = () => {};
@@ -46,4 +39,9 @@ const onRefresh = () => {};
 const onClick = (id: string) => {
   emits("on-detail", id);
 };
+
+defineExpose({
+  loading,
+  refreshing,
+});
 </script>

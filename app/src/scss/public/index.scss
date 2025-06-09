@@ -5,13 +5,16 @@
 .public-page {
   &-header {
     @include flex(row, center, center);
-    gap: 10px;
+    gap: 14px;
     width: 100%;
   }
 
   .letter-wall {
     width: 100%;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
 
     .letter-item {
       &:hover {
@@ -37,16 +40,12 @@
 
 @include tablet {
   .letter-wall {
-    .letter-item {
-      width: calc(100% / 3 - 10px);
-    }
+    grid-template-columns: repeat(3, 1fr) !important;
   }
 }
 
 @include mobile {
   .letter-wall {
-    .letter-item {
-      width: 100%;
-    }
+    grid-template-columns: repeat(1, 1fr) !important;
   }
 }

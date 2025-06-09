@@ -7,6 +7,6 @@ export type HttpResponse<T = any> = {
 export type ListResponse<T = any> = {
   count: number;
   list: T[];
-  pageNum: string;
-  pageSize: string;
+  pageNum: number;
+  pageSize: number;
 };
