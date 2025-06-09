@@ -14,6 +14,7 @@ import write from "./components/write.vue";
 import confirm from "./components/confirm.vue";
 import close from "./components/close.vue";
 import loginOption from "./components/login-option.vue";
+import publicLetter from "./components/public-letter.vue";
 import { useUserStore } from "@/stores/useUser";
 
 const props = defineProps({
@@ -29,7 +30,7 @@ const { isLogin } = useUserStore();
 
 const width = ref("80%");
 const componentObj = computed(() => {
-  return { menus, write: isLogin() ? write : menus, confirm, close, loginOption };
+  return { menus, write: isLogin() ? write : menus, confirm, close, loginOption, publicLetter };
 });
 const _events = ref(null);
 const _props = ref({});
@@ -43,6 +44,7 @@ watch(
       confirm: "max-content",
       close: "max-content",
       loginOption: "max-content",
+      publicLetter: "max-content",
     };
 
     setTimeout(() => {

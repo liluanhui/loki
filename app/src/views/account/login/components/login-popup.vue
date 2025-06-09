@@ -19,7 +19,6 @@ const popupShow = ref<boolean>(false);
 const mobileBarCtx: any = inject("mobile-bar");
 const open = () => {
   popupShow.value = true;
-  popupShow.value = true;
   mobileBarCtx?.change("loginOption", {
     events: {
       close,

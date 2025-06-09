@@ -1,39 +1,41 @@
 <template>
-  <div :class="clsBlockName">
-    <div :class="`${clsBlockName}-mail`">
-      <div :class="`${clsBlockName}-mail-info`">
-        <div class="sender-info">
-          <bp-avatar :image-url="_avatar" size="large"> </bp-avatar>
-          <div class="sender-name">
-            <span class="sender-name-inner">{{ sender_name || "--" }}</span>
-            <span class="sender-name-to">
-              {{ t("write.editor.send_field") + ` ${isSelf ? t("write.editor.send_type.self") : recipient_name}` }}
-            </span>
+  <bp-spin :spinning="loading">
+    <div :class="clsBlockName">
+      <div :class="`${clsBlockName}-mail`">
+        <div :class="`${clsBlockName}-mail-info`">
+          <div class="sender-info">
+            <bp-avatar :image-url="_avatar" size="large"> </bp-avatar>
+            <div class="sender-name" v-if="sender_name">
+              <span class="sender-name-inner">{{ sender_name || "--" }}</span>
+              <span class="sender-name-to">
+                {{ t("write.editor.send_field") + ` ${isSelf ? t("write.editor.send_type.self") : recipient_name}` }}
+              </span>
+            </div>
+          </div>
+          <div class="time-ago">
+            <span class="send-at">{{ _createdAt + ` ${t("write.sent")}` }}</span>
+            <span class="delive-at">{{ t("common.delivered_at") + ` ${_deliveryAt}` }}</span>
           </div>
         </div>
-        <div class="time-ago">
-          <span class="send-at">{{ _createdAt + ` ${t("write.sent")}` }}</span>
-          <span class="delive-at">{{ t("common.delivered_at") + ` ${_deliveryAt}` }}</span>
+
+        <div :class="`${clsBlockName}-mail-content`" v-show="content">
+          <yuque-editor ref="viewerRef" editor-type="viewer"></yuque-editor>
+        </div>
+
+        <div :class="`${clsBlockName}-mail-footer`">
+          <div class="public-no">
+            <span class="public-no-inner">{{ _no }}</span>
+          </div>
         </div>
       </div>
-
-      <div :class="`${clsBlockName}-mail-content`">
-        <yuque-editor ref="viewerRef" editor-type="viewer"></yuque-editor>
-      </div>
-
-      <div :class="`${clsBlockName}-mail-footer`">
-        <div class="public-no">
-          <span class="public-no-inner">{{ _no }}</span>
+      <div :class="`${clsBlockName}-comment`">
+        <div :class="`${clsBlockName}-comment-header`">
+          <span :class="`${clsBlockName}-comment-header-inner`">共 0 条评论</span>
         </div>
+        <div :class="`${clsBlockName}-comment-content`"></div>
       </div>
     </div>
-    <div :class="`${clsBlockName}-comment`">
-      <div :class="`${clsBlockName}-comment-header`">
-        <span :class="`${clsBlockName}-comment-header-inner`">共 0 条评论</span>
-      </div>
-      <div :class="`${clsBlockName}-comment-content`"></div>
-    </div>
-  </div>
+  </bp-spin>
 </template>
 
 <script lang="ts" setup>
@@ -44,6 +46,7 @@ import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
+  loading: { type: Boolean, default: false },
   id: { type: String },
   fpo_no: { type: String },
   sender_name: { type: String },
