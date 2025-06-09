@@ -30,13 +30,13 @@
           </div>
         </div>
       </div>
-      <!-- <div :class="`${clsBlockName}-comment`">
+      <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-header`">
           <span :class="`${clsBlockName}-comment-header-inner`">共 0 条评论</span>
         </div>
         <div :class="`${clsBlockName}-comment-content`">
         </div>
-      </div> -->
+      </div>
     </div>
   </bp-spin>
 </template>

@@ -2,8 +2,8 @@
   <div :class="`${clsBlockName}`">
     <div :class="`${clsBlockName}-btn-group`" style="width: 100%">
       <bp-button :icon="IconCloseFill" type="dashed" shape="circle" @click="handleCancle"> </bp-button>
-      <bp-button :icon="IconThumbUpLine" type="dashed" shape="circle"></bp-button>
-      <bp-button :icon="IconChat1Line" type="plain" shape="round">评论</bp-button>
+      <bp-button :icon="IconThumbUpLine" type="plain" shape="circle"></bp-button>
+      <bp-button :icon="IconChat1Line" type="plain" shape="round" @click="handleComment">评论</bp-button>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ const emits = defineEmits<{
 const handleCancle = () => {
   emits("on-event", "close");
 };
-const handleConfirm = () => {
-  emits("on-event", "confirm");
+const handleComment = () => {
+  emits("on-event", "comment");
 };
 </script>

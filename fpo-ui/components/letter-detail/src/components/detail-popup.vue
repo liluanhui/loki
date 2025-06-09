@@ -1,6 +1,10 @@
 <template>
   <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :duration="0.2" safe-area-inset-bottom @close="close">
     <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
+
+    <popup v-model:show="commentPopupShow" position="bottom" :style="{ height: '90%' }" :duration="0.2" round safe-area-inset-bottom>
+      <div class="popup-header">评论</div>
+    </popup>
   </popup>
 </template>
 
@@ -14,6 +18,7 @@ import { msg } from "../../../fpo-message";
 import { useRef } from "../../../../use/useCompRef";
 
 const popupShow = ref<boolean>(false);
+const commentPopupShow = ref<boolean>(false);
 
 const loading = ref<boolean>(false);
 const letterDetail = ref<any>(null);
@@ -44,6 +49,18 @@ const open = (id: string) => {
   mobileBarCtx?.change("publicLetter", {
     events: {
       close,
+      comment: () => {
+        commentPopupShow.value = true;
+
+        mobileBarCtx?.change("close", {
+          events: {
+            close: () => {
+              commentPopupShow.value = false;
+              mobileBarCtx?.reset();
+            },
+          },
+        });
+      },
     },
   });
   loadDetail(id);
@@ -51,7 +68,7 @@ const open = (id: string) => {
 
 const close = () => {
   popupShow.value = false;
-  mobileBarCtx?.reset();
+  mobileBarCtx?.change("menus");
 };
 
 watch(popupShow, (val) => {
