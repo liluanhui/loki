@@ -1,10 +1,12 @@
 <template>
   <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :duration="0.2" safe-area-inset-bottom @close="close">
+    <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
   </popup>
 </template>
 
 <script setup lang="ts">
 import { nextTick, inject, ref, watch } from "vue";
+import detailInner from "./detail-inner.vue";
 import { getPublicLetterDetail } from "@loki/odin-api/publicLetter";
 import { Popup } from "vant";
 import "vant/lib/popup/style/index";
@@ -15,6 +17,8 @@ const popupShow = ref<boolean>(false);
 
 const loading = ref<boolean>(false);
 const letterDetail = ref<any>(null);
+const detailInnerRef = useRef(detailInner);
+
 const loadDetail = async (id: string) => {
   try {
     loading.value = true;
@@ -24,6 +28,9 @@ const loadDetail = async (id: string) => {
     }
 
     letterDetail.value = res.data;
+    nextTick(() => {
+      detailInnerRef.value?.setContent(letterDetail.value.content);
+    });
   } catch (err) {
     msg.error((err as Error).message);
   } finally {

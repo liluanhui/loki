@@ -1,7 +1,9 @@
 <template>
   <bp-spin :spinning="loading">
-    <div :class="clsBlockName">
+    <div :class="[clsBlockName, { [`${clsBlockName}-popup`]: isPopup }]">
       <div :class="`${clsBlockName}-mail`">
+        <p v-if="isPopup" :class="`${clsBlockName}-mail-title`">{{ title }}</p>
+
         <div :class="`${clsBlockName}-mail-info`">
           <div class="sender-info">
             <bp-avatar :image-url="_avatar" size="large"> </bp-avatar>
@@ -28,12 +30,13 @@
           </div>
         </div>
       </div>
-      <div :class="`${clsBlockName}-comment`">
+      <!-- <div :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-header`">
           <span :class="`${clsBlockName}-comment-header-inner`">共 0 条评论</span>
         </div>
-        <div :class="`${clsBlockName}-comment-content`"></div>
-      </div>
+        <div :class="`${clsBlockName}-comment-content`">
+        </div>
+      </div> -->
     </div>
   </bp-spin>
 </template>
@@ -46,8 +49,10 @@ import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
+  isPopup: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
   id: { type: String },
+  title: { type: String },
   fpo_no: { type: String },
   sender_name: { type: String },
   content: { type: String },
