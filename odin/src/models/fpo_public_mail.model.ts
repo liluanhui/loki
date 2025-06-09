@@ -1,5 +1,6 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 import { FpoMailContent } from "./fpo_mail_content.model";
+import { FpoUser } from "./fpo_user.model";
 
 @Table({
   tableName: "fpo_public_mail",
@@ -44,6 +45,9 @@ export class FpoPublicMail extends Model {
     allowNull: false,
   })
   sender_name: string;
+
+  @BelongsTo(() => FpoUser, 'sender_id')
+  sender: FpoUser;
 
   @Column({
     type: DataType.ENUM("self", "email"),
@@ -116,4 +120,5 @@ export class FpoPublicMail extends Model {
     comment: "更新时间",
   })
   updated_at: Date;
+  avatar: string;
 }

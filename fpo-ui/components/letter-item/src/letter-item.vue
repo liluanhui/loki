@@ -2,11 +2,7 @@
   <div :class="[clsBlockName, `${clsBlockName}-size-${size}`]">
     <div class="header">
       <div class="sender-info">
-        <bp-avatar size="small" :image-url="_avatar">
-          <template #error>
-            {{ nickName }}
-          </template>
-        </bp-avatar>
+        <bp-avatar size="small" :image-url="_avatar"> </bp-avatar>
         <div class="sender-name">
           <span class="sender-name-inner">{{ _niclkName || "--" }}</span>
         </div>

@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { col, Op } from "sequelize";
 import { FpoMailContent } from "src/models/fpo_mail_content.model";
 import { FpoPublicMail } from "src/models/fpo_public_mail.model";
+import { FpoUser } from "src/models/fpo_user.model";
 import { PublicLetterSearchParams } from "src/types/publicLetter";
 
 @Injectable()
@@ -78,25 +79,42 @@ export class PublicLetterService {
         "id",
         "fpo_no",
         "public_type",
-        "sender_id",
         "sender_name",
         "recipient_type",
-        "recipient_email",
         "recipient_name",
-        "content_id",
+        "public_type",
         [col("content.title"), "title"],
         [col("content.content"), "content"],
         [col("content.word_count"), "word_count"],
+        [col("sender.avatar"), "avatar"],
         "deliver_at",
         "comments",
         "likes",
         "created_at",
       ],
-      include: [{ model: FpoMailContent, as: "content", attributes: [] }],
+      include: [
+        { model: FpoMailContent, as: "content", attributes: [] },
+        { model: FpoUser, as: "sender", attributes: [] },
+      ],
       raw: true,
     });
 
     // TODO uid 评论点赞处理
+
+    if (!letter) return null;
+
+    // 处理公开类型
+    switch (letter.public_type) {
+      case "privary":
+        letter.recipient_name = letter.recipient_name?.replace(/(.{1})(.*)/, "$1**");
+        letter.sender_name = letter.sender_name.slice(0, 1) + "**";
+        break;
+      case "anonymity":
+        letter.avatar = "";
+        letter.recipient_name = "***";
+        letter.sender_name = "***";
+        break;
+    }
 
     return letter;
   }

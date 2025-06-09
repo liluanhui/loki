@@ -7,13 +7,13 @@
           <div class="sender-name">
             <span class="sender-name-inner">{{ sender_name || "--" }}</span>
             <span class="sender-name-to">
-              {{ t('write.editor.send_field') + ` ${isSelf ? t('write.editor.send_type.self') : _recipientName}` }}
+              {{ t("write.editor.send_field") + ` ${isSelf ? t("write.editor.send_type.self") : recipient_name}` }}
             </span>
           </div>
         </div>
         <div class="time-ago">
-          <span class="send-at">{{ _createdAt + ` ${t('write.sent')}` }}</span>
-          <span class="delive-at">{{ t('common.delivered_at') + ` ${_deliveryAt}` }}</span>
+          <span class="send-at">{{ _createdAt + ` ${t("write.sent")}` }}</span>
+          <span class="delive-at">{{ t("common.delivered_at") + ` ${_deliveryAt}` }}</span>
         </div>
       </div>
 
@@ -49,9 +49,7 @@ const props = defineProps({
   sender_name: { type: String },
   content: { type: String },
   avatar: { type: String },
-  mode: { type: String },
   recipient_type: { type: String, default: "self" },
-  recipient_email: { type: String },
   recipient_name: { type: String },
   public_type: { type: String, default: "public" },
   created_at: { type: String },
@@ -76,21 +74,10 @@ const _no = computed(() => {
 
 // 用户头像处理
 const _avatar = computed(() => {
-  if (props.mode === "anonymity") {
+  if (props.public_type === "anonymity") {
     return "";
   }
   return props.avatar;
-});
-
-// 收件人处理
-const _recipientName = computed(() => {
-  if (props.mode === "anonymity") {
-    return "***";
-  }
-  if (props.mode === "privary") {
-    return props.recipient_name.slice(0, 1) + "**";
-  }
-  return props.recipient_name;
 });
 
 // 投递时间处理
