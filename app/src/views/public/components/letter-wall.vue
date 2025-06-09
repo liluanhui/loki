@@ -4,10 +4,12 @@
       v-if="list.length > 0"
       v-model:loading="loading"
       :finished
+      :immediate-check="false"
       finished-text="没有更多了"
       :class="clsBlockName"
-      @load="emits('on-refresh', { pageNum: Number(pageNum) + 1, pageSize: pageSize })">
-      <letter-item v-for="(item, index) in list" :key="item.id" v-bind="item" @click="onClick(item.id)" />
+      :offset="100"
+      @load="onLoad">
+      <letter-item v-for="item in list" :key="item.id" v-bind="item" @click="onClick(item.id)" />
     </vant-list>
   </pull-refresh>
 </template>
@@ -17,7 +19,6 @@ import { PropType, ref } from "vue";
 import { List as VantList, PullRefresh } from "vant";
 import "vant/lib/list/style/index";
 import "vant/lib/pull-refresh/style/index";
-import { useStorage } from "@vueuse/core";
 
 defineOptions({ name: "LetterWall" });
 const clsBlockName = "letter-wall";
@@ -32,7 +33,11 @@ const emits = defineEmits(["on-detail", "on-refresh"]);
 
 const loading = ref(true);
 const refreshing = ref(true);
-const appMode = useStorage("app-mode", "pc");
+
+const onLoad = () => {
+  if (props.finished) return;
+  emits("on-refresh", { pageNum: props.pageNum + 1, pageSize: props.pageSize });
+};
 
 const onRefresh = () => {};
 

@@ -36,7 +36,7 @@ $normalHeight: 210px;
           font-weight: 500;
           color: var(--gray-9);
           letter-spacing: 0.5px;
-          width: calc($normalWidth - 160px);
+          width: 120px;
           @extend .text-ellipsis;
         }
       }

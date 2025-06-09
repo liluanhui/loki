@@ -27,7 +27,6 @@
 @include mobile {
   .app-main {
     padding-top: $topBarHeight-mobile;
-    overflow-x: hidden;
     
     &-inner {
       min-height: calc(100vh - $topBarHeight-mobile - $footerBarHeight);
