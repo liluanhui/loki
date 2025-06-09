@@ -1,14 +1,8 @@
 <template>
-  <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
-    <vant-list
-      v-if="list.length > 0"
-      v-model:loading="loading"
-      :finished
-      :immediate-check="false"
-      finished-text="没有更多了"
-      :class="clsBlockName"
-      :offset="100"
-      @load="onLoad">
+  <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000"
+    success-text="刷新成功">
+    <vant-list v-if="list.length > 0" v-model:loading="loading" :finished :immediate-check="false" finished-text="没有更多了"
+      :class="clsBlockName" :offset="100" @load="onLoad">
       <letter-item v-for="item in list" :key="item.id" v-bind="item" @click="onClick(item.id)" />
     </vant-list>
   </pull-refresh>
@@ -26,7 +20,7 @@ const clsBlockName = "letter-wall";
 const props = defineProps({
   list: { type: Array as PropType<any>, default: () => [] },
   finished: { type: Boolean, default: false },
-  pageSize: { type: Number, default: 12 },
+  pageSize: { type: Number, default: 36 },
   pageNum: { type: Number, default: 1 },
 });
 const emits = defineEmits(["on-detail", "on-refresh"]);
@@ -39,7 +33,9 @@ const onLoad = () => {
   emits("on-refresh", { pageNum: props.pageNum + 1, pageSize: props.pageSize });
 };
 
-const onRefresh = () => {};
+const onRefresh = () => {
+  emits("on-refresh", { pageNum: 1, pageSize: props.pageSize });
+};
 
 const onClick = (id: string) => {
   emits("on-detail", id);

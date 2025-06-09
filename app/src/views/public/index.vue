@@ -2,17 +2,12 @@
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-header`">
       <radio-bar v-model="form.sort" :option-list="radioBarList"></radio-bar>
-      <bp-button v-if="appMode === 'pc'" :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
+      <bp-button v-if="appMode === 'pc'" :icon="IconRefreshLine" status="gray" type="plain" shape="circle"
+        @click="init({ pageNum: 1, pageSize: 36 })"></bp-button>
     </div>
     <div class="mt-20px">
-      <letter-wall
-        ref="letterWallRef"
-        :list
-        :finished
-        :page-num="Number(form.pageNum)"
-        :page-size="Number(form.pageSize)"
-        @on-detail="onDetail"
-        @on-refresh="init" />
+      <letter-wall ref="letterWallRef" :list :finished :page-num="Number(form.pageNum)"
+        :page-size="Number(form.pageSize)" @on-detail="onDetail" @on-refresh="init" />
     </div>
 
     <letter-detail ref="letterDetailRef" />
@@ -51,12 +46,14 @@ const form = ref<PublicLetterSearchParams>(new PublicLetterSearchParams());
 const init = async (data?: { pageNum: number; pageSize: number }) => {
   try {
     letterWallRef.value.loading = true;
-    const res = await findPublicLetterList({ ...form.value, ...data });
-    if (res.code != 0) {
-      throw new Error(res.msg);
-    }
+    form.value = { ...form.value, ...data }
     if (form.value.pageNum === 1) {
       list.value = [];
+    }
+
+    const res = await findPublicLetterList(form.value);
+    if (res.code != 0) {
+      throw new Error(res.msg);
     }
 
     list.value = [...list.value, ...res.data.list];
@@ -76,7 +73,7 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
 
 onMounted(() => {
   nextTick(() => {
-    init({ pageNum: 1, pageSize: 12 });
+    init({ pageNum: 1, pageSize: 36 });
   });
 });
 
