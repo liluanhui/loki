@@ -9,26 +9,11 @@ import { computed, PropType } from "vue";
 
 const model = defineModel({ default: "" });
 const props = defineProps({
-  optionList: {
-    type: Array,
-    default: () => [],
-  },
-  size: {
-    type: String,
-    default: "default",
-  },
-  theme: {
-    type: String as PropType<"default" | "gray">,
-    default: "default",
-  },
-  label: {
-    type: String,
-    default: "label",
-  },
-  value: {
-    type: String,
-    default: "value",
-  },
+  optionList: { type: Array, default: () => [] },
+  size: { type: String, default: "default" },
+  theme: { type: String as PropType<"default" | "gray">, default: "default" },
+  label: { type: String, default: "label" },
+  value: { type: String, default: "value" },
 });
 
 defineOptions({ name: "RadioBar" });

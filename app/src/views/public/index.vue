@@ -2,7 +2,7 @@
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-header`">
       <radio-bar v-model="form.sort" :option-list="radioBarList"></radio-bar>
-      <bp-button :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
+      <bp-button v-if="appMode === 'pc'" :icon="IconRefreshLine" status="gray" type="plain" shape="circle"></bp-button>
     </div>
     <div class="mt-20px">
       <letter-wall v-if="list.length > 0" :list @on-detail="onDetail" />
@@ -21,6 +21,7 @@ import { Message } from "birdpaper-ui";
 import { findPublicLetterList } from "@loki/odin-api/publicLetter";
 import { useRef } from "@loki/fpo-ui/use/useCompRef";
 import letterDetail from "@loki/fpo-ui/components/letter-detail";
+import { useStorage } from "@vueuse/core";
 
 defineOptions({ name: "PublicPage" });
 const clsBlockName = "public-page";
@@ -51,6 +52,8 @@ const init = async () => {
 };
 
 init();
+
+const appMode = useStorage("app-mode", "pc");
 
 const letterDetailRef = useRef(letterDetail);
 const onDetail = (id: string) => {

@@ -15,10 +15,21 @@
 
     .letter-item {
       &:hover {
-        transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         border-color: var(--gray-2);
+        transform: translateY(-2px);
         transition: all 0.2s ease;
+      }
+    }
+
+    .van-list__finished-text,
+    .van-list__loading {
+      width: 100%;
+      text-align: center;
+      color: var(--gray-4);
+
+      .van-loading__text {
+        color: var(--gray-4);
       }
     }
   }

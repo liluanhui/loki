@@ -14,7 +14,7 @@ export class PublicLetterSearchParams {
   /**
    * 每页条数
    */
-  pageSize: number = 40;
+  pageSize: number = 12;
   /**
    * 公开类型
    */

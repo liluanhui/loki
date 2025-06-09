@@ -125,3 +125,15 @@ $normalHeight: 210px;
     }
   }
 }
+
+@include tablet {
+  .letter-item {
+    width: calc(100% / 3 - 10px);
+  }
+}
+
+@include mobile {
+  .letter-item {
+    width: 100%;
+  }
+}
