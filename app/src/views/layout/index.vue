@@ -17,22 +17,29 @@ import topBar from "./components/top-bar.vue";
 import appMain from "./components/app-main.vue";
 import footerBar from "./components/footer-bar.vue";
 import mobileBar from "./components/mobile-bar/index.vue";
-import { provide, ref, watchEffect } from "vue";
+import { nextTick, provide, ref, watch } from "vue";
 import { useRef } from "@loki/fpo-ui/use/useCompRef";
 import appLogin from "@/views/account/login/app-login.vue";
 import { useStorage, useWindowSize } from "@vueuse/core";
 
 const { width } = useWindowSize();
 const appMode = useStorage("app-mode", "pc");
-watchEffect(() => {
-  if (width.value > 1200) {
-    appMode.value = "pc";
-  } else if (width.value < 1200 && width.value > 766) {
-    appMode.value = "tablet";
-  } else {
-    appMode.value = "mobile";
-  }
-});
+
+watch(
+  () => width.value,
+  (newWidth) => {
+    nextTick(()=>{
+      if (newWidth > 1200) {
+        appMode.value = "pc";
+      } else if (newWidth <= 1200 && newWidth > 766) {
+        appMode.value = "tablet";
+      } else {
+        appMode.value = "mobile";
+      }
+    })
+  },
+  { immediate: true }
+);
 
 // 全局登录弹窗
 const appLoginRef = useRef(appLogin);
