@@ -1,9 +1,40 @@
 @use "@loki/fpo-ui/style/common/design.scss" as *;
 @use "@loki/fpo-ui/style/common/mixins.scss" as *;
 
+$page-bg: #fadaac;
+
 .activity-20250819 {
-  background-color: var(--brand-1);
+  position: relative;
+  background-color: $page-bg;
   padding: 16px;
-  height: 100%;
-  overflow-y: auto;
+  overflow-x: hidden;
+
+  &-header {
+    @include flex(row, center, flex-end);
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    top: -900px;
+    left: 50%;
+    padding: 40px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(250, 144, 30, 0.41) 79%, #fa901e 100%);
+    box-sizing: border-box;
+    border: 1px solid #ff9019;
+    box-shadow: 0px 8px 20px 0px rgba(255, 154, 46, 0.5);
+  }
+
+  &-banner {
+    margin-top: 110px;
+    
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0px 8px 18px 0px rgba(252, 138, 17, 0.3);
+    }
+  }
 }
