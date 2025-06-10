@@ -2,12 +2,23 @@
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-header`">
       <radio-bar v-model="form.sort" :option-list="radioBarList"></radio-bar>
-      <bp-button v-if="appMode === 'pc'" :icon="IconRefreshLine" status="gray" type="plain" shape="circle"
+      <bp-button
+        v-if="appMode === 'pc'"
+        :icon="IconRefreshLine"
+        status="gray"
+        type="plain"
+        shape="circle"
         @click="init({ pageNum: 1, pageSize: 36 })"></bp-button>
     </div>
     <div class="mt-20px">
-      <letter-wall ref="letterWallRef" :list :finished :page-num="Number(form.pageNum)"
-        :page-size="Number(form.pageSize)" @on-detail="onDetail" @on-refresh="init" />
+      <letter-wall
+        ref="letterWallRef"
+        :list
+        :finished
+        :page-num="Number(form.pageNum)"
+        :page-size="Number(form.pageSize)"
+        @on-detail="onDetail"
+        @on-refresh="init" />
     </div>
 
     <letter-detail ref="letterDetailRef" />
@@ -15,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, nextTick, onMounted, ref } from "vue";
+import { inject, nextTick, onMounted, ref, watch } from "vue";
 import { IconRefreshLine } from "birdpaper-icon";
 import letterWall from "./components/letter-wall.vue";
 import { PublicLetterSearchParams } from "@loki/odin/src/types/publicLetter";
@@ -33,8 +44,8 @@ mobileBarCtx?.change("menus");
 
 const radioBarList = [
   { label: "最新", value: "created_at" },
-  { label: "最多点赞", value: "like" },
-  { label: "最多评论", value: "comment" },
+  { label: "最多点赞", value: "likes" },
+  { label: "最多评论", value: "comments" },
 ];
 
 const finished = ref(false);
@@ -46,7 +57,7 @@ const form = ref<PublicLetterSearchParams>(new PublicLetterSearchParams());
 const init = async (data?: { pageNum: number; pageSize: number }) => {
   try {
     letterWallRef.value.loading = true;
-    form.value = { ...form.value, ...data }
+    form.value = { ...form.value, ...data };
     if (form.value.pageNum === 1) {
       list.value = [];
     }
@@ -83,4 +94,13 @@ const letterDetailRef = useRef(letterDetail);
 const onDetail = (id: string) => {
   letterDetailRef.value.open(id);
 };
+
+watch(
+  () => form.value.sort,
+  (newVal) => {
+    if (newVal) {
+      init({ pageNum: 1, pageSize: 36 });
+    }
+  }
+);
 </script>
