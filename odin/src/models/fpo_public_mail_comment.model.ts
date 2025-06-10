@@ -39,12 +39,14 @@ export class FpoPublicMailComment extends Model {
   @Column({
     type: DataType.STRING(11),
     comment: '父级ID',
+    allowNull: true,
   })
   last_id: string;
 
   @Column({
     type: DataType.STRING(11),
     comment: '根ID',
+    allowNull: true,
   })
   root_id: string;
 

@@ -7,14 +7,15 @@ export class CommentService {
   async queryList(
     offset: number,
     limit: number,
-    query: PublicLetterCommentSearchParams,
+    { mail_id, root_id }: PublicLetterCommentSearchParams
   ): Promise<{ count: number; list: FpoPublicMailComment[] }> {
     const attributes = ["id"] as string[];
 
     let { count, rows: list } = await FpoPublicMailComment.findAndCountAll({
       attributes,
       where: {
-        mail_id: query.mailId,
+        mail_id: mail_id,
+        root_id: root_id || null,
       },
       offset,
       limit,
