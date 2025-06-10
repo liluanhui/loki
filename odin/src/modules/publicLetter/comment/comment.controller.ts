@@ -46,8 +46,9 @@ export class CommentController {
     }
 
     // 根评论校验
+    let rootComment = null;
     if (root_id) {
-      const rootComment = await FpoPublicMailComment.findByPk(root_id);
+      rootComment = await FpoPublicMailComment.findByPk(root_id);
       if (!rootComment) {
         paramsError(getResponseMsg("Comment", "COMMENT_NOT_FOUND", req));
       }
@@ -72,9 +73,69 @@ export class CommentController {
       level: level || 0,
     });
 
+    // 更新公开信评论数
+    letter.increment("comments", { by: 1 });
+    await letter.save();
+
+    // 如果是根评论，更新根评论的评论数
+    if (root_id) {
+      rootComment.increment("comments", { by: 1 });
+      await rootComment.save();
+    }
+
     return {
       code: HttpStatus.OK,
       msg: getResponseMsg("Comment", "COMMENT_ADD_SUCCESS", req),
+      data: id,
+    };
+  }
+
+  // Front 删除公开信评论
+  @Post("del")
+  @HttpCode(HttpStatus.OK)
+  async delete(@Body() body: { id: string }, @Req() req: Request) {
+    const { id } = body;
+    if (!id) paramsError();
+
+    // 评论校验
+    const comment = await FpoPublicMailComment.findByPk(id);
+    if (!comment) {
+      paramsError(getResponseMsg("Comment", "COMMENT_NOT_FOUND", req));
+    }
+
+    // 只能删除自己的评论
+    if (comment.uid !== req["uid"]) {
+      paramsError(getResponseMsg("Comment", "NO_PERMISSION", req));
+    }
+
+    // 公开信校验
+    const letter = await FpoPublicMail.findByPk(comment.mail_id);
+    if (!letter) {
+      paramsError(getResponseMsg("Comment", "LETTER_NOT_FOUND", req));
+    }
+
+    let rootComment = null;
+    if (comment.root_id) {
+      rootComment = await FpoPublicMailComment.findByPk(comment.root_id);
+      if (!rootComment) {
+        paramsError(getResponseMsg("Comment", "COMMENT_NOT_FOUND", req));
+      }
+    }
+    
+    await comment.destroy();
+    
+    // 更新公开信评论数
+    letter.decrement("comments", { by: 1 });
+    await letter.save();
+    
+    // 如果是根评论，更新根评论的评论数
+    if (comment.root_id) {
+      rootComment.decrement("comments", { by: 1 });
+      await rootComment.save();
+    }
+
+    return {
+      msg: getResponseMsg("Comment", "COMMENT_DELETE_SUCCESS", req),
       data: id,
     };
   }
