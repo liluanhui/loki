@@ -5,6 +5,7 @@
         <component :is="Component" />
       </transition>
     </router-view>
+    <div style="height: 200px"></div>
   </div>
 </template>
 
