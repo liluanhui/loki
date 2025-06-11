@@ -5,7 +5,9 @@
     </div>
 
     <div :class="`${clsBlockName}-banner`">
-      <img src="https://fpo-1251999712.cos.ap-guangzhou.myqcloud.com/activity/20250819/letter-banner@1.5x.png?imageMogr2/thumbnail/!80p" alt="" />
+      <img class="banner-text" src="https://fpo-1251999712.cos.ap-guangzhou.myqcloud.com/activity/20250819/banner-text.png" alt="" />
+      <img class="banner-pic" src="https://fpo-1251999712.cos.ap-guangzhou.myqcloud.com/activity/20250819/16-pic.jpg" alt="" />
+      <!-- <img src="https://fpo-1251999712.cos.ap-guangzhou.myqcloud.com/activity/20250819/letter-banner@1.5x.png?imageMogr2/thumbnail/!80p" alt="" /> -->
     </div>
   </div>
 </template>

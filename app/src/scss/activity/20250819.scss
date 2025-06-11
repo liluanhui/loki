@@ -29,14 +29,26 @@ $page-bg: #fadaac;
 
   &-banner {
     margin-top: 120px;
-    
+    height: max-content;
+    border-radius: 18px;
+    background: #ff9a2e;
+    box-sizing: border-box;
+    border: 1px solid #fa901e;
+    padding: 20px 16px;
+
+    .banner-text {
+    }
+
+    .banner-pic {
+      margin: 20px 0 12px 0;
+      border-radius: 8px;
+    }
+
     img {
       width: 100%;
       height: auto;
       max-width: 100%;
       display: block;
-      border-radius: 18px;
-      box-shadow: 0px 8px 18px 0px rgba(252, 138, 17, 0.3);
     }
   }
 }
