@@ -10,8 +10,8 @@
     </div>
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">
-      <bp-button size="small" type="secondary" @click="isFoucus = false">取消</bp-button>
-      <bp-button size="small">发送</bp-button>
+      <bp-button size="small" shape="round" type="dashed" @click="isFoucus = false">取消</bp-button>
+      <bp-button size="small" shape="round">发送</bp-button>
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ const clsBlockName = "comment-editor";
 const { t } = useI18n();
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
 
-const isFoucus = ref(true);
+const isFoucus = ref(false);
 const onFocus = () => {
   isFoucus.value = true;
 };

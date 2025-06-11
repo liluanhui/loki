@@ -35,7 +35,7 @@
           <span :class="`${clsBlockName}-comment-header-inner`">共 {{ comments }} 条评论</span>
         </div>
         <div :class="`${clsBlockName}-comment-content`">
-          <comment-list />
+          <comment-list ref="commentListRef" />
         </div>
         <div :class="`${clsBlockName}-comment-footer`">
           <comment-editor />
@@ -51,6 +51,7 @@ import { useRef } from "../../../../use/useCompRef";
 import { computed } from "vue";
 import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
+import { CommentList } from "../../../comment-list";
 
 const props = defineProps({
   isPopup: { type: Boolean, default: false },
@@ -74,9 +75,11 @@ const clsBlockName = "detail-inner";
 
 const { t } = useI18n();
 
+const commentListRef = useRef(CommentList);
 const viewerRef = useRef(YuqueEditor);
 const setContent = (content: string) => {
   viewerRef.value?.setViewerContent(content);
+  commentListRef.value?.init(props.id);
 };
 
 const isSelf = computed(() => props.recipient_type === "self");

@@ -17,6 +17,23 @@ export class PublicLetterCommentSearchParams {
   root_id?: string;
 }
 
+export interface PublicLetterCommentItem {
+    avatar: null | string;
+    comments: number;
+    created_at: string;
+    deliver_at: string;
+    fpo_no: string;
+    id: string;
+    likes: number;
+    public_type: string;
+    recipient_email?: null;
+    recipient_name?: null | string;
+    recipient_type: string;
+    sender_name: string;
+    title: string;
+    word_count: number;
+}
+
 export class PublicLetterCommentForm {
   /**
    * 评论内容
