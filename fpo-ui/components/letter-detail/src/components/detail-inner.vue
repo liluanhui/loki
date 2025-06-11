@@ -31,9 +31,6 @@
         </div>
       </div>
       <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
-        <div :class="`${clsBlockName}-comment-header`">
-          <span :class="`${clsBlockName}-comment-header-inner`">共 {{ commentListRef?.count || 0 }} 条评论</span>
-        </div>
         <div :class="`${clsBlockName}-comment-content`">
           <comment-list ref="commentListRef" />
         </div>

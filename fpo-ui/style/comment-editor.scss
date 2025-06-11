@@ -5,7 +5,7 @@
 .comment-editor {
   &-inner {
     @include flex(row, flex-start, center);
-    gap: 10px;
+    gap: 6px;
   }
 
   &-option {

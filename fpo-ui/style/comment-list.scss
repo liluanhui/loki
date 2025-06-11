@@ -3,6 +3,15 @@
 @use "./common/extend.scss" as *;
 
 .comment-list {
+  &-header {
+    @include flex(column, flex-start, flex-end);
+    
+    &-inner {
+      font-size: 13px;
+      color: var(--gray-6);
+    }
+  }
+
   .comment-item {
     @include flex(row, flex-start, flex-start);
     margin-bottom: 16px;

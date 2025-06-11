@@ -69,7 +69,8 @@ const list = ref<DraftListItem[]>([]);
 const init = async (data?: { pageNum: number; pageSize: number }) => {
   try {
     loading.value = true;
-    const res = await findDraftList({ ...form.value, ...data });
+    form.value = {...form.value, ...data };
+    const res = await findDraftList(form.value);
     if (res.code != 0) {
       throw new Error(res.msg);
     }
@@ -86,7 +87,7 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
       form.value.pageSize = res.data.pageSize;
       total.value = res.data.count;
       finished.value = form.value.pageNum * form.value.pageSize >= total.value;
-    }, 800);
+    }, 400);
   } catch (err) {
     Message.error((err as Error).message);
     list.value = [];
@@ -97,7 +98,7 @@ const init = async (data?: { pageNum: number; pageSize: number }) => {
     setTimeout(() => {
       refreshing.value = false;
       loading.value = false;
-    }, 800);
+    }, 400);
   }
 };
 const onRefresh = () => {
