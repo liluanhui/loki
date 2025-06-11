@@ -93,7 +93,7 @@ $normalHeight: 210px;
 
     .statistic {
       @include flex(row, center, center);
-      gap: 12px;
+      gap: 8px;
       transform: scale(0.9);
 
       &-item {

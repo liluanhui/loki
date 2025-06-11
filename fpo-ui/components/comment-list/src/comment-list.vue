@@ -34,5 +34,6 @@ const init = async (id: string) => {
 
 defineExpose({
   init,
+  count
 });
 </script>

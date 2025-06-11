@@ -32,13 +32,13 @@
       </div>
       <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-header`">
-          <span :class="`${clsBlockName}-comment-header-inner`">共 {{ comments }} 条评论</span>
+          <span :class="`${clsBlockName}-comment-header-inner`">共 {{ commentListRef?.count || 0 }} 条评论</span>
         </div>
         <div :class="`${clsBlockName}-comment-content`">
           <comment-list ref="commentListRef" />
         </div>
         <div :class="`${clsBlockName}-comment-footer`">
-          <comment-editor :mail-id="id" />
+          <comment-editor :mail-id="id" @success="onCommentSuccess" />
         </div>
       </div>
     </div>
@@ -79,6 +79,10 @@ const commentListRef = useRef(CommentList);
 const viewerRef = useRef(YuqueEditor);
 const setContent = (content: string) => {
   viewerRef.value?.setViewerContent(content);
+  commentListRef.value?.init(props.id);
+};
+
+const onCommentSuccess = () => {
   commentListRef.value?.init(props.id);
 };
 

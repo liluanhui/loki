@@ -20,8 +20,8 @@
         <span class="public-no-inner">{{ _no || "--" }}</span>
       </div>
       <div class="statistic">
-        <span class="statistic-item"> <IconThumbUpLine size="14" />{{ likes }} </span>
-        <span class="statistic-item"> <IconChat1Line size="14" />{{ comments }} </span>
+        <span class="statistic-item"> <IconHeart3Line size="14" />{{ likes > 0 ? likes : "" }} </span>
+        <span class="statistic-item"> <IconChat1Line size="14" />{{ comments > 0 ? comments : "" }} </span>
       </div>
     </div>
   </div>

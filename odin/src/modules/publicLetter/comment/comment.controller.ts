@@ -84,7 +84,6 @@ export class CommentController {
     }
 
     return {
-      code: HttpStatus.OK,
       msg: getResponseMsg("Comment", "COMMENT_ADD_SUCCESS", req),
       data: id,
     };
