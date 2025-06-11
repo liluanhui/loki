@@ -32,9 +32,10 @@
       </div>
       <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-header`">
-          <span :class="`${clsBlockName}-comment-header-inner`">共 0 条评论</span>
+          <span :class="`${clsBlockName}-comment-header-inner`">共 {{ comments }} 条评论</span>
         </div>
         <div :class="`${clsBlockName}-comment-content`">
+          <comment-list />
         </div>
       </div>
     </div>
@@ -62,6 +63,7 @@ const props = defineProps({
   public_type: { type: String, default: "public" },
   created_at: { type: String },
   deliver_at: { type: String },
+  comments: { type: Number, default: 0 },
 });
 
 defineOptions({ name: "DetailInner" });

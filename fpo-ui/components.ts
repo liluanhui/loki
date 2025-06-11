@@ -10,6 +10,7 @@ import {
   PublicTypeSelector,
   YuqueEditor,
   LetterDetail,
+  CommentList
 } from "./fpo-ui";
 
 export default [
@@ -24,4 +25,5 @@ export default [
   PublicTypeSelector,
   YuqueEditor,
   LetterDetail,
+  CommentList
 ];

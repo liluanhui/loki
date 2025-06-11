@@ -11,6 +11,7 @@ declare module "vue" {
     PublicTypeSelector: typeof import("fpo-ui")["PublicTypeSelector"];
     YuqueEditor: typeof import("fpo-ui")["YuqueEditor"];
     LetterDetail: typeof import("fpo-ui")["LetterDetail"];
+    CommentList: typeof import("fpo-ui")["CommentList"];
   }
 }
 
