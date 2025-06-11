@@ -1,5 +1,7 @@
 <template>
-  <div :class="clsBlockName">123</div>
+  <div :class="clsBlockName">
+    <p v-for="v in 70">List</p>
+  </div>
 </template>
 
 <script lang="ts" setup>

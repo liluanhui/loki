@@ -37,6 +37,9 @@
         <div :class="`${clsBlockName}-comment-content`">
           <comment-list />
         </div>
+        <div :class="`${clsBlockName}-comment-footer`">
+          <comment-editor />
+        </div>
       </div>
     </div>
   </bp-spin>
@@ -70,6 +73,7 @@ defineOptions({ name: "DetailInner" });
 const clsBlockName = "detail-inner";
 
 const { t } = useI18n();
+
 const viewerRef = useRef(YuqueEditor);
 const setContent = (content: string) => {
   viewerRef.value?.setViewerContent(content);

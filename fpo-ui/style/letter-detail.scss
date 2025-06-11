@@ -95,14 +95,13 @@
   }
 
   &-comment {
+    position: relative;
     width: 300px;
     height: 100%;
     border-left: 1px dashed $borderColor-2;
-    padding: 0 12px;
 
     &-header {
       @include flex(column, flex-start, flex-end);
-      height: 52px;
 
       &-inner {
         font-size: 13px;
@@ -110,8 +109,22 @@
       }
     }
 
-    &-content{
-      padding: 16px;
+    &-content {
+      padding: 16px 12px 100px 12px;
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    &-footer {
+      position: absolute;
+      bottom: -20px;
+      width: 100%;
+      height: max-content;
+      border-top: $borderSize dashed $borderColor-3;
+      padding: 14px 0 20px 12px;
+      background-color: var(--gray-0);
+      transition: all 0.2s ease-in-out;
     }
   }
 }

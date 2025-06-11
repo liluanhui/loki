@@ -11,3 +11,4 @@ export * from "./components/yuque-editor";
 export * from "./components/fpo-message";
 export * from "./components/letter-detail";
 export * from "./components/comment-list";
+export * from "./components/comment-editor";

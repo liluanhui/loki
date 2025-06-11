@@ -12,6 +12,7 @@ declare module "vue" {
     YuqueEditor: typeof import("fpo-ui")["YuqueEditor"];
     LetterDetail: typeof import("fpo-ui")["LetterDetail"];
     CommentList: typeof import("fpo-ui")["CommentList"];
+    CommentEditor: typeof import("fpo-ui")["CommentEditor"];
   }
 }
 
