@@ -3,4 +3,65 @@
 @use "./common/extend.scss" as *;
 
 .comment-list {
+  .comment-item {
+    @include flex(row, flex-start, flex-start);
+    margin-bottom: 16px;
+
+    &-content {
+      @include flex(column, center, flex-start);
+      margin-left: 6px;
+      padding: 4px;
+    }
+
+    &-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-9);
+      width: 200px;
+      @extend .text-ellipsis;
+    }
+
+    &-inner {
+      margin-top: 6px;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gray-8);
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    &-footer {
+      @include flex(row, flex-start, center);
+      gap: 10px;
+      margin-top: 4px;
+      color: var(--gray-5);
+      transition: all 0.2s;
+
+      .bp-icon {
+        fill: var(--gray-5);
+        margin-right: 2px;
+        transition: all 0.2s;
+      }
+
+      span {
+        @include flex(row, flex-start, center);
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .comment {
+        cursor: pointer;
+
+        &:hover {
+          color: var(--brand-6);
+          transition: all 0.2s;
+
+          .bp-icon {
+            fill: var(--brand-6);
+            transition: all 0.2s;
+          }
+        }
+      }
+    }
+  }
 }

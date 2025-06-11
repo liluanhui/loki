@@ -38,7 +38,7 @@
           <comment-list ref="commentListRef" />
         </div>
         <div :class="`${clsBlockName}-comment-footer`">
-          <comment-editor />
+          <comment-editor :mail-id="id" />
         </div>
       </div>
     </div>

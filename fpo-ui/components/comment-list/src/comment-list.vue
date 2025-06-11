@@ -1,11 +1,14 @@
 <template>
-  <div :class="clsBlockName"></div>
+  <div :class="clsBlockName">
+    <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" />
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment";
-import { msg } from "../../../fpo-ui";
 import { ref } from "vue";
+import { msg } from "../../../fpo-ui";
+import commentItem from "./components/comment-item.vue";
+import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment";
 import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/odin/src/types/publicLetter/comment";
 
 defineOptions({ name: "CommentList" });
