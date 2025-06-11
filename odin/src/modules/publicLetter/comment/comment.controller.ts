@@ -3,13 +3,13 @@ import { CommentService } from "./comment.service";
 import { Public } from "src/modules/auth/auth.decorator";
 import { PublicLetterCommentForm, PublicLetterCommentSearchParams } from "src/types/publicLetter/comment";
 import { getResponseMsg, paramsError } from "src/utils/throw";
-import { getRealIp, handlePageLimit, randomString, searchIpRegion } from "src/utils/helper";
+import { getRealIp, handlePageLimit, ipToInt, randomString, searchIpRegion } from "src/utils/helper";
 import { FpoPublicMail } from "src/models/fpo_public_mail.model";
 import { FpoPublicMailComment } from "src/models/fpo_public_mail_comment.model";
 
 @Controller("publicLetter/comment")
 export class CommentController {
-  constructor(private commentService: CommentService) {}
+  constructor(private commentService: CommentService) { }
 
   // Front 获取公开信评论列表
   @Public()
@@ -29,7 +29,6 @@ export class CommentController {
   @Post("add")
   @HttpCode(HttpStatus.OK)
   async add(@Body() body: PublicLetterCommentForm, @Req() req: Request) {
-    // let region = await searchIpRegion(getRealIp(req)");
     const { mail_id, content, root_id, last_id, level } = body;
 
     if (!mail_id || !content) paramsError(getResponseMsg("Comment", "COMMENT_IS_EMPTY", req));
@@ -64,6 +63,9 @@ export class CommentController {
     }
 
     const id = randomString();
+    const ip = getRealIp(req);
+    let region = await searchIpRegion(ip);
+
     await FpoPublicMailComment.create({
       id,
       uid: req["uid"],
@@ -72,6 +74,8 @@ export class CommentController {
       root_id: root_id || null,
       last_id: last_id || null,
       level: level || 0,
+      ip_address: ipToInt(ip),
+      ip_region: region
     });
 
     // 更新公开信评论数

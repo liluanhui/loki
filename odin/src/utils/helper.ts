@@ -109,3 +109,60 @@ export const searchIpRegion = async (ip: string) => {
     return "IP location not found";
   }
 };
+
+/**
+ * 将32位无符号整数转换为IPv4地址字符串
+ * @param int - 32位无符号整数
+ * @returns 对应的IPv4地址字符串，格式为"xxx.xxx.xxx.xxx"
+ * @throws 当输入不是有效的32位无符号整数时抛出错误
+ */
+export function intToIp(int: number): string {
+  if (typeof int !== 'number' || !Number.isInteger(int) || int < 0 || int > 0xFFFFFFFF) {
+    return '';
+  }
+  return [
+    (int >>> 24) & 0xFF,
+    (int >>> 16) & 0xFF,
+    (int >>> 8) & 0xFF,
+    int & 0xFF
+  ].join('.');
+}
+
+/**
+ * 将IPv4地址字符串转换为32位无符号整数
+ * @param ip - IPv4地址字符串，格式为"xxx.xxx.xxx.xxx"
+ * @returns 对应的32位无符号整数，或抛出错误
+ * @throws 当IP格式无效或数值超出范围时抛出错误
+ */
+export function ipToInt(ip: string): number {
+  // 验证输入是否为字符串
+  if (typeof ip !== 'string') {
+    throw new TypeError('输入必须是字符串');
+  }
+
+  // 使用正则表达式验证IP格式
+  const ipRegex = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
+  const match = ip.match(ipRegex);
+
+  if (!match) {
+    throw new Error('无效的IP地址格式');
+  }
+
+  // 解析四个部分并验证范围
+  const parts = match.slice(1).map(Number);
+  for (const part of parts) {
+    if (part < 0 || part > 255) {
+      throw new Error('IP地址的每个部分必须在0-255之间');
+    }
+  }
+
+  // 转换为32位无符号整数
+  // 使用位运算确保结果为32位整数
+  let result = 0;
+  for (let i = 0; i < 4; i++) {
+    result = (result << 8) | parts[i];
+  }
+
+  // 确保结果为无符号整数（处理JavaScript中的符号问题）
+  return result >>> 0;
+}

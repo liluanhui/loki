@@ -55,6 +55,20 @@ export class FpoPublicMailComment extends Model {
   root_id: string;
 
   @Column({
+    type: DataType.INET(),
+    comment: "IP 地址",
+    allowNull: false,
+  })
+  ip_address: string;
+
+  @Column({
+    type: DataType.JSON,
+    comment: "IP 归属地信息",
+    allowNull: true,
+  })
+  ip_region: string;
+
+  @Column({
     type: DataType.STRING(500),
     comment: "内容",
     allowNull: false,
