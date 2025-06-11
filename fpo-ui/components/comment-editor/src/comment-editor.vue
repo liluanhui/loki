@@ -2,7 +2,7 @@
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-inner`">
       <bp-button v-show="!isFoucus" :icon="IconThumbUpLine" type="secondary" shape="circle" />
-      <bp-input v-model="form.content" clearable :maxlength="25" show-limit placeholder="说点什么..." @focus="onFocus">
+      <bp-input v-model="form.content" is-round clearable :maxlength="25" show-limit placeholder="说点什么..." @focus="onFocus">
         <template #prefix v-show="!isFoucus">
           <bp-avatar size="mini" image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
         </template>
@@ -10,8 +10,8 @@
     </div>
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">
-      <bp-button size="small">发送</bp-button>
       <bp-button size="small" type="secondary" @click="isFoucus = false">取消</bp-button>
+      <bp-button size="small">发送</bp-button>
     </div>
   </div>
 </template>

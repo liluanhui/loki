@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0(vue@3.5.13(typescript@5.7.3))
       birdpaper-ui:
-        specifier: ^3.0.0-alpha.58
-        version: 3.0.0-alpha.58(vue@3.5.13(typescript@5.7.3))
+        specifier: ^3.0.0-alpha.59
+        version: 3.0.0-alpha.59(vue@3.5.13(typescript@5.7.3))
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2102,8 +2102,8 @@ packages:
   birdpaper-icon@0.9.0:
     resolution: {integrity: sha512-rpwqBYUUU5dklzQG02ATCZgmjBZgzV7jPQFkCP1HEpYAoYSSQH/aUEEiVrJz/o4NIs81R90Q7dgLcqgYNVtg6g==}
 
-  birdpaper-ui@3.0.0-alpha.58:
-    resolution: {integrity: sha512-rVHJ9hU7rC+aZy3Kiyp2FV8Gqs/Do6GVZZ0CK17ZsGFy8PxkA/9h/uw/XasFtvP9h6oKtEb8C0KIAaTEzVE5vA==}
+  birdpaper-ui@3.0.0-alpha.59:
+    resolution: {integrity: sha512-0sLlUizHE9Vagls44fNLGpOuFxNtHf2/ZrrVEIQsZiOF3cOeyePUPXhBaBiDFT1fNf+1vlSxtnJsReAm/3Avmw==}
 
   birpc@0.2.19:
     resolution: {integrity: sha512-5WeXXAvTmitV1RqJFppT5QtUiz2p1mRSYU000Jkft5ZUCLJIk4uQriYNO50HknxKwM6jd8utNc66K1qGIwwWBQ==}
@@ -7092,7 +7092,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  birdpaper-ui@3.0.0-alpha.58(vue@3.5.13(typescript@5.7.3)):
+  birdpaper-ui@3.0.0-alpha.59(vue@3.5.13(typescript@5.7.3)):
     dependencies:
       '@vueuse/components': 11.3.0(vue@3.5.13(typescript@5.7.3))
       '@vueuse/core': 10.11.1(vue@3.5.13(typescript@5.7.3))
