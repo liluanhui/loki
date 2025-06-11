@@ -6,7 +6,7 @@ export class PublicLetterCommentSearchParams {
   /**
    * 每页条数
    */
-  pageSize: number = 10;
+  pageSize: number = 20;
   /**
    * 公开信ID
    */

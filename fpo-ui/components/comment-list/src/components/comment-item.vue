@@ -7,8 +7,11 @@
       <p :class="`${clsBlockName}-name`">{{ nick_name }}</p>
       <p :class="`${clsBlockName}-inner`">{{ content }}</p>
       <div :class="`${clsBlockName}-footer`">
-        <span class="time" :title="created_at">{{ _createdAt }}</span>
-        <span class="comment"><IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }}</span>
+        <span class="time" :title="created_at">{{ _createdAt }} </span>
+        <span class="region">{{ province ? province.replace(/省$/, '') : '' }}</span>
+        <span class="comment">
+          <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }}
+        </span>
       </div>
     </div>
   </div>
@@ -25,6 +28,7 @@ const props = defineProps({
   avatar: { type: String },
   comments: { type: Number },
   content: { type: String },
+  province: { type: String },
   created_at: { type: String },
   id: { type: String },
   last_id: { type: String },

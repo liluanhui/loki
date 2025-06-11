@@ -4,7 +4,7 @@
 
 .comment-editor {
   &-inner {
-    @include flex(row, flex-start, center);
+    @include flex(row, space-between, center);
     gap: 6px;
   }
 

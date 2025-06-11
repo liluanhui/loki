@@ -1,12 +1,14 @@
 <template>
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-inner`">
-      <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
-      <bp-input v-model="form.content" is-round clearable :maxlength="500" placeholder="说点什么..." @focus="isFoucus = true">
+        <bp-input v-model="form.content" is-round clearable :maxlength="500" placeholder="说点什么..."
+        @focus="isFoucus = true" :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
-          <bp-avatar size="mini" image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
+          <bp-avatar size="mini"
+          image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
         </template>
       </bp-input>
+      <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
     </div>
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">

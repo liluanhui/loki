@@ -80,7 +80,7 @@ const setContent = (content: string) => {
 };
 
 const onCommentSuccess = () => {
-  commentListRef.value?.init(props.id);
+  commentListRef.value?.init(props.id, { pageNum: 1, pageSize: 20 });
 };
 
 const isSelf = computed(() => props.recipient_type === "self");
