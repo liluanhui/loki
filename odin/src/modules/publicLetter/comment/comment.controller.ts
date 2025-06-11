@@ -3,7 +3,7 @@ import { CommentService } from "./comment.service";
 import { Public } from "src/modules/auth/auth.decorator";
 import { PublicLetterCommentForm, PublicLetterCommentSearchParams } from "src/types/publicLetter/comment";
 import { getResponseMsg, paramsError } from "src/utils/throw";
-import { handlePageLimit, randomString } from "src/utils/helper";
+import { getRealIp, handlePageLimit, randomString, searchIpRegion } from "src/utils/helper";
 import { FpoPublicMail } from "src/models/fpo_public_mail.model";
 import { FpoPublicMailComment } from "src/models/fpo_public_mail_comment.model";
 
@@ -29,6 +29,7 @@ export class CommentController {
   @Post("add")
   @HttpCode(HttpStatus.OK)
   async add(@Body() body: PublicLetterCommentForm, @Req() req: Request) {
+    // let region = await searchIpRegion(getRealIp(req)");
     const { mail_id, content, root_id, last_id, level } = body;
 
     if (!mail_id || !content) paramsError(getResponseMsg("Comment", "COMMENT_IS_EMPTY", req));
@@ -120,13 +121,13 @@ export class CommentController {
         paramsError(getResponseMsg("Comment", "COMMENT_NOT_FOUND", req));
       }
     }
-    
+
     await comment.destroy();
-    
+
     // 更新公开信评论数
     letter.decrement("comments", { by: 1 });
     await letter.save();
-    
+
     // 如果是根评论，更新根评论的评论数
     if (comment.root_id) {
       rootComment.decrement("comments", { by: 1 });

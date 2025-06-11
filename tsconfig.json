@@ -27,6 +27,6 @@
     "fpo-ui/**/*.d.ts",
     "fpo-ui/**/*.tsx",
     "fpo-ui/**/*.vue"
-  ],
+, "odin/src/utils/ip2region/index.js"  ],
   "exclude": ["dist", "**/*.js"]
 }

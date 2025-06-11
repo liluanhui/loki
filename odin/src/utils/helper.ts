@@ -1,3 +1,5 @@
+import IP2Region from "ip2region";
+
 /**
  * 生成随机字符串
  * @param {number} [len=11]
@@ -5,14 +7,10 @@
  * @param {number} [randomType=2]
  * @returns
  */
-export const randomString = (
-  len: number = 11,
-  prefix: string = '',
-  randomType: number = 2,
-): string => {
-  const charSets = ['abcdefghijklmnopqrstuvwxyz', '0123456789'];
-  const text = randomType === 2 ? charSets.join('') : charSets[randomType];
-  let result = '';
+export const randomString = (len: number = 11, prefix: string = "", randomType: number = 2): string => {
+  const charSets = ["abcdefghijklmnopqrstuvwxyz", "0123456789"];
+  const text = randomType === 2 ? charSets.join("") : charSets[randomType];
+  let result = "";
 
   for (let i = 0; i < len; i++) {
     result += text.charAt(Math.floor(Math.random() * text.length));
@@ -69,7 +67,7 @@ export const isPassword = (data: any) => {
  * @param time
  * @returns
  */
-export const getTimeStamp = (time: string = '') => {
+export const getTimeStamp = (time: string = "") => {
   const timeStamp = time ? Date.parse(time) : new Date().getTime();
   return Math.floor(timeStamp / 1000);
 };
@@ -78,8 +76,36 @@ export const isUrl = (data: string) => {
   if (!data) return true;
 
   var v = new RegExp(
-    '^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$',
-    'i',
+    "^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$",
+    "i"
   );
   return v.test(data);
+};
+
+/**
+ * @description: 获取客户端真实 IP
+ * @param {Request} req
+ */
+export const getRealIp = (req: Request): string => {
+  const result = req.headers["x-forwarded-for"] || req.headers["x-real-ip"] || req["socket"].remoteAddress || req["ip"];
+  let ip = Array.isArray(result) ? result[0] : result;
+  if (ip.indexOf("::ffff:") !== -1) {
+    ip = ip.substring(7);
+  }
+  return ip || "";
+};
+
+/**
+ * @description: 根据 IP 查询地区
+ * @param ip 
+ * @returns 
+ */
+export const searchIpRegion = async (ip: string) => {
+  const query = new IP2Region();
+  try {
+    const result = query.search(ip);
+    return result;
+  } catch (error) {
+    return "IP location not found";
+  }
 };
