@@ -1,19 +1,18 @@
 <template>
   <div :class="clsBlockName">
-    <div :class="`${clsBlockName}-avatar`">
-      <bp-avatar size="small" :image-url="avatar"></bp-avatar>
-    </div>
-    <div :class="`${clsBlockName}-content`">
-      <p :class="`${clsBlockName}-name`">{{ nick_name }}</p>
-      <p :class="`${clsBlockName}-inner`">{{ content }}</p>
-      <div :class="`${clsBlockName}-footer`">
-        <span class="time" :title="created_at">{{ _createdAt }} </span>
-        <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
-        <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
+    <div :class="`${clsBlockName}-item`">
+      <div :class="`${clsBlockName}-item-avatar`">
+        <bp-avatar size="mini" :image-url="avatar"></bp-avatar>
       </div>
-      <p v-if="comments > 0" :class="`${clsBlockName}-expand-reply`">展开 {{ comments }} 条回复</p>
-
-     <reply-item v-bind="props"></reply-item>
+      <div :class="`${clsBlockName}-item-content`">
+        <p :class="`${clsBlockName}-item-name`">{{ nick_name }}</p>
+        <p :class="`${clsBlockName}-item-inner`">{{ content }}</p>
+        <div :class="`${clsBlockName}-item-footer`">
+          <span class="time" :title="created_at">{{ _createdAt }} </span>
+          <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
+          <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +23,6 @@ import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useI18n } from "vue-i18n";
-import replyItem from "./reply-item.vue";
 
 const props = defineProps({
   avatar: { type: String },
@@ -40,8 +38,8 @@ const props = defineProps({
   uid: { type: String },
 });
 
-defineOptions({ name: "CommentItem" });
-const clsBlockName = "comment-item";
+defineOptions({ name: "ReplyComment" });
+const clsBlockName = "reply-comment";
 
 const { t, locale } = useI18n();
 dayjs.locale(locale.value === "zh_CN" ? "zh-cn" : "en");
