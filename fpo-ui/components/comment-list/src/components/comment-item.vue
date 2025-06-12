@@ -9,7 +9,7 @@
       <div :class="`${clsBlockName}-footer`">
         <span class="time" :title="created_at">{{ _createdAt }} </span>
         <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
-        <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
+        <span class="comment" @click="handleReply"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
       </div>
       <p
         v-if="comments > 0 && replyList.length === 0"
@@ -46,8 +46,11 @@ const props = defineProps({
   nick_name: { type: String },
   root_id: { type: String },
   uid: { type: String },
-  mail_id: { type: String},
+  mail_id: { type: String },
 });
+const emits = defineEmits<{
+  (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
+}>();
 
 defineOptions({ name: "CommentItem" });
 const clsBlockName = "comment-item";
@@ -62,6 +65,10 @@ dayjs.extend(relativeTime);
 const _createdAt = computed(() => {
   return props.created_at ? dayjs().to(dayjs(props.created_at)) : "";
 });
+
+const handleReply = () => {
+  emits("reply", props.id, props.id, props.nick_name, props.content);
+};
 
 const loading = ref(false);
 const count = ref(0);

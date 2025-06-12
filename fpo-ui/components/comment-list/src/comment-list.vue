@@ -10,7 +10,12 @@
         :offset="10"
         finished-text="没有更多了"
         @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
-        <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" :mail_id="form.mail_id" />
+        <comment-item
+          v-for="(item, index) in list"
+          v-bind="item"
+          :key="`comment-${index}`"
+          :mail_id="form.mail_id"
+          @reply="onReply" />
       </vant-list>
     </pull-refresh>
   </div>
@@ -25,6 +30,10 @@ import "vant/lib/pull-refresh/style/index";
 import commentItem from "./components/comment-item.vue";
 import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment";
 import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/odin/src/types/publicLetter/comment";
+
+const emits = defineEmits<{
+  (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
+}>();
 
 defineOptions({ name: "CommentList" });
 const clsBlockName = "comment-list";
@@ -79,6 +88,10 @@ const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
       loading.value = false;
     }, 400);
   }
+};
+
+const onReply = (root_id: string, last_id: string, last_nick_name: string, content: string) => {
+  emits("reply", root_id, last_id, last_nick_name, content);
 };
 
 defineExpose({

@@ -32,10 +32,10 @@
       </div>
       <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-content`">
-          <comment-list ref="commentListRef" />
+          <comment-list ref="commentListRef" @reply="onReply"/>
         </div>
         <div :class="`${clsBlockName}-comment-footer`">
-          <comment-editor :mail-id="id" @success="onCommentSuccess" />
+          <comment-editor ref="commentEditorRef" :mail-id="id" @success="onCommentSuccess" />
         </div>
       </div>
     </div>
@@ -49,6 +49,7 @@ import { computed } from "vue";
 import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 import { CommentList } from "../../../comment-list";
+import CommentEditor from "../../../comment-editor/src/comment-editor.vue";
 
 const props = defineProps({
   isPopup: { type: Boolean, default: false },
@@ -107,6 +108,11 @@ const _deliveryAt = computed(() => {
 const _createdAt = computed(() => {
   return props.created_at ? dayjs().to(dayjs(props.created_at)) : "";
 });
+
+const commentEditorRef = useRef(CommentEditor);
+const onReply = (root_id: string, last_id: string, last_nick_name: string, content: string) => {
+  commentEditorRef.value?.initReply(root_id, last_id, last_nick_name, content);
+};
 
 defineExpose({
   setContent,

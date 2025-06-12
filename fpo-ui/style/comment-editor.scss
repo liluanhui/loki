@@ -3,6 +3,24 @@
 @use "./common/extend.scss" as *;
 
 .comment-editor {
+  &-reply {
+    margin-bottom: 10px;
+
+    &-inner {
+      font-size: 13px;
+      color: var(--gray-6);
+      @extend .text-ellipsis;
+    }
+
+    &-content {
+      width: 260px;
+      font-size: 13px;
+      color: var(--gray-8);
+      line-height: 1.8;
+      @extend .text-ellipsis;
+    }
+  }
+
   &-inner {
     @include flex(row, space-between, center);
     gap: 6px;

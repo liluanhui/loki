@@ -1,11 +1,22 @@
 <template>
   <div :class="clsBlockName">
+    <div v-if="form.last_id && isFoucus" :class="`${clsBlockName}-reply`">
+      <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
+      <p :class="`${clsBlockName}-reply-content`">测室温万本金都是开了放假哈市的咖啡花洒地方哈圣诞节快乐好</p>
+    </div>
+
     <div :class="`${clsBlockName}-inner`">
-        <bp-input v-model="form.content" is-round clearable :maxlength="500" placeholder="说点什么..."
-        @focus="isFoucus = true" :style="{ width: isFoucus ? '100%' : '220px' }">
+      <bp-input
+        ref="inpRef"
+        v-model="form.content"
+        is-round
+        clearable
+        :maxlength="500"
+        placeholder="说点什么..."
+        @focus="isFoucus = true"
+        :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
-          <bp-avatar size="mini"
-          image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
+          <bp-avatar size="mini" image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
         </template>
       </bp-input>
       <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
@@ -25,6 +36,8 @@ import { ref } from "vue";
 import { PublicLetterCommentForm } from "../../../../odin/src/types/publicLetter/comment";
 import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
+import { useRef } from "../../../use/useCompRef";
+import { Input } from "birdpaper-ui";
 
 const props = defineProps({
   mailId: { type: String },
@@ -38,6 +51,19 @@ const clsBlockName = "comment-editor";
 
 const { t } = useI18n();
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
+
+const lastNickName = ref("");
+const lastContent = ref("");
+const inpRef = useRef(Input);
+const initReply = (root_id: string, last_id: string, last_nick_name: string, content: string) => {
+  lastNickName.value = last_nick_name;
+  lastContent.value = content;
+
+  form.value.root_id = root_id;
+  form.value.last_id = last_id;
+  form.value.level = 1;
+  inpRef.value?.focus();
+};
 
 const isFoucus = ref(false);
 const onSubmit = async () => {
@@ -58,4 +84,8 @@ const onSubmit = async () => {
     msg.error((err as Error).message);
   }
 };
+
+defineExpose({
+  initReply,
+});
 </script>
