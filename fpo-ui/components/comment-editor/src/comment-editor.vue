@@ -1,20 +1,13 @@
 <template>
-  <div :class="clsBlockName">
+  <div v-if="isLogin()" :class="clsBlockName">
     <div v-if="form.last_id && isFoucus" :class="`${clsBlockName}-reply`">
       <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
       <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
     </div>
 
-    <div v-if="isLogin()" :class="`${clsBlockName}-inner`">
-      <bp-input
-        ref="inpRef"
-        v-model="form.content"
-        is-round
-        clearable
-        :maxlength="500"
-        placeholder="说点什么..."
-        @focus="isFoucus = true"
-        :style="{ width: isFoucus ? '100%' : '220px' }">
+    <div :class="`${clsBlockName}-inner`">
+      <bp-input ref="inpRef" v-model="form.content" is-round clearable :maxlength="500" placeholder="说点什么..."
+        @focus="isFoucus = true" :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
           <bp-avatar size="mini" :image-url="userInfo.avatar" />
         </template>
@@ -27,10 +20,16 @@
       <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
     </div>
   </div>
+
+  <div v-else class="flex justify-center items-center">
+    <bp-button size="small" shape="round" type="plain" @click="handleLoginClick">
+      登录后评论
+    </bp-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/stores/useUser";
 import { IconHeart3Line } from "birdpaper-icon";
@@ -51,7 +50,14 @@ const emits = defineEmits<{
 defineOptions({ name: "CommentEditor" });
 const clsBlockName = "comment-editor";
 
+const accountCtx = ref(inject("account", undefined));
 const { isLogin, userInfo } = useUserStore();
+const handleLoginClick = () => {
+  if (!isLogin()) {
+    accountCtx.value.login();
+    return;
+  }
+};
 
 const { t } = useI18n();
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
