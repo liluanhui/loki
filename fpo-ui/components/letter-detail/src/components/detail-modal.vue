@@ -36,6 +36,7 @@ const loadDetail = async (id: string) => {
 };
 
 const open = (id: string) => {
+  detailInnerRef.value?.reset();
   modalShow.value = true;
   loadDetail(id);
 };

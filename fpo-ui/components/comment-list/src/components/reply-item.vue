@@ -6,11 +6,11 @@
       </div>
       <div :class="`${clsBlockName}-item-content`">
         <p :class="`${clsBlockName}-item-name`">{{ nick_name }}</p>
-        <p :class="`${clsBlockName}-item-inner`">{{ content }}</p>
+        <p :class="`${clsBlockName}-item-inner`">{{ last_nick_name ? "回复" + last_nick_name : "" }}: {{ content }}</p>
         <div :class="`${clsBlockName}-item-footer`">
           <span class="time" :title="created_at">{{ _createdAt }} </span>
           <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
-          <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
+          <span class="comment" @click="handleReply"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
         </div>
       </div>
     </div>
@@ -33,10 +33,14 @@ const props = defineProps({
   id: { type: String },
   last_id: { type: String },
   level: { type: Number },
+  last_nick_name: { type: String },
   nick_name: { type: String },
   root_id: { type: String },
   uid: { type: String },
 });
+const emits = defineEmits<{
+  (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
+}>();
 
 defineOptions({ name: "ReplyComment" });
 const clsBlockName = "reply-comment";
@@ -49,4 +53,8 @@ dayjs.extend(relativeTime);
 const _createdAt = computed(() => {
   return props.created_at ? dayjs().to(dayjs(props.created_at)) : "";
 });
+
+const handleReply = () => {
+  emits("reply", props.root_id, props.id, props.nick_name, props.content);
+};
 </script>

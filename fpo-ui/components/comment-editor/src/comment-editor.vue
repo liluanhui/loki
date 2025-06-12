@@ -2,7 +2,7 @@
   <div :class="clsBlockName">
     <div v-if="form.last_id && isFoucus" :class="`${clsBlockName}-reply`">
       <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
-      <p :class="`${clsBlockName}-reply-content`">测室温万本金都是开了放假哈市的咖啡花洒地方哈圣诞节快乐好</p>
+      <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
     </div>
 
     <div :class="`${clsBlockName}-inner`">
@@ -23,16 +23,16 @@
     </div>
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">
-      <bp-button size="small" shape="round" type="dashed" @click="isFoucus = false">取消</bp-button>
+      <bp-button size="small" shape="round" type="dashed" @click="handleCancle">取消</bp-button>
       <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { IconHeart3Line } from "birdpaper-icon";
-import { ref } from "vue";
 import { PublicLetterCommentForm } from "../../../../odin/src/types/publicLetter/comment";
 import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
@@ -85,7 +85,13 @@ const onSubmit = async () => {
   }
 };
 
+const handleCancle = () => {
+  isFoucus.value = false;
+  form.value = new PublicLetterCommentForm();
+};
+
 defineExpose({
   initReply,
+  handleCancle
 });
 </script>

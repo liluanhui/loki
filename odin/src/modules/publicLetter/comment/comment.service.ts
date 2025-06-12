@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { col, json, literal } from "sequelize";
+import { col, literal } from "sequelize";
 import { FpoPublicMailComment } from "src/models/fpo_public_mail_comment.model";
 import { FpoUser } from "src/models/fpo_user.model";
 import { PublicLetterCommentSearchParams } from "src/types/publicLetter/comment";
@@ -26,8 +26,9 @@ export class CommentService {
       "level",
       "root_id",
       "last_id",
-      [col("last_user.nick_name"), "last_nick_name"],
-      [literal(`JSON_UNQUOTE(JSON_EXTRACT(ip_region, '$.province'))`), "province"],
+      [col("last_comment.uid"), "last_uid"],
+      [col("last_comment.user.nick_name"), "last_nick_name"],
+      [literal(`JSON_UNQUOTE(JSON_EXTRACT(FpoPublicMailComment.ip_region, '$.province'))`), "province"],
       "content",
       "comments",
       "created_at",
@@ -45,7 +46,19 @@ export class CommentService {
       raw: true,
       include: [
         { model: FpoUser, as: "user", attributes: [] },
-        { model: FpoUser, as: "last_user", attributes: [] },
+        {
+          model: FpoPublicMailComment,
+          as: "last_comment",
+          attributes: [],
+          include: [
+            {
+              model: FpoUser,
+              as: "user",
+              attributes: [],
+              foreignKey: "uid",
+            },
+          ],
+        },
       ],
     });
 

@@ -97,5 +97,6 @@ const onReply = (root_id: string, last_id: string, last_nick_name: string, conte
 defineExpose({
   init,
   count,
+  list
 });
 </script>

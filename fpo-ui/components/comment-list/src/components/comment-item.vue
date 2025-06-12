@@ -18,7 +18,7 @@
         展开 {{ comments }} 条回复
       </p>
 
-      <reply-item v-bind="v" v-for="(v, k) in replyList"></reply-item>
+      <reply-item v-bind="v" v-for="(v, k) in replyList" :root_id="id" @reply="onReplyItemReply"></reply-item>
     </div>
   </div>
 </template>
@@ -68,6 +68,9 @@ const _createdAt = computed(() => {
 
 const handleReply = () => {
   emits("reply", props.id, props.id, props.nick_name, props.content);
+};
+const onReplyItemReply = (root_id: string, last_id: string, last_nick_name: string, content: string) => {
+  emits("reply", root_id, last_id, last_nick_name, content);
 };
 
 const loading = ref(false);

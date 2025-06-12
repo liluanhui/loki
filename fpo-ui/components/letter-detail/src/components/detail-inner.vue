@@ -114,7 +114,12 @@ const onReply = (root_id: string, last_id: string, last_nick_name: string, conte
   commentEditorRef.value?.initReply(root_id, last_id, last_nick_name, content);
 };
 
+const reset = () => {
+  commentListRef.value.list = [];
+};
+
 defineExpose({
   setContent,
+  reset
 });
 </script>
