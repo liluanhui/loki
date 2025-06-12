@@ -47,6 +47,9 @@ export class FpoPublicMailComment extends Model {
   })
   last_id: string;
 
+  @BelongsTo(() => FpoUser, "last_id")
+  last_user: FpoUser;
+
   @Column({
     type: DataType.STRING(11),
     comment: "根ID",

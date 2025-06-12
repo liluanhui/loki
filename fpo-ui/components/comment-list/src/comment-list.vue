@@ -10,7 +10,7 @@
         :offset="10"
         finished-text="没有更多了"
         @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
-        <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" />
+        <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" :mail_id="form.mail_id" />
       </vant-list>
     </pull-refresh>
   </div>
@@ -48,7 +48,7 @@ const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
     loading.value = true;
 
     form.value.mail_id = id;
-    form.value = {...form.value, ...data };
+    form.value = { ...form.value, ...data };
     const res = await findPublicLetterCommentList(form.value);
     if (res.code != 0) {
       throw new Error(res.msg);

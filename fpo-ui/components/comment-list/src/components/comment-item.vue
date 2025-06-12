@@ -11,20 +11,28 @@
         <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
         <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
       </div>
-      <p v-if="comments > 0" :class="`${clsBlockName}-expand-reply`">展开 {{ comments }} 条回复</p>
+      <p
+        v-if="comments > 0 && replyList.length === 0"
+        :class="`${clsBlockName}-expand-reply`"
+        @click="handleSearchReply({ pageNum: 1, pageSize: 10 })">
+        展开 {{ comments }} 条回复
+      </p>
 
-     <reply-item v-bind="props"></reply-item>
+      <reply-item v-bind="v" v-for="(v, k) in replyList"></reply-item>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useI18n } from "vue-i18n";
 import replyItem from "./reply-item.vue";
+import { msg } from "../../../../fpo-ui";
+import { findPublicLetterCommentList } from "@loki/odin-api";
+import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/odin/src/types/publicLetter/comment";
 
 const props = defineProps({
   avatar: { type: String },
@@ -38,10 +46,13 @@ const props = defineProps({
   nick_name: { type: String },
   root_id: { type: String },
   uid: { type: String },
+  mail_id: { type: String},
 });
 
 defineOptions({ name: "CommentItem" });
 const clsBlockName = "comment-item";
+
+const replyList = ref<PublicLetterCommentItem[]>([]);
 
 const { t, locale } = useI18n();
 dayjs.locale(locale.value === "zh_CN" ? "zh-cn" : "en");
@@ -51,4 +62,44 @@ dayjs.extend(relativeTime);
 const _createdAt = computed(() => {
   return props.created_at ? dayjs().to(dayjs(props.created_at)) : "";
 });
+
+const loading = ref(false);
+const count = ref(0);
+const form = ref<PublicLetterCommentSearchParams>(new PublicLetterCommentSearchParams());
+const handleSearchReply = async (data?: PublicLetterCommentSearchParams) => {
+  try {
+    loading.value = true;
+
+    form.value.mail_id = props.mail_id;
+    form.value.root_id = props.id;
+    form.value = { ...form.value, ...data };
+    const res = await findPublicLetterCommentList(form.value);
+    if (res.code != 0) {
+      throw new Error(res.msg);
+    }
+    setTimeout(() => {
+      if (form.value.pageNum === 1) {
+        replyList.value = [];
+      }
+
+      for (let i = 0; i < res.data.list.length; i++) {
+        const element = res.data.list[i];
+        replyList.value.push(element);
+      }
+      form.value.pageNum = res.data.pageNum;
+      form.value.pageSize = res.data.pageSize;
+      count.value = res.data.count;
+    }, 400);
+  } catch (err) {
+    msg.error((err as Error).message);
+    replyList.value = [];
+    count.value = 0;
+    form.value.pageNum = 1;
+    form.value.pageSize = 10;
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+    }, 400);
+  }
+};
 </script>

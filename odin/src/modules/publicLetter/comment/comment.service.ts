@@ -8,10 +8,10 @@ import { PublicLetterCommentSearchParams } from "src/types/publicLetter/comment"
 export class CommentService {
   /**
    * 查询公开信评论列表
-   * @param offset 
-   * @param limit 
-   * @param param2 
-   * @returns 
+   * @param offset
+   * @param limit
+   * @param param2
+   * @returns
    */
   async queryList(
     offset: number,
@@ -26,7 +26,8 @@ export class CommentService {
       "level",
       "root_id",
       "last_id",
-      [literal(`JSON_UNQUOTE(JSON_EXTRACT(ip_region, '$.province'))`), 'province'],
+      [col("last_user.nick_name"), "last_nick_name"],
+      [literal(`JSON_UNQUOTE(JSON_EXTRACT(ip_region, '$.province'))`), "province"],
       "content",
       "comments",
       "created_at",
@@ -42,7 +43,10 @@ export class CommentService {
       limit,
       order: [["created_at", "DESC"]],
       raw: true,
-      include: [{ model: FpoUser, as: "user", attributes: [] }],
+      include: [
+        { model: FpoUser, as: "user", attributes: [] },
+        { model: FpoUser, as: "last_user", attributes: [] },
+      ],
     });
 
     return { count, list: list as unknown as any[] };
