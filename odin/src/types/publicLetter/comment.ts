@@ -15,6 +15,8 @@ export class PublicLetterCommentSearchParams {
    * 根ID
    */
   root_id?: string;
+
+  sort?: string = "DESC";
 }
 
 export interface PublicLetterCommentItem {

@@ -18,7 +18,7 @@
         展开 {{ comments }} 条回复
       </p>
 
-      <reply-item v-bind="v" v-for="(v, k) in replyList" :root_id="id" @reply="onReplyItemReply"></reply-item>
+      <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ const _createdAt = computed(() => {
 });
 
 const handleReply = () => {
-  emits("reply", props.id, props.id, props.nick_name, props.content);
+  emits("reply", props.id, "", props.nick_name, props.content);
 };
 const onReplyItemReply = (root_id: string, last_id: string, last_nick_name: string, content: string) => {
   emits("reply", root_id, last_id, last_nick_name, content);
@@ -82,6 +82,7 @@ const handleSearchReply = async (data?: PublicLetterCommentSearchParams) => {
 
     form.value.mail_id = props.mail_id;
     form.value.root_id = props.id;
+    form.value.sort = "ASC";
     form.value = { ...form.value, ...data };
     const res = await findPublicLetterCommentList(form.value);
     if (res.code != 0) {

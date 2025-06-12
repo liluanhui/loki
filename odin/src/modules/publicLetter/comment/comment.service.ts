@@ -16,7 +16,7 @@ export class CommentService {
   async queryList(
     offset: number,
     limit: number,
-    { mail_id, root_id }: PublicLetterCommentSearchParams
+    { mail_id, root_id, sort }: PublicLetterCommentSearchParams
   ): Promise<{ count: number; list: FpoPublicMailComment[] }> {
     const attributes = [
       "id",
@@ -42,7 +42,7 @@ export class CommentService {
       },
       offset,
       limit,
-      order: [["created_at", "DESC"]],
+      order: [["created_at", sort || "DESC"]],
       raw: true,
       include: [
         { model: FpoUser, as: "user", attributes: [] },

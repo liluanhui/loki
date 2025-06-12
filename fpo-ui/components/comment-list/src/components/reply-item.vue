@@ -6,7 +6,12 @@
       </div>
       <div :class="`${clsBlockName}-item-content`">
         <p :class="`${clsBlockName}-item-name`">{{ nick_name }}</p>
-        <p :class="`${clsBlockName}-item-inner`">{{ last_nick_name ? "回复" + last_nick_name : "" }}: {{ content }}</p>
+        <p :class="`${clsBlockName}-item-inner`">
+          <span>
+            {{ last_nick_name ? "回复" + last_nick_name + "：" : "" }}
+          </span>
+          {{ content }}
+        </p>
         <div :class="`${clsBlockName}-item-footer`">
           <span class="time" :title="created_at">{{ _createdAt }} </span>
           <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>

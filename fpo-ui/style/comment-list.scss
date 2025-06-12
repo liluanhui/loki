@@ -118,8 +118,12 @@
           color: var(--gray-8);
           line-height: 1.6;
           word-break: break-all;
+
+          span {
+            color: var(--gray-6);
+          }
         }
-        
+
         &-footer {
           @include flex(row, flex-start, center);
           gap: 6px;
