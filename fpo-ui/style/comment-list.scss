@@ -5,7 +5,8 @@
 .comment-list {
   &-header {
     @include flex(column, flex-start, flex-end);
-    
+    margin-bottom: 10px;
+
     &-inner {
       font-size: 13px;
       color: var(--gray-6);
@@ -14,7 +15,7 @@
 
   .comment-item {
     @include flex(row, flex-start, flex-start);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 
     &-content {
       @include flex(column, center, flex-start);
@@ -39,6 +40,19 @@
       word-break: break-all;
     }
 
+    &-expand-reply {
+      font-size: 12px;
+      color: var(--gary-8);
+      margin-top: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        color: var(--brand-6);
+        transition: all 0.2s;
+      }
+    }
+
     &-footer {
       @include flex(row, flex-start, center);
       gap: 6px;
@@ -59,7 +73,12 @@
       }
 
       .comment {
+        color: var(--gray-7);
         cursor: pointer;
+
+        .bp-icon {
+          fill: var(--gray-7);
+        }
 
         &:hover {
           color: var(--brand-6);

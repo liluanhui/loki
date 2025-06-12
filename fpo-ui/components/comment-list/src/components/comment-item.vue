@@ -8,11 +8,10 @@
       <p :class="`${clsBlockName}-inner`">{{ content }}</p>
       <div :class="`${clsBlockName}-footer`">
         <span class="time" :title="created_at">{{ _createdAt }} </span>
-        <span class="region">{{ province ? province.replace(/省$/, '') : '' }}</span>
-        <span class="comment">
-          <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }}
-        </span>
+        <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
+        <span class="comment"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
       </div>
+      <p v-if="comments > 0" :class="`${clsBlockName}-expand-reply`">展开 {{ comments }} 条回复</p>
     </div>
   </div>
 </template>
