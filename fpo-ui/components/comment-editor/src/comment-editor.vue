@@ -5,7 +5,7 @@
       <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
     </div>
 
-    <div :class="`${clsBlockName}-inner`">
+    <div v-if="isLogin()" :class="`${clsBlockName}-inner`">
       <bp-input
         ref="inpRef"
         v-model="form.content"
@@ -16,7 +16,7 @@
         @focus="isFoucus = true"
         :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
-          <bp-avatar size="mini" image-url="https://moya-1251999712.cos.ap-guangzhou.myqcloud.com/avatar/avatar_sam.jpg" />
+          <bp-avatar size="mini" :image-url="userInfo.avatar" />
         </template>
       </bp-input>
       <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
@@ -32,12 +32,14 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useUserStore } from "@/stores/useUser";
 import { IconHeart3Line } from "birdpaper-icon";
 import { PublicLetterCommentForm } from "../../../../odin/src/types/publicLetter/comment";
 import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
 import { useRef } from "../../../use/useCompRef";
 import { Input } from "birdpaper-ui";
+import { useStorage } from "@vueuse/core";
 
 const props = defineProps({
   mailId: { type: String },
@@ -48,6 +50,8 @@ const emits = defineEmits<{
 
 defineOptions({ name: "CommentEditor" });
 const clsBlockName = "comment-editor";
+
+const { isLogin, userInfo } = useUserStore();
 
 const { t } = useI18n();
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
@@ -92,6 +96,6 @@ const handleCancle = () => {
 
 defineExpose({
   initReply,
-  handleCancle
+  handleCancle,
 });
 </script>
