@@ -12,13 +12,14 @@
         <span class="comment" @click="handleReply"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
       </div>
       <p
-        v-if="comments > 0 && replyList.length === 0"
+        v-if="comments > 0 && replyList.length === 0 && !loading"
         :class="`${clsBlockName}-expand-reply`"
         @click="handleSearchReply({ pageNum: 1, pageSize: 10 })">
         展开 {{ comments }} 条回复
       </p>
-
-      <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
+      <skeleton title avatar :row="2" animate :loading="loading && form.pageNum === 1" :style="{ width: '100%', 'margin-top': '10px' }">
+        <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
+      </skeleton>
     </div>
   </div>
 </template>
@@ -28,6 +29,8 @@ import { computed, ref } from "vue";
 import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Skeleton } from "vant";
+import "vant/lib/skeleton/style/index";
 import { useI18n } from "vue-i18n";
 import replyItem from "./reply-item.vue";
 import { msg } from "../../../../fpo-ui";

@@ -1,13 +1,20 @@
 <template>
   <div v-if="isLogin()" :class="clsBlockName">
-    <div v-if="form.last_id && isFoucus" :class="`${clsBlockName}-reply`">
+    <div v-if="(form.last_id || form.root_id) && isFoucus" :class="`${clsBlockName}-reply`">
       <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
       <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
     </div>
 
     <div :class="`${clsBlockName}-inner`">
-      <bp-input ref="inpRef" v-model="form.content" is-round clearable :maxlength="500" placeholder="说点什么..."
-        @focus="isFoucus = true" :style="{ width: isFoucus ? '100%' : '220px' }">
+      <bp-input
+        ref="inpRef"
+        v-model="form.content"
+        is-round
+        clearable
+        :maxlength="500"
+        placeholder="说点什么..."
+        @focus="isFoucus = true"
+        :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
           <bp-avatar size="mini" :image-url="userInfo.avatar" />
         </template>
@@ -22,15 +29,14 @@
   </div>
 
   <div v-else class="flex justify-center items-center">
-    <bp-button size="small" shape="round" type="plain" @click="handleLoginClick">
-      登录后评论
-    </bp-button>
+    <bp-button size="small" shape="round" type="plain" @click="handleLoginClick"> 登录后评论 </bp-button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { inject, ref } from "vue";
 import { useI18n } from "vue-i18n";
+// @ts-ignore
 import { useUserStore } from "@/stores/useUser";
 import { IconHeart3Line } from "birdpaper-icon";
 import { PublicLetterCommentForm } from "../../../../odin/src/types/publicLetter/comment";

@@ -4,7 +4,7 @@
       <span :class="`${clsBlockName}-header-inner`">共 {{ count || 0 }} 条评论</span>
     </div>
     <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
-      <skeleton title avatar :row="4" animate round :loading="loading && form.pageNum === 1 && !refreshing">
+      <skeleton title avatar :row="4" animate :loading="loading && form.pageNum === 1 && !refreshing">
         <vant-list
           v-model:loading="loading"
           :finished
