@@ -13,13 +13,21 @@
       </div>
       <p
         v-if="comments > 0 && replyList.length === 0 && !loading"
-        :class="`${clsBlockName}-expand-reply`"
-        @click="handleSearchReply({ pageNum: 1, pageSize: 10 })">
+        @click="handleSearchReply({ pageNum: 1, pageSize: 10 })"
+        :class="`${clsBlockName}-expand-reply`">
         展开 {{ comments }} 条回复
       </p>
       <skeleton title avatar :row="2" animate :loading="loading && form.pageNum === 1" :style="{ width: '100%', 'margin-top': '10px' }">
         <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
       </skeleton>
+      <bp-link
+        v-if="isLoadMore"
+        :class="`${clsBlockName}-load-more`"
+        size="mini"
+        :loading
+        @click="handleSearchReply({ pageNum: Number(form.pageNum) + 1, pageSize: 10 })">
+        加载更多
+      </bp-link>
     </div>
   </div>
 </template>
@@ -79,6 +87,7 @@ const onReplyItemReply = (root_id: string, last_id: string, last_nick_name: stri
 const loading = ref(false);
 const count = ref(0);
 const form = ref<PublicLetterCommentSearchParams>(new PublicLetterCommentSearchParams());
+const isLoadMore = ref(false);
 const handleSearchReply = async (data?: PublicLetterCommentSearchParams) => {
   try {
     loading.value = true;
@@ -103,6 +112,7 @@ const handleSearchReply = async (data?: PublicLetterCommentSearchParams) => {
       form.value.pageNum = res.data.pageNum;
       form.value.pageSize = res.data.pageSize;
       count.value = res.data.count;
+      isLoadMore.value = form.value.pageNum * form.value.pageSize < count.value;
     }, 400);
   } catch (err) {
     msg.error((err as Error).message);
