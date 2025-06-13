@@ -32,7 +32,7 @@
       </div>
       <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
         <div :class="`${clsBlockName}-comment-content`">
-          <comment-list ref="commentListRef" @reply="onReply"/>
+          <comment-list ref="commentListRef" @reply="onReply" />
         </div>
         <div :class="`${clsBlockName}-comment-footer`">
           <comment-editor ref="commentEditorRef" :mail-id="id" @success="onCommentSuccess" />
@@ -50,6 +50,7 @@ import dayjs from "dayjs";
 import { useI18n } from "vue-i18n";
 import { CommentList } from "../../../comment-list";
 import CommentEditor from "../../../comment-editor/src/comment-editor.vue";
+import { PublicLetterCommentItem } from "@loki/odin/src/types/publicLetter/comment";
 
 const props = defineProps({
   isPopup: { type: Boolean, default: false },
@@ -80,8 +81,10 @@ const setContent = (content: string) => {
   commentListRef.value?.init(props.id);
 };
 
-const onCommentSuccess = () => {
-  commentListRef.value?.init(props.id, { pageNum: 1, pageSize: 20 });
+const onCommentSuccess = (data: PublicLetterCommentItem) => {
+  if (data.level === 0) {
+    commentListRef.value?.list.unshift(data);
+  }
 };
 
 const isSelf = computed(() => props.recipient_type === "self");
@@ -120,6 +123,6 @@ const reset = () => {
 
 defineExpose({
   setContent,
-  reset
+  reset,
 });
 </script>

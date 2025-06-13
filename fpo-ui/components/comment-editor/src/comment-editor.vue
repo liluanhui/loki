@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLogin()" :class="clsBlockName">
-    <div v-if="(form.last_id || form.root_id) && isFoucus" :class="`${clsBlockName}-reply`">
+    <div v-if="lastNickName && isFoucus" :class="`${clsBlockName}-reply`">
       <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
       <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
     </div>
@@ -13,7 +13,7 @@
         clearable
         :maxlength="500"
         placeholder="说点什么..."
-        @focus="isFoucus = true"
+        @focus="onFocus"
         :style="{ width: isFoucus ? '100%' : '220px' }">
         <template #prefix v-show="!isFoucus">
           <bp-avatar size="mini" :image-url="userInfo.avatar" />
@@ -39,18 +39,17 @@ import { useI18n } from "vue-i18n";
 // @ts-ignore
 import { useUserStore } from "@/stores/useUser";
 import { IconHeart3Line } from "birdpaper-icon";
-import { PublicLetterCommentForm } from "../../../../odin/src/types/publicLetter/comment";
+import { PublicLetterCommentForm, PublicLetterCommentItem } from "@loki/odin/src/types/publicLetter/comment";
 import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
 import { useRef } from "../../../use/useCompRef";
 import { Input } from "birdpaper-ui";
-import { useStorage } from "@vueuse/core";
 
 const props = defineProps({
   mailId: { type: String },
 });
 const emits = defineEmits<{
-  (e: "success"): void;
+  (e: "success", data: PublicLetterCommentItem): void;
 }>();
 
 defineOptions({ name: "CommentEditor" });
@@ -82,6 +81,10 @@ const initReply = (root_id: string, last_id: string, last_nick_name: string, con
 };
 
 const isFoucus = ref(false);
+const onFocus = () => {
+  isFoucus.value = true;
+};
+
 const onSubmit = async () => {
   if (!form.value.content) {
     return;
@@ -92,10 +95,18 @@ const onSubmit = async () => {
     if (res.code != 0) {
       throw new Error(res.msg);
     }
-    form.value.content = "";
     isFoucus.value = false;
+    emits("success", {
+      ...form.value,
+      id: res.data,
+      uid: userInfo.uid,
+      nick_name: userInfo.nick_name,
+      avatar: userInfo.avatar,
+      created_at: new Date().toISOString(),
+      comments: 0,
+    });
+    form.value.content = "";
     msg.success(res.msg);
-    emits("success");
   } catch (err) {
     msg.error((err as Error).message);
   }
@@ -104,6 +115,8 @@ const onSubmit = async () => {
 const handleCancle = () => {
   isFoucus.value = false;
   form.value = new PublicLetterCommentForm();
+  lastNickName.value = "";
+  lastContent.value = "";
 };
 
 defineExpose({

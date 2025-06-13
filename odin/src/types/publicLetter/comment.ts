@@ -25,10 +25,10 @@ export interface PublicLetterCommentItem {
   content: string;
   created_at: string;
   id: string;
-  last_id: string;
+  last_id?: string;
   level: number;
   nick_name: string;
-  root_id: string;
+  root_id?: string;
   uid: string;
 }
 
@@ -40,7 +40,7 @@ export class PublicLetterCommentForm {
   /**
    * 回复ID
    */
-  last_id?: string;
+  last_id: string;
   /**
    * 评论层级
    */
