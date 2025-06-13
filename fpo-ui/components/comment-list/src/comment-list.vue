@@ -4,19 +4,16 @@
       <span :class="`${clsBlockName}-header-inner`">共 {{ count || 0 }} 条评论</span>
     </div>
     <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
-      <vant-list
-        v-model:loading="loading"
-        :finished
-        :offset="10"
-        finished-text="没有更多了"
-        @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
-        <comment-item
-          v-for="(item, index) in list"
-          v-bind="item"
-          :key="`comment-${index}`"
-          :mail_id="form.mail_id"
-          @reply="onReply" />
-      </vant-list>
+      <skeleton title avatar :row="4" animate round :loading="loading && form.pageNum === 1 && !refreshing">
+        <vant-list
+          v-model:loading="loading"
+          :finished
+          :offset="10"
+          finished-text="没有更多了"
+          @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
+          <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" :mail_id="form.mail_id" @reply="onReply" />
+        </vant-list>
+      </skeleton>
     </pull-refresh>
   </div>
 </template>
@@ -24,8 +21,9 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { msg } from "../../../fpo-ui";
-import { List as VantList, PullRefresh } from "vant";
+import { List as VantList, PullRefresh, Skeleton } from "vant";
 import "vant/lib/list/style/index";
+import "vant/lib/skeleton/style/index";
 import "vant/lib/pull-refresh/style/index";
 import commentItem from "./components/comment-item.vue";
 import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment";
@@ -97,6 +95,6 @@ const onReply = (root_id: string, last_id: string, last_nick_name: string, conte
 defineExpose({
   init,
   count,
-  list
+  list,
 });
 </script>
