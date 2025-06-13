@@ -104,6 +104,7 @@ const onSubmit = async () => {
       avatar: userInfo.avatar,
       created_at: new Date().toISOString(),
       comments: 0,
+      last_nick_name: lastNickName.value,
     });
     form.value.content = "";
     msg.success(res.msg);

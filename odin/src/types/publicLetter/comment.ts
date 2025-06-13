@@ -28,6 +28,7 @@ export interface PublicLetterCommentItem {
   last_id?: string;
   level: number;
   nick_name: string;
+  last_nick_name: string;
   root_id?: string;
   uid: string;
 }

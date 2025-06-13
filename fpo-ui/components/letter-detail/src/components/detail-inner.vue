@@ -86,6 +86,7 @@ const onCommentSuccess = (data: PublicLetterCommentItem) => {
     commentListRef.value?.list.unshift(data);
     return;
   }
+  console.log('data: ', data);
   commentListRef.value?.updateItemChild(data);
 };
 
