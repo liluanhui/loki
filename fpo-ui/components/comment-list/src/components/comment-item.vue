@@ -116,4 +116,8 @@ const handleSearchReply = async (data?: PublicLetterCommentSearchParams) => {
     }, 400);
   }
 };
+
+defineExpose({
+  replyList,
+});
 </script>

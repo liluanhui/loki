@@ -14,7 +14,13 @@
           :offset="10"
           finished-text="没有更多了"
           @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
-          <comment-item v-for="(item, index) in list" v-bind="item" :key="`comment-${index}`" :mail_id="form.mail_id" @reply="onReply" />
+          <comment-item
+            v-for="(item, index) in list"
+            :ref="(el) => getItemRef(el, index)"
+            v-bind="item"
+            :key="`comment-${index}`"
+            :mail_id="form.mail_id"
+            @reply="onReply" />
         </vant-list>
       </skeleton>
     </pull-refresh>
@@ -46,6 +52,13 @@ const finished = ref(false);
 const form = ref<PublicLetterCommentSearchParams>(new PublicLetterCommentSearchParams());
 const list = ref<PublicLetterCommentItem[]>([]);
 const count = ref(0);
+
+const itemRefList = ref<any[]>([]);
+const getItemRef = (el: any, index: number) => {
+  if (el) {
+    itemRefList.value[index] = el;
+  }
+};
 
 const onRefresh = () => {
   form.value.pageNum = 1;
@@ -95,9 +108,26 @@ const onReply = (root_id: string, last_id: string, last_nick_name: string, conte
   emits("reply", root_id, last_id, last_nick_name, content);
 };
 
+const updateItemChild = (data: PublicLetterCommentItem) => {
+  const { root_id } = data;
+
+  for (let i = 0; i < list.value.length; i++) {
+    const element = list.value[i];
+    if (element.id === root_id) {
+      if (itemRefList.value[i]?.replyList.length > 0) {
+        itemRefList.value[i]?.replyList.push(data);
+      }
+
+      list.value[i].comments++;
+      break;
+    }
+  }
+};
+
 defineExpose({
   init,
   count,
   list,
+  updateItemChild,
 });
 </script>

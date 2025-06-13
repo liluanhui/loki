@@ -84,7 +84,9 @@ const setContent = (content: string) => {
 const onCommentSuccess = (data: PublicLetterCommentItem) => {
   if (data.level === 0) {
     commentListRef.value?.list.unshift(data);
+    return;
   }
+  commentListRef.value?.updateItemChild(data);
 };
 
 const isSelf = computed(() => props.recipient_type === "self");
