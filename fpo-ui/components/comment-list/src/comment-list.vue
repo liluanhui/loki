@@ -1,6 +1,6 @@
 <template>
   <div :class="clsBlockName">
-    <div :class="`${clsBlockName}-header`">
+    <div v-if="!hideHeader" :class="`${clsBlockName}-header`">
       <span :class="`${clsBlockName}-header-inner`">
         共 {{ count || 0 }} 条评论
         <bp-link size="small" @click="onRefresh">刷新</bp-link>
@@ -38,6 +38,9 @@ import commentItem from "./components/comment-item.vue";
 import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment";
 import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/odin/src/types/publicLetter/comment";
 
+const props = defineProps({
+  hideHeader: { type: Boolean, default: false },
+})
 const emits = defineEmits<{
   (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
 }>();
@@ -67,6 +70,8 @@ const onRefresh = () => {
 };
 
 const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
+  if (!id) return;
+
   try {
     loading.value = true;
 

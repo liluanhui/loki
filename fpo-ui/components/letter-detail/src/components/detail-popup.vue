@@ -2,8 +2,18 @@
   <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :duration="0.2" safe-area-inset-bottom @close="close">
     <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
 
-    <popup v-model:show="commentPopupShow" position="bottom" :style="{ height: '90%' }" :duration="0.2" round safe-area-inset-bottom>
+    <popup
+      v-model:show="commentPopupShow"
+      position="bottom"
+      :style="{ height: '90%' }"
+      :duration="0.2"
+      round
+      safe-area-inset-bottom
+      @close="closeCommentPopup">
       <div class="popup-header">评论</div>
+      <div style="margin-top: 52px; padding: 0 12px 100px 12px">
+        <comment-list ref="commentListRef" hide-header />
+      </div>
     </popup>
   </popup>
 </template>
@@ -16,6 +26,7 @@ import { Popup } from "vant";
 import "vant/lib/popup/style/index";
 import { msg } from "../../../fpo-message";
 import { useRef } from "../../../../use/useCompRef";
+import { CommentList } from "../../../comment-list";
 
 const popupShow = ref<boolean>(false);
 const commentPopupShow = ref<boolean>(false);
@@ -43,6 +54,7 @@ const loadDetail = async (id: string) => {
   }
 };
 
+const commentListRef = useRef(CommentList);
 const mobileBarCtx: any = inject("mobile-bar");
 const open = (id: string) => {
   popupShow.value = true;
@@ -51,14 +63,13 @@ const open = (id: string) => {
       close,
       comment: () => {
         commentPopupShow.value = true;
-
         mobileBarCtx?.change("close", {
           events: {
-            close: () => {
-              commentPopupShow.value = false;
-              mobileBarCtx?.reset();
-            },
+            close: () => closeCommentPopup(),
           },
+        });
+        nextTick(() => {
+          // commentListRef.value?.init(id,{pageNum: 1, pageSize: 20});
         });
       },
     },
@@ -69,6 +80,11 @@ const open = (id: string) => {
 const close = () => {
   popupShow.value = false;
   mobileBarCtx?.change("menus");
+};
+
+const closeCommentPopup = () => {
+  commentPopupShow.value = false;
+  mobileBarCtx?.reset();
 };
 
 watch(popupShow, (val) => {

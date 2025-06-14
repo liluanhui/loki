@@ -11,15 +11,18 @@
         <span class="region">{{ province ? province.replace(/省$/, "") : "" }}</span>
         <span class="comment" @click="handleReply"> <IconChat1Line size="14" />{{ comments <= 0 ? "回复" : comments }} </span>
       </div>
-      <p
-        v-if="comments > 0 && replyList.length === 0 && !loading"
+      <bp-link
+        v-if="comments > 0 && replyList.length === 0"
+        status="gray"
+        size="mini"
+        :loading
         @click="handleSearchReply({ pageNum: 1, pageSize: 10 })"
         :class="`${clsBlockName}-expand-reply`">
         展开 {{ comments }} 条回复
-      </p>
-      <skeleton title avatar :row="2" animate :loading="loading && form.pageNum === 1" :style="{ width: '100%', 'margin-top': '10px' }">
-        <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
-      </skeleton>
+      </bp-link>
+      <!-- <skeleton title avatar :row="2" animate :loading="loading && form.pageNum === 1" :style="{ width: '100%', 'margin-top': '10px' }"> -->
+      <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
+      <!-- </skeleton> -->
       <bp-link
         v-if="isLoadMore"
         :class="`${clsBlockName}-load-more`"
