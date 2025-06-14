@@ -1,19 +1,16 @@
 <template>
-  <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :duration="0.2" safe-area-inset-bottom @close="close">
+  <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :lock-scroll="false" :duration="0.2" safe-area-inset-bottom @close="close">
     <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
 
     <popup
       v-model:show="commentPopupShow"
       position="bottom"
-      :style="{ height: '90%' }"
+      :style="{ height: '300px' }"
       :duration="0.2"
       round
       safe-area-inset-bottom
       @close="closeCommentPopup">
       <div class="popup-header">评论</div>
-      <div style="margin-top: 52px; padding: 0 12px 100px 12px">
-        <comment-list ref="commentListRef" hide-header />
-      </div>
     </popup>
   </popup>
 </template>

@@ -1,12 +1,12 @@
 <template>
   <div :class="clsBlockName">
-    <div v-if="!hideHeader" :class="`${clsBlockName}-header`">
+    <div :class="`${clsBlockName}-header`">
       <span :class="`${clsBlockName}-header-inner`">
         共 {{ count || 0 }} 条评论
-        <bp-link size="small" @click="onRefresh">刷新</bp-link>
+        <bp-link size="small" v-if="!hideReloadText" @click="onRefresh">刷新</bp-link>
       </span>
     </div>
-    <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
+    <!-- <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功"> -->
       <skeleton title avatar :row="4" animate :loading="loading && form.pageNum === 1 && !refreshing">
         <vant-list v-model:loading="loading" :finished :offset="10" finished-text="没有更多了" @load="onLoad">
           <comment-item
@@ -18,7 +18,7 @@
             @reply="onReply" />
         </vant-list>
       </skeleton>
-    </pull-refresh>
+    <!-- </pull-refresh> -->
   </div>
 </template>
 
@@ -34,7 +34,7 @@ import { findPublicLetterCommentList } from "@loki/odin-api/publicLetter/comment
 import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/odin/src/types/publicLetter/comment";
 
 const props = defineProps({
-  hideHeader: { type: Boolean, default: false },
+  hideReloadText: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
   (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
@@ -84,7 +84,7 @@ const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
       throw new Error(res.msg);
     }
     setTimeout(() => {
-      console.log('form.value.pageNum: ', form.value.pageNum);
+      console.log("form.value.pageNum: ", form.value.pageNum);
       if (form.value.pageNum === 1) {
         list.value = [];
       }

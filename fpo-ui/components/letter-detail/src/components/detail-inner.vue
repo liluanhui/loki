@@ -30,11 +30,11 @@
           </div>
         </div>
       </div>
-      <div v-if="!isPopup" :class="`${clsBlockName}-comment`">
+      <div :class="[`${clsBlockName}-comment`, { 'is-popup': isPopup }]">
         <div :class="`${clsBlockName}-comment-content`">
           <comment-list ref="commentListRef" @reply="onReply" />
         </div>
-        <div :class="`${clsBlockName}-comment-footer`">
+        <div v-if="!isPopup" :class="`${clsBlockName}-comment-footer`">
           <comment-editor ref="commentEditorRef" :mail-id="id" @success="onCommentSuccess" />
         </div>
       </div>

@@ -118,12 +118,18 @@
       transition: all 0.2s ease-in-out;
     }
   }
+
+  .is-popup {
+    border: none;
+    width: 100%;
+  }
 }
 
 .detail-inner-popup {
   @include flex(column, center, flex-start);
   height: max-content;
   padding: 16px;
+  overflow-y: auto;
 
   .detail-inner {
     &-mail {
