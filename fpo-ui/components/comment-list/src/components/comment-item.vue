@@ -20,9 +20,7 @@
         :class="`${clsBlockName}-expand-reply`">
         展开 {{ comments }} 条回复
       </bp-link>
-      <!-- <skeleton title avatar :row="2" animate :loading="loading && form.pageNum === 1" :style="{ width: '100%', 'margin-top': '10px' }"> -->
       <reply-item v-bind="v" v-for="v in replyList" :root_id="id" :key="`reply-${v.id}`" @reply="onReplyItemReply"></reply-item>
-      <!-- </skeleton> -->
       <bp-link
         v-if="isLoadMore"
         :class="`${clsBlockName}-load-more`"
@@ -40,8 +38,6 @@ import { computed, ref } from "vue";
 import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Skeleton } from "vant";
-import "vant/lib/skeleton/style/index";
 import { useI18n } from "vue-i18n";
 import replyItem from "./reply-item.vue";
 import { msg } from "../../../../fpo-ui";

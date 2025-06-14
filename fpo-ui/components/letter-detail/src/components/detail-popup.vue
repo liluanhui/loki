@@ -69,7 +69,7 @@ const open = (id: string) => {
           },
         });
         nextTick(() => {
-          // commentListRef.value?.init(id,{pageNum: 1, pageSize: 20});
+          commentListRef.value?.init(id,{pageNum: 1, pageSize: 20});
         });
       },
     },

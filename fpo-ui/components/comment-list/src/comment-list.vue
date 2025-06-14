@@ -8,12 +8,7 @@
     </div>
     <pull-refresh v-model="refreshing" :pull-distance="100" @refresh="onRefresh" :success-duration="1000" success-text="刷新成功">
       <skeleton title avatar :row="4" animate :loading="loading && form.pageNum === 1 && !refreshing">
-        <vant-list
-          v-model:loading="loading"
-          :finished
-          :offset="10"
-          finished-text="没有更多了"
-          @load="init(form.mail_id, { pageNum: Number(form.pageNum) + 1, pageSize: form.pageSize })">
+        <vant-list v-model:loading="loading" :finished :offset="10" finished-text="没有更多了" @load="onLoad">
           <comment-item
             v-for="(item, index) in list"
             :ref="(el) => getItemRef(el, index)"
@@ -40,7 +35,7 @@ import { PublicLetterCommentItem, PublicLetterCommentSearchParams } from "@loki/
 
 const props = defineProps({
   hideHeader: { type: Boolean, default: false },
-})
+});
 const emits = defineEmits<{
   (e: "reply", root_id: string, last_id: string, last_nick_name: string, content: string): void;
 }>();
@@ -69,6 +64,13 @@ const onRefresh = () => {
   init(form.value.mail_id);
 };
 
+const onLoad = () => {
+  if (finished.value || loading.value) return;
+
+  form.value.pageNum++;
+  init(form.value.mail_id);
+};
+
 const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
   if (!id) return;
 
@@ -82,6 +84,7 @@ const init = async (id: string, data?: PublicLetterCommentSearchParams) => {
       throw new Error(res.msg);
     }
     setTimeout(() => {
+      console.log('form.value.pageNum: ', form.value.pageNum);
       if (form.value.pageNum === 1) {
         list.value = [];
       }
