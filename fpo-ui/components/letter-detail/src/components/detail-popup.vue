@@ -8,16 +8,6 @@
     safe-area-inset-bottom
     @close="close">
     <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
-
-    <popup
-      v-model:show="commentPopupShow"
-      position="bottom"
-      :style="{ height: '100%' }"
-      :duration="0.2"
-      safe-area-inset-bottom
-      @close="closeCommentPopup">
-      <div class="popup-header">说点什么...</div>
-    </popup>
   </popup>
 </template>
 
@@ -31,7 +21,6 @@ import { msg } from "../../../fpo-message";
 import { useRef } from "../../../../use/useCompRef";
 
 const popupShow = ref<boolean>(false);
-const commentPopupShow = ref<boolean>(false);
 
 const loading = ref<boolean>(false);
 const letterDetail = ref<any>(null);
@@ -63,15 +52,7 @@ const open = (id: string) => {
     events: {
       close,
       comment: () => {
-        commentPopupShow.value = true;
-        mobileBarCtx?.change("confirm", {
-          props: {
-            okText: "发送",
-          },
-          events: {
-            close: () => closeCommentPopup(),
-          },
-        });
+        detailInnerRef.value?.showPopupCommentEditor();
       },
     },
   });
@@ -81,11 +62,6 @@ const open = (id: string) => {
 const close = () => {
   popupShow.value = false;
   mobileBarCtx?.change("menus");
-};
-
-const closeCommentPopup = () => {
-  commentPopupShow.value = false;
-  mobileBarCtx?.reset();
 };
 
 watch(popupShow, (val) => {

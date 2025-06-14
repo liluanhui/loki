@@ -1,36 +1,58 @@
 <template>
-  <div v-if="isLogin()" :class="clsBlockName">
-    <div v-if="lastNickName && isFoucus" :class="`${clsBlockName}-reply`">
-      <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
-      <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
+  <template v-if="!isPopup">
+    <div v-if="isLogin()" :class="clsBlockName">
+      `
+      <div v-if="lastNickName && isFoucus" :class="`${clsBlockName}-reply`">
+        <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
+        <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
+      </div>
+      `
+
+      <div :class="`${clsBlockName}-inner`">
+        <bp-input
+          ref="inpRef"
+          v-model="form.content"
+          is-round
+          clearable
+          :maxlength="500"
+          placeholder="说点什么..."
+          @focus="onFocus"
+          :style="{ width: isFoucus ? '100%' : '220px' }">
+          <template #prefix v-show="!isFoucus">
+            <bp-avatar size="mini" :image-url="userInfo.avatar" />
+          </template>
+        </bp-input>
+        <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
+      </div>
+
+      <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">
+        <bp-button size="small" shape="round" type="dashed" @click="handleCancle">取消</bp-button>
+        <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
+      </div>
     </div>
 
-    <div :class="`${clsBlockName}-inner`">
-      <bp-input
-        ref="inpRef"
-        v-model="form.content"
-        is-round
-        clearable
-        :maxlength="500"
-        placeholder="说点什么..."
-        @focus="onFocus"
-        :style="{ width: isFoucus ? '100%' : '220px' }">
-        <template #prefix v-show="!isFoucus">
-          <bp-avatar size="mini" :image-url="userInfo.avatar" />
-        </template>
-      </bp-input>
-      <bp-button v-show="!isFoucus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
+    <div v-else class="flex justify-center items-center">
+      <bp-button size="small" shape="round" type="plain" @click="handleLoginClick"> 登录后评论 </bp-button>
     </div>
+  </template>
 
-    <div :class="[`${clsBlockName}-option`, { 'option-open': isFoucus }]">
-      <bp-button size="small" shape="round" type="dashed" @click="handleCancle">取消</bp-button>
-      <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
+  <popup
+    v-else
+    v-model:show="editPopupShow"
+    position="bottom"
+    :style="{ height: '100%' }"
+    :duration="0.2"
+    safe-area-inset-bottom
+    @close="closeEditorPopup">
+    <div class="popup-header">说点什么...</div>
+    <div style="margin-top: 52px;padding: 0 16px">
+      <div v-if="lastNickName" :class="`${clsBlockName}-reply`">
+        <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
+        <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
+      </div>
+      <div contenteditable></div>
     </div>
-  </div>
-
-  <div v-else class="flex justify-center items-center">
-    <bp-button size="small" shape="round" type="plain" @click="handleLoginClick"> 登录后评论 </bp-button>
-  </div>
+  </popup>
 </template>
 
 <script lang="ts" setup>
@@ -44,9 +66,12 @@ import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
 import { useRef } from "../../../use/useCompRef";
 import { Input } from "birdpaper-ui";
+import { Popup } from "vant";
+import "vant/lib/popup/style/index";
 
 const props = defineProps({
   mailId: { type: String },
+  isPopup: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
   (e: "success", data: PublicLetterCommentItem): void;
@@ -54,6 +79,25 @@ const emits = defineEmits<{
 
 defineOptions({ name: "CommentEditor" });
 const clsBlockName = "comment-editor";
+
+const mobileBarCtx: any = inject("mobile-bar");
+const editPopupShow = ref<boolean>(false);
+const initEditPopup = () => {
+  form.value = new PublicLetterCommentForm();
+  editPopupShow.value = true;
+  mobileBarCtx?.change("confirm", {
+    props: {
+      okText: "发送",
+    },
+    events: {
+      close: () => closeEditorPopup(),
+    },
+  });
+};
+const closeEditorPopup = () => {
+  editPopupShow.value = false;
+  mobileBarCtx?.reset();
+};
 
 const accountCtx = ref(inject("account", undefined));
 const { isLogin, userInfo } = useUserStore();
@@ -77,7 +121,11 @@ const initReply = (root_id: string, last_id: string, last_nick_name: string, con
   form.value.root_id = root_id;
   form.value.last_id = last_id;
   form.value.level = 1;
-  inpRef.value?.focus();
+  if (props.isPopup) {
+    initEditPopup();
+  } else {
+    inpRef.value?.focus();
+  }
 };
 
 const isFoucus = ref(false);
@@ -123,5 +171,6 @@ const handleCancle = () => {
 defineExpose({
   initReply,
   handleCancle,
+  initEditPopup,
 });
 </script>
