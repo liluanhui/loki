@@ -42,21 +42,22 @@
     position="bottom"
     :style="{ height: '100%' }"
     :duration="0.2"
+    lock-scroll
     safe-area-inset-bottom
     @close="closeEditorPopup">
-    <div class="popup-header">说点什么...</div>
-    <div style="margin-top: 52px;padding: 0 16px">
+    <div class="popup-header">评论</div>
+    <div style="margin-top: 52px; padding: 0 16px">
       <div v-if="lastNickName" :class="`${clsBlockName}-reply`">
         <p :class="`${clsBlockName}-reply-inner`">回复 {{ lastNickName }}</p>
         <p :class="`${clsBlockName}-reply-content`">{{ lastContent }}</p>
       </div>
-      <div contenteditable></div>
+      <bp-textarea ref="editorRef" v-model="form.content" rows="6" placeholder="说点什么" :maxlength="500" clearable> </bp-textarea>
     </div>
   </popup>
 </template>
 
 <script lang="ts" setup>
-import { inject, ref } from "vue";
+import { inject, nextTick, ref } from "vue";
 import { useI18n } from "vue-i18n";
 // @ts-ignore
 import { useUserStore } from "@/stores/useUser";
@@ -82,16 +83,20 @@ const clsBlockName = "comment-editor";
 
 const mobileBarCtx: any = inject("mobile-bar");
 const editPopupShow = ref<boolean>(false);
+const editorRef = ref<HTMLElement | null>(null);
 const initEditPopup = () => {
-  form.value = new PublicLetterCommentForm();
   editPopupShow.value = true;
-  mobileBarCtx?.change("confirm", {
-    props: {
-      okText: "发送",
-    },
-    events: {
-      close: () => closeEditorPopup(),
-    },
+  nextTick(() => {
+    mobileBarCtx?.change("confirm", {
+      props: {
+        okText: "发送",
+        okDisabled: () => !form.value.content,
+      },
+      events: {
+        close: () => closeEditorPopup(),
+        confirm: () => onSubmit(),
+      },
+    });
   });
 };
 const closeEditorPopup = () => {
@@ -156,6 +161,9 @@ const onSubmit = async () => {
     });
     form.value.content = "";
     msg.success(res.msg);
+    if (props.isPopup) {
+      closeEditorPopup();
+    }
   } catch (err) {
     msg.error((err as Error).message);
   }
