@@ -1,16 +1,22 @@
 <template>
-  <popup v-model:show="popupShow" position="bottom" :style="{ height: '100%' }" :lock-scroll="false" :duration="0.2" safe-area-inset-bottom @close="close">
+  <popup
+    v-model:show="popupShow"
+    position="bottom"
+    :style="{ height: '100%' }"
+    :lock-scroll="false"
+    :duration="0.2"
+    safe-area-inset-bottom
+    @close="close">
     <detail-inner ref="detailInnerRef" is-popup v-bind="letterDetail" :loading />
 
     <popup
       v-model:show="commentPopupShow"
       position="bottom"
-      :style="{ height: '300px' }"
+      :style="{ height: '100%' }"
       :duration="0.2"
-      round
       safe-area-inset-bottom
       @close="closeCommentPopup">
-      <div class="popup-header">评论</div>
+      <div class="popup-header">说点什么...</div>
     </popup>
   </popup>
 </template>
@@ -23,7 +29,6 @@ import { Popup } from "vant";
 import "vant/lib/popup/style/index";
 import { msg } from "../../../fpo-message";
 import { useRef } from "../../../../use/useCompRef";
-import { CommentList } from "../../../comment-list";
 
 const popupShow = ref<boolean>(false);
 const commentPopupShow = ref<boolean>(false);
@@ -51,7 +56,6 @@ const loadDetail = async (id: string) => {
   }
 };
 
-const commentListRef = useRef(CommentList);
 const mobileBarCtx: any = inject("mobile-bar");
 const open = (id: string) => {
   popupShow.value = true;
@@ -60,13 +64,13 @@ const open = (id: string) => {
       close,
       comment: () => {
         commentPopupShow.value = true;
-        mobileBarCtx?.change("close", {
+        mobileBarCtx?.change("confirm", {
+          props: {
+            okText: "发送",
+          },
           events: {
             close: () => closeCommentPopup(),
           },
-        });
-        nextTick(() => {
-          commentListRef.value?.init(id,{pageNum: 1, pageSize: 20});
         });
       },
     },

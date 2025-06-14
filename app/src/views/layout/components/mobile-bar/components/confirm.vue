@@ -5,7 +5,7 @@
         {{ t("common.close") }}
       </bp-button>
       <bp-button :icon="IconCheckFill" shape="round" @click="handleConfirm">
-        {{ t("common.confirm") }}
+        {{ okText || t("common.confirm") }}
       </bp-button>
     </div>
   </div>
@@ -18,6 +18,9 @@ import { useI18n } from "vue-i18n";
 const clsBlockName = "mobile-bar-inner";
 const { t } = useI18n();
 
+const props = defineProps({
+  okText: { type: String },
+});
 const emits = defineEmits<{
   (e: "on-event", name: string): void;
 }>();
