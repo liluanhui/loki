@@ -3,7 +3,7 @@
 @use "./common/extend.scss" as *;
 
 .comment-editor {
-  &-reply {
+  .reply-info {
     margin-bottom: 10px;
 
     &-inner {
