@@ -1,34 +1,6 @@
 <template>
   <template v-if="!isPopup">
-    <div v-if="isLogin()" :class="clsBlockName">
-      <reply-info v-if="isFocus" v-bind="reply" />
-
-      <div :class="`${clsBlockName}-inner`">
-        <bp-input
-          ref="inpRef"
-          v-model="form.content"
-          is-round
-          clearable
-          :maxlength
-          :placeholder
-          @focus="onFocus"
-          :style="{ width: isFocus ? '100%' : '220px' }">
-          <template #prefix v-show="!isFocus">
-            <bp-avatar size="mini" :image-url="userInfo.avatar" />
-          </template>
-        </bp-input>
-        <bp-button v-show="!isFocus" :icon="IconHeart3Line" type="secondary" shape="round">赞</bp-button>
-      </div>
-
-      <div :class="[`${clsBlockName}-option`, { 'option-open': isFocus }]">
-        <bp-button size="small" shape="round" type="dashed" @click="handleCancel">取消</bp-button>
-        <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
-      </div>
-    </div>
-
-    <div v-else class="flex justify-center items-center">
-      <bp-button size="small" shape="round" type="plain" @click="handleLoginClick"> 登录后评论 </bp-button>
-    </div>
+    <inner-editor ref="innerEditorRef" v-if="isLogin()" :maxlength :placeholder :reply @submit="onSubmit" />
   </template>
 
   <!-- 弹窗模式 -->
@@ -36,16 +8,13 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { IconHeart3Line } from "birdpaper-icon";
+import { ref } from "vue";
 import { PublicLetterCommentForm, PublicLetterCommentItem } from "@loki/odin/src/types/publicLetter/comment";
 import { msg } from "../../../fpo-ui";
 import { addPublicLetterComment } from "@loki/odin-api";
 import { useRef } from "../../../use/useCompRef";
-import { Input } from "birdpaper-ui";
 import popupEditor from "./components/popup-editor.vue";
-import replyInfo from "./components/reply-info.vue";
+import innerEditor from "./components/inner-editor.vue";
 // @ts-ignore
 import { useUserStore } from "@/stores/useUser";
 
@@ -58,9 +27,6 @@ const emits = defineEmits<{
 }>();
 
 defineOptions({ name: "CommentEditor" });
-const clsBlockName = "comment-editor";
-
-const accountCtx = ref(inject("account", undefined));
 
 // 用户信息
 const { isLogin, userInfo } = useUserStore();
@@ -92,33 +58,15 @@ const initReply = (root_id: string, last_id: string, last_nick_name: string, con
     last_id,
     level: 1,
   });
-  props.isPopup ? initEditPopup() : inpRef.value?.focus();
+  props.isPopup ? initEditPopup() : innerEditorRef.value?.inpRef.focus();
 };
 
-// 输入框引用
-const inpRef = useRef(Input);
-
-// 输入框聚焦状态
-const isFocus = ref(false);
-
-const { t } = useI18n();
+const innerEditorRef = useRef(innerEditor);
 
 const popupEditorRef = useRef(popupEditor);
 const initEditPopup = () => {
   popupEditorRef.value?.init();
   return;
-};
-/**
- * 登录按钮点击
- */
-const handleLoginClick = () => {
-  if (!isLogin()) accountCtx.value?.login();
-};
-/**
- * 输入框聚焦
- */
-const onFocus = () => {
-  isFocus.value = true;
 };
 
 /**
@@ -129,13 +77,12 @@ const onSubmit = async (data?: PublicLetterCommentForm) => {
     form.value = { ...form.value, ...data };
     form.value.mail_id = props.mailId;
     if (!form.value.content) {
-      throw new Error('评论内容不能为空');
-    };
+      throw new Error("评论内容不能为空");
+    }
 
     const res = await addPublicLetterComment(form.value);
     if (res.code !== 0) throw new Error(res.msg);
 
-    isFocus.value = false;
     emits("success", {
       ...form.value,
       id: res.data,
@@ -158,7 +105,6 @@ const onSubmit = async (data?: PublicLetterCommentForm) => {
  * 取消评论
  */
 const handleCancel = () => {
-  isFocus.value = false;
   form.value = new PublicLetterCommentForm();
   reply.value = new Reply();
 };
