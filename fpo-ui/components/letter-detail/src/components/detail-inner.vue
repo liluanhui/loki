@@ -120,7 +120,7 @@ const onReply = (root_id: string, last_id: string, last_nick_name: string, conte
 };
 
 const showPopupCommentEditor = () => {
-  commentEditorRef.value.initEditPopup();
+  commentEditorRef.value.editorRef?.init();
 };
 
 const reset = () => {

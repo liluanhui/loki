@@ -20,7 +20,7 @@
     </div>
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFocus }]">
-      <bp-button size="small" shape="round" type="dashed" @click="handleCancel">取消</bp-button>
+      <bp-button size="small" shape="round" type="dashed" @click="close">取消</bp-button>
       <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
     </div>
   </div>
@@ -74,7 +74,7 @@ const onFocus = () => {
 /**
  * 取消评论
  */
-const handleCancel = () => {
+const close = () => {
   isFocus.value = false;
   form.value = new PublicLetterCommentForm();
 };
@@ -82,8 +82,7 @@ const handleCancel = () => {
 const onSubmit = () => {
   if (!form.value.content) return;
   emits("submit", form.value);
-  isFocus.value = false;
-  form.value = new PublicLetterCommentForm();
+  close();
 };
 
 const accountCtx = ref(inject("account", undefined));
@@ -91,7 +90,13 @@ const handleLoginClick = () => {
   if (!isLogin()) accountCtx.value?.login();
 };
 
+const init = () => {
+  inpRef.value?.focus();
+};
+
 defineExpose({
-  inpRef
-})
+  inpRef,
+  init,
+  close,
+});
 </script>
