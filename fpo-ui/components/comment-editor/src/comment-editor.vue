@@ -1,5 +1,5 @@
 <template>
-  <component ref="editorRef" :is="_component" :maxlength :placeholder :reply @submit="onSubmit"></component>
+  <component ref="editorRef" :is="_component" :loading :maxlength :placeholder :reply @submit="onSubmit"></component>
 </template>
 
 <script lang="ts" setup>
@@ -33,11 +33,10 @@ const _component = props.isPopup ? popupEditor : innerEditor;
 
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
 
-/**
- * 发送评论
- */
+const loading = ref(false);
 const onSubmit = async (data?: PublicLetterCommentForm) => {
   try {
+    loading.value = true;
     form.value = { ...form.value, ...data, level: form.value.level };
     form.value.mail_id = props.mailId;
     if (!form.value.content) {
@@ -65,6 +64,8 @@ const onSubmit = async (data?: PublicLetterCommentForm) => {
     editorRef.value?.close();
   } catch (err) {
     msg.error((err as Error).message);
+  } finally {
+    loading.value = false;
   }
 };
 

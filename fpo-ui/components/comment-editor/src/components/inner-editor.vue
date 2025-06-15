@@ -10,7 +10,7 @@
         clearable
         :maxlength
         :placeholder
-        @focus="onFocus"
+        @focus="isFocus = true"
         :style="{ width: isFocus ? '100%' : '220px' }">
         <template #prefix v-show="!isFocus">
           <bp-avatar size="mini" :image-url="userInfo.avatar" />
@@ -21,7 +21,7 @@
 
     <div :class="[`${clsBlockName}-option`, { 'option-open': isFocus }]">
       <bp-button size="small" shape="round" type="dashed" @click="close">取消</bp-button>
-      <bp-button size="small" shape="round" :disabled="!form.content" @click="onSubmit">发送</bp-button>
+      <bp-button size="small" shape="round" :loading :disabled="!form.content" @click="onSubmit">发送</bp-button>
     </div>
   </div>
 
@@ -43,10 +43,8 @@ import { Input } from "birdpaper-ui";
 const props = defineProps({
   placeholder: String,
   maxlength: Number,
-  reply: {
-    type: Object,
-    default: () => ({}),
-  },
+  loading: { type: Boolean, default: false },
+  reply: { type: Object, default: () => ({}) },
 });
 const emits = defineEmits<{
   (e: "submit", data: PublicLetterCommentForm): void;
@@ -54,26 +52,12 @@ const emits = defineEmits<{
 
 const clsBlockName = "inner-editor";
 
-// 评论表单
 const form = ref<PublicLetterCommentForm>(new PublicLetterCommentForm());
 const { isLogin, userInfo } = useUserStore();
 
-// 输入框引用
 const inpRef = useRef(Input);
-
-// 输入框聚焦状态
 const isFocus = ref(false);
 
-/**
- * 输入框聚焦
- */
-const onFocus = () => {
-  isFocus.value = true;
-};
-
-/**
- * 取消评论
- */
 const close = () => {
   isFocus.value = false;
   form.value = new PublicLetterCommentForm();

@@ -4,7 +4,7 @@
       <bp-button :icon="IconCloseFill" type="plain" shape="round" @click="handleCancle">
         {{ t("common.close") }}
       </bp-button>
-      <bp-button :icon="IconCheckFill" :disabled="okDisabled()" shape="round" @click="handleConfirm">
+      <bp-button :icon="IconCheckFill" :loading="okLoading" :disabled="okDisabled()" shape="round" @click="handleConfirm">
         {{ okText || t("common.confirm") }}
       </bp-button>
     </div>
@@ -20,6 +20,7 @@ const { t } = useI18n();
 
 const props = defineProps({
   okText: { type: String },
+  okLoading: { type: Boolean, default: false },
   okDisabled: { type: Function, default: () => false },
 });
 const emits = defineEmits<{

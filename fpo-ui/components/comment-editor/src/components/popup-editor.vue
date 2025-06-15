@@ -25,10 +25,8 @@ import "vant/lib/popup/style/index";
 const props = defineProps({
   placeholder: String,
   maxlength: Number,
-  reply: {
-    type: Object,
-    default: () => ({}),
-  },
+  loading: { type: Boolean, default: false },
+  reply: { type: Object, default: () => ({}) },
 });
 const emits = defineEmits<{
   (e: "submit", data: PublicLetterCommentForm): void;
@@ -45,6 +43,7 @@ const init = () => {
     mobileBarCtx?.change("confirm", {
       props: {
         okText: "发送",
+        okLoading: () => props.loading,
         okDisabled: () => !form.value.content,
       },
       events: {
